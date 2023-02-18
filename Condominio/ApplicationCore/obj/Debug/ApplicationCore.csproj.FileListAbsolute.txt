@@ -1,0 +1,6 @@
+C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\ApplicationCore\bin\Debug\ApplicationCore.dll
+C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\ApplicationCore\bin\Debug\ApplicationCore.pdb
+C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\ApplicationCore\obj\Debug\ApplicationCore.csproj.AssemblyReference.cache
+C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\ApplicationCore\obj\Debug\ApplicationCore.csproj.CoreCompileInputs.cache
+C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\ApplicationCore\obj\Debug\ApplicationCore.dll
+C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\ApplicationCore\obj\Debug\ApplicationCore.pdb

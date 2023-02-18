@@ -32,13 +32,12 @@ Create Table Residencias(
 ID int IDENTITY (1,1) not null,
 IDUsuario int not null,
 IDEstado int,
-IDPlanCobro int,
-IDIncidencias int,
+IDPlanAsignado int,
 CantPersonas int,
 AnnoInicio date,
 CantCarros int
-
 );
+
 Go
 alter table Residencias add constraint PK_Residencias primary key (ID);
 Go
@@ -46,9 +45,7 @@ ALTER TABLE Residencias ADD CONSTRAINT FKResidencias_Usuario FOREIGN KEY(IDUsuar
 Go
 ALTER TABLE Residencias ADD CONSTRAINT FKResidencias_EstadoResidencias FOREIGN KEY(IDEstado)REFERENCES EstadoResidencias(ID)
 Go
-ALTER TABLE Residencias ADD CONSTRAINT FKResidencias_Incidencias FOREIGN KEY(IDIncidencias)REFERENCES Incidencias(ID)
-Go
-ALTER TABLE Residencias ADD CONSTRAINT FKResidencias_PlanesCobro FOREIGN KEY(IDPlanCobro)REFERENCES PlanesCobro(ID)
+ALTER TABLE Residencias ADD CONSTRAINT FKResidencias_PlanAsignado FOREIGN KEY(IDPlanAsignado)REFERENCES PlanAsignado(ID)
 Go
 
 --------------------------------------------------------------------------------------
@@ -66,12 +63,15 @@ Go
 Create Table Incidencias(
 ID int IDENTITY (1,1) not null,
 IDEstado int,
+IDResidencias int,
 Descripcion varchar(50),
 );
 Go
 alter table Incidencias add constraint PK_Incidencias primary key (ID);
 Go
 ALTER TABLE Incidencias ADD CONSTRAINT FKIncidencias_Estado FOREIGN KEY(IDEstado)REFERENCES EstadoIncidencia(ID)
+Go
+ALTER TABLE Incidencias ADD CONSTRAINT FKIncidencias_Residencias FOREIGN KEY(IDResidencias)REFERENCES Residencias(ID)
 Go
 
 
@@ -90,10 +90,7 @@ Create Table Reservaciones(
 ID int IDENTITY (1,1) not null,
 IDUsuario int,
 IDAreaComunal int,
-Descripcion varchar(100),
 Fecha date,
-Hora time(7),
-CantTiempo time(7)
 );
 Go
 alter table Reservaciones add constraint PK_Reservaciones primary key (ID);
@@ -128,9 +125,7 @@ Go
 
 Create Table PlanesCobro(
 ID int IDENTITY (1,1) not null,
-IDEstado int,
-Total numeric,
-Mes date
+IDEstado int
 );
 Go
 alter table PlanesCobro add constraint PK_PlanesCobro primary key (ID);
@@ -172,3 +167,25 @@ Imagen varbinary (max),
 
 alter table Informacion add constraint PK_Informacion primary key (ID);
 Go
+
+--------------------------------------------------------------------------------------
+
+Create Table PlanAsignado(
+ID int IDENTITY (1,1) not null,
+IDPlanCobro int,
+Total numeric,
+Mes date
+);
+
+alter table PlanAsignado add constraint PK_PlanAsignado primary key (ID);
+Go
+
+ALTER TABLE PlanAsignado ADD CONSTRAINT FKPlanAsignado_PlanesCobro FOREIGN KEY(IDPlanCobro)REFERENCES PlanesCobro(ID)
+Go
+
+--------------------------------------------------------------------------------------
+
+
+
+
+
