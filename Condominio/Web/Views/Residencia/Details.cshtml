@@ -1,0 +1,66 @@
+﻿@model Infrastructure.Models.Residencias
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Residencias</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CantPersonas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CantPersonas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnnoInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnnoInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CantCarros)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CantCarros)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstadoResidencias.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadoResidencias.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlanAsignado.ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlanAsignado.ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.correo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.correo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "IndexAdmin")
+</p>

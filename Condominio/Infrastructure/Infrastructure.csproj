@@ -116,7 +116,9 @@
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IRepositoryPlanCobro.cs" />
     <Compile Include="Repository\IRepositoryResidencias.cs" />
+    <Compile Include="Repository\RepositoryPlanCobro.cs" />
     <Compile Include="Repository\RepositoryResidencias.cs" />
     <Compile Include="Utils\Log.cs" />
   </ItemGroup>
@@ -146,7 +148,6 @@
       <LastGenOutput>MyModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

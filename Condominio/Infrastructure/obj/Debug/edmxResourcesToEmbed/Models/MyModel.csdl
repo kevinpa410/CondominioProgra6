@@ -38,9 +38,10 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IDEstado" Type="Int32" />
+    <Property Name="IDResidencias" Type="Int32" />
     <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="EstadoIncidencia" Relationship="Self.FKIncidencias_Estado" FromRole="Incidencias" ToRole="EstadoIncidencia" />
-    <NavigationProperty Name="Residencias" Relationship="Self.FKResidencias_Incidencias" FromRole="Incidencias" ToRole="Residencias" />
+    <NavigationProperty Name="Residencias" Relationship="Self.FKIncidencias_Residencias" FromRole="Incidencias" ToRole="Residencias" />
   </EntityType>
   <EntityType Name="Informacion">
     <Key>
@@ -56,7 +57,6 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IDPlanCobro" Type="Int32" />
-    <Property Name="IDCondominio" Type="Int32" />
     <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="Mes" Type="DateTime" Precision="0" />
     <NavigationProperty Name="PlanesCobro" Relationship="Self.FKPlanAsignado_PlanesCobro" FromRole="PlanAsignado" ToRole="PlanesCobro" />
@@ -91,12 +91,11 @@
     <Property Name="IDUsuario" Type="Int32" Nullable="false" />
     <Property Name="IDEstado" Type="Int32" />
     <Property Name="IDPlanAsignado" Type="Int32" />
-    <Property Name="IDIncidencias" Type="Int32" />
     <Property Name="CantPersonas" Type="Int32" />
     <Property Name="AnnoInicio" Type="DateTime" Precision="0" />
     <Property Name="CantCarros" Type="Int32" />
     <NavigationProperty Name="EstadoResidencias" Relationship="Self.FKResidencias_EstadoResidencias" FromRole="Residencias" ToRole="EstadoResidencias" />
-    <NavigationProperty Name="Incidencias" Relationship="Self.FKResidencias_Incidencias" FromRole="Residencias" ToRole="Incidencias" />
+    <NavigationProperty Name="Incidencias" Relationship="Self.FKIncidencias_Residencias" FromRole="Residencias" ToRole="Incidencias" />
     <NavigationProperty Name="PlanAsignado" Relationship="Self.FKResidencias_PlanAsignado" FromRole="Residencias" ToRole="PlanAsignado" />
     <NavigationProperty Name="Usuario" Relationship="Self.FKResidencias_Usuario" FromRole="Residencias" ToRole="Usuario" />
   </EntityType>
@@ -180,15 +179,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FKResidencias_Incidencias">
-    <End Role="Incidencias" Type="Self.Incidencias" Multiplicity="0..1" />
-    <End Role="Residencias" Type="Self.Residencias" Multiplicity="*" />
+  <Association Name="FKIncidencias_Residencias">
+    <End Role="Residencias" Type="Self.Residencias" Multiplicity="0..1" />
+    <End Role="Incidencias" Type="Self.Incidencias" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Incidencias">
+      <Principal Role="Residencias">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="Residencias">
-        <PropertyRef Name="IDIncidencias" />
+      <Dependent Role="Incidencias">
+        <PropertyRef Name="IDResidencias" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -286,9 +285,9 @@
       <End Role="EstadoResidencias" EntitySet="EstadoResidencias" />
       <End Role="Residencias" EntitySet="Residencias" />
     </AssociationSet>
-    <AssociationSet Name="FKResidencias_Incidencias" Association="Self.FKResidencias_Incidencias">
-      <End Role="Incidencias" EntitySet="Incidencias" />
+    <AssociationSet Name="FKIncidencias_Residencias" Association="Self.FKIncidencias_Residencias">
       <End Role="Residencias" EntitySet="Residencias" />
+      <End Role="Incidencias" EntitySet="Incidencias" />
     </AssociationSet>
     <AssociationSet Name="FKPlanAsignado_PlanesCobro" Association="Self.FKPlanAsignado_PlanesCobro">
       <End Role="PlanesCobro" EntitySet="PlanesCobro" />

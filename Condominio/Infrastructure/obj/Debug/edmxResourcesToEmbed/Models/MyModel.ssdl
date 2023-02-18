@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="CondominioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="CondominioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AreaComunal">
     <Key>
       <PropertyRef Name="ID" />
@@ -34,6 +34,7 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IDEstado" Type="int" />
+    <Property Name="IDResidencias" Type="int" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Informacion">
@@ -50,7 +51,6 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IDPlanCobro" Type="int" />
-    <Property Name="IDCondominio" Type="int" />
     <Property Name="Total" Type="numeric" Precision="18" Scale="0" />
     <Property Name="Mes" Type="date" />
   </EntityType>
@@ -78,7 +78,6 @@
     <Property Name="IDUsuario" Type="int" Nullable="false" />
     <Property Name="IDEstado" Type="int" />
     <Property Name="IDPlanAsignado" Type="int" />
-    <Property Name="IDIncidencias" Type="int" />
     <Property Name="CantPersonas" Type="int" />
     <Property Name="AnnoInicio" Type="date" />
     <Property Name="CantCarros" Type="int" />
@@ -127,6 +126,18 @@
       </Principal>
       <Dependent Role="Incidencias">
         <PropertyRef Name="IDEstado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKIncidencias_Residencias">
+    <End Role="Residencias" Type="Self.Residencias" Multiplicity="0..1" />
+    <End Role="Incidencias" Type="Self.Incidencias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Residencias">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Incidencias">
+        <PropertyRef Name="IDResidencias" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -187,18 +198,6 @@
       </Principal>
       <Dependent Role="Residencias">
         <PropertyRef Name="IDEstado" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FKResidencias_Incidencias">
-    <End Role="Incidencias" Type="Self.Incidencias" Multiplicity="0..1" />
-    <End Role="Residencias" Type="Self.Residencias" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Incidencias">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Residencias">
-        <PropertyRef Name="IDIncidencias" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -281,6 +280,10 @@
       <End Role="EstadoIncidencia" EntitySet="EstadoIncidencia" />
       <End Role="Incidencias" EntitySet="Incidencias" />
     </AssociationSet>
+    <AssociationSet Name="FKIncidencias_Residencias" Association="Self.FKIncidencias_Residencias">
+      <End Role="Residencias" EntitySet="Residencias" />
+      <End Role="Incidencias" EntitySet="Incidencias" />
+    </AssociationSet>
     <AssociationSet Name="FKPlanAsignado_PlanesCobro" Association="Self.FKPlanAsignado_PlanesCobro">
       <End Role="PlanesCobro" EntitySet="PlanesCobro" />
       <End Role="PlanAsignado" EntitySet="PlanAsignado" />
@@ -299,10 +302,6 @@
     </AssociationSet>
     <AssociationSet Name="FKResidencias_EstadoResidencias" Association="Self.FKResidencias_EstadoResidencias">
       <End Role="EstadoResidencias" EntitySet="EstadoResidencias" />
-      <End Role="Residencias" EntitySet="Residencias" />
-    </AssociationSet>
-    <AssociationSet Name="FKResidencias_Incidencias" Association="Self.FKResidencias_Incidencias">
-      <End Role="Incidencias" EntitySet="Incidencias" />
       <End Role="Residencias" EntitySet="Residencias" />
     </AssociationSet>
     <AssociationSet Name="FKResidencias_PlanAsignado" Association="Self.FKResidencias_PlanAsignado">

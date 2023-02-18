@@ -38,6 +38,7 @@
         <MappingFragment StoreEntitySet="Incidencias">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="IDEstado" ColumnName="IDEstado" />
+          <ScalarProperty Name="IDResidencias" ColumnName="IDResidencias" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -56,7 +57,6 @@
         <MappingFragment StoreEntitySet="PlanAsignado">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="IDPlanCobro" ColumnName="IDPlanCobro" />
-          <ScalarProperty Name="IDCondominio" ColumnName="IDCondominio" />
           <ScalarProperty Name="Total" ColumnName="Total" />
           <ScalarProperty Name="Mes" ColumnName="Mes" />
         </MappingFragment>
@@ -87,7 +87,6 @@
           <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
           <ScalarProperty Name="IDEstado" ColumnName="IDEstado" />
           <ScalarProperty Name="IDPlanAsignado" ColumnName="IDPlanAsignado" />
-          <ScalarProperty Name="IDIncidencias" ColumnName="IDIncidencias" />
           <ScalarProperty Name="CantPersonas" ColumnName="CantPersonas" />
           <ScalarProperty Name="AnnoInicio" ColumnName="AnnoInicio" />
           <ScalarProperty Name="CantCarros" ColumnName="CantCarros" />

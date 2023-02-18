@@ -64,3 +64,8 @@ C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\We
 C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\obj\Debug\Web.csproj.CopyComplete
 C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\obj\Debug\Web.dll
 C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\obj\Debug\Web.pdb
+C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\ApplicationCore.dll
+C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\Infrastructure.dll
+C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\ApplicationCore.pdb
+C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\Infrastructure.pdb
+C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\Infrastructure.dll.config

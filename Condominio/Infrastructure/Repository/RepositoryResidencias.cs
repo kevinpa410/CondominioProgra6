@@ -23,9 +23,11 @@ namespace Infrastructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener todos los libros incluyendo el autor
-                    lista = ctx.Residencias.Include("Residencias").ToList();
-
-                    //lista = ctx.Libro.Include(x=>x.Autor).ToList();
+                    lista = ctx.Residencias.
+                        Include("Usuario").
+                        Include("Incidencias").
+                        Include("PlanAsignado").
+                        Include("EstadoResidencias").ToList();
 
                 }
                 return lista;
@@ -47,14 +49,14 @@ namespace Infrastructure.Repository
 
         public Residencias GetResidenciasByID(int id)
         {
-            Residencias oLibro = null;
+            Residencias oResidencia = null;
             try
             {
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener libro por ID incluyendo el autor y todas sus categorías
-                    oLibro = ctx.Residencias.
+                    oResidencia = ctx.Residencias.
                         Where(l => l.ID == id).
                         Include("Usuario").
                         Include("Incidencias").
@@ -63,7 +65,7 @@ namespace Infrastructure.Repository
                         FirstOrDefault();
 
                 }
-                return oLibro;
+                return oResidencia;
             }
             catch (DbUpdateException dbEx)
             {
