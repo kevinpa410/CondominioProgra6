@@ -10,14 +10,14 @@ using System.Web.Mvc;
 
 namespace Web.Controllers
 {
-    public class ResidenciaController : Controller
+    public class ResidenciasController : Controller
     {
-        // GET: Residencia
+        // GET: Residencias
         public ActionResult Index()
         {
             return View();
         }
-
+        // GET: Residencias
         public ActionResult IndexAdmin()
         {
             IEnumerable<Residencias> lista = null;
@@ -39,7 +39,7 @@ namespace Web.Controllers
             }
         }
 
-        // GET: Residencia/Details/5
+        // GET: Residencias/Details/5
         public ActionResult Details(int id)
         {
             ServicesResidencias _ServiceResidencias = new ServicesResidencias();
@@ -50,7 +50,7 @@ namespace Web.Controllers
                 // Si va null
                 if (id == null)
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("IndexAdmin");
                 }
 
                 residencias = _ServiceResidencias.GetResidenciasByID(Convert.ToInt32(id));
@@ -76,13 +76,13 @@ namespace Web.Controllers
             }
         }
 
-        // GET: Residencia/Create
+        // GET: Residencias/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Residencia/Create
+        // POST: Residencias/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -98,41 +98,19 @@ namespace Web.Controllers
             }
         }
 
-        // GET: Residencia/Edit/5
+        // GET: Residencias/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Residencia/Edit/5
+        // POST: Residencias/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
             try
             {
                 // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Residencia/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Residencia/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
 
                 return RedirectToAction("Index");
             }

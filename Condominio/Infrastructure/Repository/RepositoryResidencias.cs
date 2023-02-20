@@ -25,9 +25,8 @@ namespace Infrastructure.Repository
                     //Obtener todos los libros incluyendo el autor
                     lista = ctx.Residencias.
                         Include("Usuario").
-                        Include("Incidencias").
-                        Include("PlanAsignado").
-                        Include("EstadoResidencias").ToList();
+                        Include("EstadoResidencias").
+                        ToList();
 
                 }
                 return lista;
@@ -59,8 +58,6 @@ namespace Infrastructure.Repository
                     oResidencia = ctx.Residencias.
                         Where(l => l.ID == id).
                         Include("Usuario").
-                        Include("Incidencias").
-                        Include("PlanAsignado").
                         Include("EstadoResidencias").
                         FirstOrDefault();
 
@@ -90,7 +87,6 @@ namespace Infrastructure.Repository
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
                 oResidencias = GetResidenciasByID((int)residencias.ID);
-                IRepositoryResidencias _RepositoryCategoria = new RepositoryResidencias();
 
                 if (oResidencias == null)
                 {

@@ -11,7 +11,7 @@ namespace Infrastructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Reservaciones
     {
         public int ID { get; set; }

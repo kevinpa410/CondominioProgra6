@@ -11,22 +11,20 @@ namespace Infrastructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class PlanAsignado
+    using System.ComponentModel.DataAnnotations;
+    using static Infrastructure.Models.Metadata;
+
+    [MetadataType(typeof(EstadoCuentaMetadata))]
+    public partial class EstadoCuenta
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PlanAsignado()
-        {
-            this.Residencias = new HashSet<Residencias>();
-        }
-    
         public int ID { get; set; }
         public Nullable<int> IDPlanCobro { get; set; }
+        public Nullable<int> IDUsuario { get; set; }
+        public Nullable<int> IDResidencia { get; set; }
         public Nullable<decimal> Total { get; set; }
-        public Nullable<System.DateTime> Mes { get; set; }
-    
+        public Nullable<System.DateTime> Mes { get; set; }    
         public virtual PlanesCobro PlanesCobro { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Residencias> Residencias { get; set; }
+        public virtual Residencias Residencias { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

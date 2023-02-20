@@ -32,8 +32,10 @@ C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\We
 C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\roslyn\VBCSCompiler.exe
 C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\Antlr3.Runtime.dll
+C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\ApplicationCore.dll
 C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\EntityFramework.dll
 C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\EntityFramework.SqlServer.dll
+C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\Infrastructure.dll
 C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\log4net.dll
 C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\Microsoft.Web.Infrastructure.dll
@@ -46,6 +48,9 @@ C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\We
 C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\System.Web.WebPages.dll
 C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\System.Web.WebPages.Razor.dll
 C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\WebGrease.dll
+C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\ApplicationCore.pdb
+C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\Infrastructure.pdb
+C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\Infrastructure.dll.config
 C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\EntityFramework.xml
 C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\EntityFramework.SqlServer.xml
 C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\log4net.xml
@@ -64,8 +69,3 @@ C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\We
 C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\obj\Debug\Web.csproj.CopyComplete
 C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\obj\Debug\Web.dll
 C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\obj\Debug\Web.pdb
-C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\ApplicationCore.dll
-C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\Infrastructure.dll
-C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\ApplicationCore.pdb
-C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\Infrastructure.pdb
-C:\Users\School Work\Desktop\Proyecto\Condominio\CondominioProgra6\Condominio\Web\bin\Infrastructure.dll.config

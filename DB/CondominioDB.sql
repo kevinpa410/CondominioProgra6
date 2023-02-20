@@ -32,7 +32,6 @@ Create Table Residencias(
 ID int IDENTITY (1,1) not null,
 IDUsuario int not null,
 IDEstado int,
-IDPlanAsignado int,
 CantPersonas int,
 AnnoInicio date,
 CantCarros int
@@ -45,8 +44,7 @@ ALTER TABLE Residencias ADD CONSTRAINT FKResidencias_Usuario FOREIGN KEY(IDUsuar
 Go
 ALTER TABLE Residencias ADD CONSTRAINT FKResidencias_EstadoResidencias FOREIGN KEY(IDEstado)REFERENCES EstadoResidencias(ID)
 Go
-ALTER TABLE Residencias ADD CONSTRAINT FKResidencias_PlanAsignado FOREIGN KEY(IDPlanAsignado)REFERENCES PlanAsignado(ID)
-Go
+
 
 --------------------------------------------------------------------------------------
 
@@ -170,17 +168,22 @@ Go
 
 --------------------------------------------------------------------------------------
 
-Create Table PlanAsignado(
+Create Table EstadoCuenta(
 ID int IDENTITY (1,1) not null,
 IDPlanCobro int,
+IDUsuario int,
+IDResidencia int,
 Total numeric,
 Mes date
 );
 
-alter table PlanAsignado add constraint PK_PlanAsignado primary key (ID);
+alter table EstadoCuenta add constraint PK_EstadoCuenta primary key (ID);
 Go
-
-ALTER TABLE PlanAsignado ADD CONSTRAINT FKPlanAsignado_PlanesCobro FOREIGN KEY(IDPlanCobro)REFERENCES PlanesCobro(ID)
+ALTER TABLE EstadoCuenta ADD CONSTRAINT FKEstadoCuenta_PlanesCobro FOREIGN KEY(IDPlanCobro)REFERENCES PlanesCobro(ID)
+Go
+ALTER TABLE EstadoCuenta ADD CONSTRAINT FKEstadoCuenta_Usuario FOREIGN KEY(IDUsuario)REFERENCES Usuario(ID)
+Go
+ALTER TABLE EstadoCuenta ADD CONSTRAINT FKEstadoCuenta_Residencia FOREIGN KEY(IDResidencia)REFERENCES Residencias(ID)
 Go
 
 --------------------------------------------------------------------------------------

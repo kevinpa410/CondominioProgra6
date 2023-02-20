@@ -120,8 +120,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\EstadoCuentaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ResidenciaController.cs" />
+    <Compile Include="Controllers\PlanesCobroController.cs" />
+    <Compile Include="Controllers\ResidenciasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -183,8 +185,12 @@
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
-    <Content Include="Views\Residencia\IndexAdmin.cshtml" />
-    <Content Include="Views\Residencia\Details.cshtml" />
+    <Content Include="Views\EstadoCuenta\Index.cshtml" />
+    <Content Include="Views\EstadoCuenta\Details.cshtml" />
+    <Content Include="Views\Residencias\IndexAdmin.cshtml" />
+    <Content Include="Views\PlanesCobro\Index.cshtml" />
+    <Content Include="Views\PlanesCobro\Details.cshtml" />
+    <Content Include="Views\Residencias\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,52 @@
+﻿@model Infrastructure.Models.EstadoCuenta
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>EstadoCuenta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.apellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Residencias.ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Residencias.ID)
+        </dd>
+
+        <b>@Html.DisplayNameFor(model => model.PlanesCobro):</b>
+        <div>
+            @foreach (var c in Model.PlanesCobro.RubroCobro)
+            {
+
+                <li>@c.ID</li>
+            }
+        </div>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -24,8 +24,6 @@ namespace Infrastructure.Repository
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener todos los libros incluyendo el autor
                     lista = ctx.PlanesCobro
-                        .Include("RubroCobro")
-                        .Include("PlanAsignado")
                         .Include("EstadoPlanesCobro").
                         ToList();
 
@@ -61,7 +59,7 @@ namespace Infrastructure.Repository
                     oPlanesCobro = ctx.PlanesCobro.
                         Where(l => l.ID == id)
                         .Include("RubroCobro")
-                        .Include("PlanAsignado")
+                        .Include("EstadoCuenta")
                         .Include("EstadoPlanesCobro").
                         FirstOrDefault();
 
@@ -82,9 +80,44 @@ namespace Infrastructure.Repository
             }
         }
 
-        public PlanesCobro Save(PlanesCobro planesCobro)
+        public PlanesCobro Save(PlanesCobro planesCobro) //Review Code
         {
-            throw new NotImplementedException();
+            int retorno = 0;
+            PlanesCobro oPlanesCobro = null;
+
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                oPlanesCobro = GetPlanesCobroByID((int)planesCobro.ID);
+                //IRepositoryResidencias _RepositoryCategoria = new RepositoryResidencias();
+
+                if (oPlanesCobro == null)
+                {
+
+
+                    //Insertar Libro
+                    ctx.PlanesCobro.Add(planesCobro);
+                    //SaveChanges
+                    //guarda todos los cambios realizados en el contexto de la base de datos.
+                    retorno = ctx.SaveChanges();
+                    //retorna número de filas afectadas
+                }
+                else
+                {
+                    //Registradas: 1,2,3
+                    //Actualizar: 1,3,4
+
+                    //Actualizar Libro
+                    ctx.PlanesCobro.Add(planesCobro);
+                    ctx.Entry(planesCobro).State = EntityState.Modified;
+                    retorno = ctx.SaveChanges();
+                }
+            }
+
+            if (retorno >= 0)
+                oPlanesCobro = GetPlanesCobroByID((int)planesCobro.ID);
+
+            return oPlanesCobro;
         }
     }
 }

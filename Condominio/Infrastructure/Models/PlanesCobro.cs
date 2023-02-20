@@ -11,22 +11,25 @@ namespace Infrastructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using static Infrastructure.Models.Metadata;
+
+    [MetadataType(typeof(PlanesCobroMetadata))]
     public partial class PlanesCobro
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PlanesCobro()
         {
-            this.PlanAsignado = new HashSet<PlanAsignado>();
+            this.EstadoCuenta = new HashSet<EstadoCuenta>();
             this.RubroCobro = new HashSet<RubroCobro>();
         }
     
         public int ID { get; set; }
         public Nullable<int> IDEstado { get; set; }
     
-        public virtual EstadoPlanesCobro EstadoPlanesCobro { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PlanAsignado> PlanAsignado { get; set; }
+        public virtual ICollection<EstadoCuenta> EstadoCuenta { get; set; }
+        public virtual EstadoPlanesCobro EstadoPlanesCobro { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RubroCobro> RubroCobro { get; set; }
     }

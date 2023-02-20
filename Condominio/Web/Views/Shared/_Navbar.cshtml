@@ -32,7 +32,11 @@
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mantenimientos</a>
                     <div class="dropdown-menu">
                         @*Enlace a la lista de autores*@
-                        @Html.ActionLink("Recidencias", "IndexAdmin", "Recidencia", null, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Residencias", "IndexAdmin", "Residencias", null, new { @class = "dropdown-item" })
+                        <div class="dropdown-divider"></div>
+                        @Html.ActionLink("Estados de Cuenta", "Index", "EstadoCuenta", null, new { @class = "dropdown-item" })
+                        <div class="dropdown-divider"></div>
+                        @Html.ActionLink("Planes de Cobro", "Index", "PlanesCobro", null, new { @class = "dropdown-item" })
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Separated link</a>
                     </div>

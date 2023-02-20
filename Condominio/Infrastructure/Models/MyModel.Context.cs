@@ -26,12 +26,12 @@ namespace Infrastructure.Models
         }
     
         public virtual DbSet<AreaComunal> AreaComunal { get; set; }
+        public virtual DbSet<EstadoCuenta> EstadoCuenta { get; set; }
         public virtual DbSet<EstadoIncidencia> EstadoIncidencia { get; set; }
         public virtual DbSet<EstadoPlanesCobro> EstadoPlanesCobro { get; set; }
         public virtual DbSet<EstadoResidencias> EstadoResidencias { get; set; }
         public virtual DbSet<Incidencias> Incidencias { get; set; }
         public virtual DbSet<Informacion> Informacion { get; set; }
-        public virtual DbSet<PlanAsignado> PlanAsignado { get; set; }
         public virtual DbSet<PlanesCobro> PlanesCobro { get; set; }
         public virtual DbSet<Reservaciones> Reservaciones { get; set; }
         public virtual DbSet<Residencias> Residencias { get; set; }

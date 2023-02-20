@@ -11,12 +11,17 @@ namespace Infrastructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using static Infrastructure.Models.Metadata;
+
+    [MetadataType(typeof(UsuarioMetadata))]
+
     public partial class Usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuario()
         {
+            this.EstadoCuenta = new HashSet<EstadoCuenta>();
             this.Reservaciones = new HashSet<Reservaciones>();
             this.Residencias = new HashSet<Residencias>();
         }
@@ -29,6 +34,8 @@ namespace Infrastructure.Models
         public Nullable<int> IDRol { get; set; }
         public Nullable<int> activo { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EstadoCuenta> EstadoCuenta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservaciones> Reservaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

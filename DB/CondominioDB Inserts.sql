@@ -37,13 +37,13 @@ insert into RubroPlanes values(1,3);
 insert into RubroPlanes values(2,3);
 insert into RubroPlanes values(3,3);
 
-insert into PlanAsignado values(1,50000,'2-1-2023');
-insert into PlanAsignado values(2,55000,'2-1-2023');
-insert into PlanAsignado values(3,60000,'2-1-2023');
+insert into Residencias values(1,1,3,'1-1-2020',1);
+insert into Residencias values(2,2,5,'4-16-2021',2);
+insert into Residencias values(3,1,4,'7-20-2019',1);
 
-insert into Residencias values(1,1,1,3,'1-1-2020',1);
-insert into Residencias values(2,2,2,5,'4-16-2021',2);
-insert into Residencias values(3,1,3,4,'7-20-2019',1);
+insert into EstadoCuenta values(1,1,1,50000,'2-1-2023');
+insert into EstadoCuenta values(2,2,2,55000,'2-1-2023');
+insert into EstadoCuenta values(3,3,3,60000,'2-1-2023');
 
 delete from RubroPlanes where IDRubro = 3
 select * from EstadoResidencias
