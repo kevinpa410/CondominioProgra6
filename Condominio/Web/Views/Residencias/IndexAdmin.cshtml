@@ -9,43 +9,25 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Usuario.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Usuario.apellido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IDUsuario)
-        </th>
-        <th></th>
-    </tr>
+<div class="col-lg-9" >
+    <div id="resultado" class="row">
+        @foreach (var item in Model)
+        {
+            
+            <div class="col-sm-3" style=" margin: 1rem;">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body " style=" margin-left: 10px; margin-right: 10px;">
+                        <p class="card-text"> @Html.DisplayNameFor(model => model.ID):@Html.DisplayFor(modelItem => item.ID) </p>
+                        <p class="card-text">@Html.DisplayNameFor(model => model.Usuario.nombre) y @Html.DisplayNameFor(model => model.Usuario.apellido):@Html.DisplayFor(modelItem => item.Usuario.nombre) @Html.DisplayFor(modelItem => item.Usuario.apellido) </p>
+                        <p class="card-text"></p>
+                        <p class="card-text">@Html.DisplayNameFor(model => model.IDUsuario): @Html.DisplayFor(modelItem => item.IDUsuario)</p>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Usuario.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Usuario.apellido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IDUsuario)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
-
-</table>
+                        <a href="@Url.Action("Edit", "Residencias", new { id = item.ID })" class="btn btn-warning">Editar</a>
+                        <a href="@Url.Action("Details", "Residencias", new { id = item.ID })" class="btn btn-primary">Detalles</a>
+                    </div>
+                </div>
+            </div>
+            <br />
+        }
+    </div>
+</div>
