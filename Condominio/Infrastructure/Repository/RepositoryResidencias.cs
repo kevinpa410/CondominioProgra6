@@ -17,8 +17,6 @@ namespace Infrastructure.Repository
             IEnumerable<Residencias> lista = null;
             try
             {
-
-
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;

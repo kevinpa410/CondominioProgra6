@@ -48,7 +48,6 @@ namespace Infrastructure.Repository
                 throw;
             }
         }
-
         public EstadoCuenta GetEstadoCuentaByID(int id)
         {
             EstadoCuenta oEstadoCuenta = null;
@@ -81,7 +80,6 @@ namespace Infrastructure.Repository
                 throw;
             }
         }
-
         public EstadoCuenta Save(EstadoCuenta estadoCuenta)//Review Code
         {
             int retorno = 0;

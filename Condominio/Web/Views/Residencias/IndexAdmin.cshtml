@@ -7,23 +7,22 @@
 <h2>Residencias</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href="@Url.Action("Create", "Residencias")" class="btn btn-outline-primary" style="border-radius: 10rem;">Nueva Residencia</a>
 </p>
-<div class="col-lg-9" >
+<div class="col-lg-9">
     <div id="resultado" class="row">
         @foreach (var item in Model)
         {
-            
-            <div class="col-sm-3" style=" margin: 1rem;">
-                <div class="card" style="width: 18rem;">
+            <div class="col-sm-3" style=" margin: 1rem; ">
+                <div class="card" style="width: 18rem; border-radius: 1rem; border-color:gray">
                     <div class="card-body " style=" margin-left: 10px; margin-right: 10px;">
                         <p class="card-text"> @Html.DisplayNameFor(model => model.ID):@Html.DisplayFor(modelItem => item.ID) </p>
                         <p class="card-text">@Html.DisplayNameFor(model => model.Usuario.nombre) y @Html.DisplayNameFor(model => model.Usuario.apellido):@Html.DisplayFor(modelItem => item.Usuario.nombre) @Html.DisplayFor(modelItem => item.Usuario.apellido) </p>
                         <p class="card-text"></p>
                         <p class="card-text">@Html.DisplayNameFor(model => model.IDUsuario): @Html.DisplayFor(modelItem => item.IDUsuario)</p>
 
-                        <a href="@Url.Action("Edit", "Residencias", new { id = item.ID })" class="btn btn-warning">Editar</a>
-                        <a href="@Url.Action("Details", "Residencias", new { id = item.ID })" class="btn btn-primary">Detalles</a>
+                        <a href="@Url.Action("Edit", "Residencias", new { id = item.ID })" class="btn btn-warning" style="border-radius: 10rem";>Editar</a>
+                        <a href="@Url.Action("Details", "Residencias", new { id = item.ID })" class="btn btn-primary "style="border-radius: 10rem;">Detalles</a>
                     </div>
                 </div>
             </div>

@@ -35,8 +35,12 @@ namespace Web.Controllers
         }
 
         // GET: EstadoCuenta/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
+
+            ViewBag.DeudasVigentes = GetEstadoCuentaByDeudasVigentes();
+            ViewBag.HistorialPagos = GetEstadoCuentaByHistorialPagos();
+
             ServicesEstadoCuenta _ServicesEstadoCuenta = new ServicesEstadoCuenta();
             EstadoCuenta estadoCuenta = null;
 
@@ -75,6 +79,20 @@ namespace Web.Controllers
         public ActionResult Create()
         {
             return View();
+        }
+
+        private SelectList GetEstadoCuentaByDeudasVigentes(int IDEstado = 1)
+        {
+            IServicesPlanesCobro _ServicesPlanesCobro = new ServicesPlanesCobro();
+            IEnumerable<PlanesCobro> lista = _ServicesPlanesCobro.GetPlanesCobro();
+            return new SelectList(lista, "ID", "descripcion", IDEstado);
+        }
+
+        private SelectList GetEstadoCuentaByHistorialPagos(int IDEstado = 2)
+        {
+            IServicesPlanesCobro _ServicesPlanesCobro = new ServicesPlanesCobro();
+            IEnumerable<PlanesCobro> lista = _ServicesPlanesCobro.GetPlanesCobro();
+            return new SelectList(lista, "ID", "IDEstado", IDEstado);
         }
 
         // POST: EstadoCuenta/Create

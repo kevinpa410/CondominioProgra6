@@ -36,19 +36,40 @@
             @Html.DisplayFor(model => model.Residencias.ID)
         </dd>
 
-        <b>@Html.DisplayNameFor(model => model.PlanesCobro):</b>
-        <div>
-            @foreach (var c in Model.PlanesCobro.RubroCobro)
-            {
+        <dt>
+            Deudas vigentes
+        </dt>
 
-                <li>@c.ID</li>
-            }
-        </div>
+        <dd>
+            <ul>
+                @foreach (var c in ViewBag.HistorialPagos)
+                {
+
+                    <li>@c.ID</li>
+                }
+            </ul>
+        </dd>
+
+        <dt>
+            Historial de pagos
+        </dt>
+
+        <dd>
+            <ul>
+                @foreach (var item in ViewBag.HistorialPagos)
+                {
+
+                    <li>@item.ID</li>
+                }
+            </ul>
+        </dd>
+        
+
 
 
     </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>

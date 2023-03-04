@@ -3,10 +3,14 @@ using Infraestructure.Utils;
 using Infrastructure.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
+using Web.Utils;
+using Log = Web.Utils.Log;
 
 namespace Web.Controllers
 {
@@ -31,7 +35,7 @@ namespace Web.Controllers
             }
             catch (Exception ex)
             {
-                Log.Error(ex, MethodBase.GetCurrentMethod());
+                Utils.Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
 
                 // Redireccion a la captura del Error
@@ -40,7 +44,7 @@ namespace Web.Controllers
         }
 
         // GET: Residencias/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             ServicesResidencias _ServiceResidencias = new ServicesResidencias();
             Residencias residencias = null;
@@ -67,7 +71,7 @@ namespace Web.Controllers
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
+                Utils.Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
                 TempData["Redirect"] = "Libro";
                 TempData["Redirect-Action"] = "IndexAdmin";
@@ -79,22 +83,71 @@ namespace Web.Controllers
         // GET: Residencias/Create
         public ActionResult Create()
         {
+            ViewBag.IDEstado = listaEstadoResidencias();
+            ViewBag.IDUsuario = listaUsuario();
             return View();
+        }
+
+        private SelectList listaEstadoResidencias(int IDEstado = 0)
+        {
+            IServicesEstadoResidencias _ServicesEstadoResidencias = new ServicesEstadoResidencias();
+            IEnumerable<EstadoResidencias> lista = _ServicesEstadoResidencias.GetEstadoResidencias();
+            return new SelectList(lista, "ID", "descripcion", IDEstado);
+        }
+
+        private SelectList listaUsuario(int idUsuario = 0)
+        {
+            IServicesUsuario _ServicesUsuario = new ServicesUsuario();
+            IEnumerable<Usuario> lista = _ServicesUsuario.GetUsuarios();
+            return new SelectList(lista, "ID", "nombre",idUsuario);
         }
 
         // POST: Residencias/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Save(Residencias residencias)
         {
+            //Gestión de archivos
+            MemoryStream target = new MemoryStream();
+            //Servicio Libro
+            IServicesResidencias _ServicesResidencias = new ServicesResidencias();
             try
             {
-                // TODO: Add insert logic here
+                
+                if (ModelState.IsValid)
+                {
+                    Residencias oResidencias = _ServicesResidencias.Save(residencias);
+                }
+                else
+                {
+                    // Valida Errores si Javascript está deshabilitado
+                    Util.ValidateErrors(this);
+                    ViewBag.IDEstadoResidencias = listaEstadoResidencias(Convert.ToInt32(residencias.IDEstado));
+                    ViewBag.idUsuario = listaUsuario(residencias.IDUsuario);
+                    
+
+                    //Cargar la vista crear o actualizar
+                    //Lógica para cargar vista correspondiente
+                    if (residencias.ID > 0)
+                    {
+                        return (ActionResult)View("Edit", residencias);
+                    }
+                    else
+                    {
+                        return View("Create", residencias);
+                    }
+                }
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Libro";
+                TempData["Redirect-Action"] = "IndexAdmin";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
             }
         }
 

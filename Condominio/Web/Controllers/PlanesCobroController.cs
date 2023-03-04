@@ -35,7 +35,7 @@ namespace Web.Controllers
         }
 
         // GET: PlanesCobro/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             ServicesPlanesCobro _ServicePlanesCobro = new ServicesPlanesCobro();
             PlanesCobro planesCobro = null;

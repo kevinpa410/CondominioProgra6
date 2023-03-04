@@ -19,6 +19,17 @@
         </dd>
 
     </dl>
+
+    <ul>
+        @foreach (var item in Model.RubroCobro)
+        {
+            <li>
+                @item.Descripcion - @item.Monto
+            </li>
+        }
+
+    </ul>
+
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |

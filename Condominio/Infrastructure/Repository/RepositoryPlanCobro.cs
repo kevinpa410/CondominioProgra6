@@ -80,6 +80,83 @@ namespace Infrastructure.Repository
             }
         }
 
+        public IEnumerable<PlanesCobro> GetEstadoCuentaByDeudasVigentes(int id = 1)
+        {
+            IEnumerable<PlanesCobro> lista = null;
+            try
+            {
+
+
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener todos los libros incluyendo el autor
+                    lista = ctx.PlanesCobro
+                        .Where(l => l.ID == id)
+                        .Include("RubroCobro")
+                        .Include("EstadoCuenta")
+                        .Include("EstadoPlanesCobro").
+                        ToList();
+
+                    //lista = ctx.Libro.Include(x=>x.Autor).ToList();
+
+                }
+                return lista;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
+        public IEnumerable<PlanesCobro> GetEstadoCuentaByHistorialPagos(int id = 2)
+        {
+            IEnumerable<PlanesCobro> lista = null;
+            try
+            {
+
+
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener todos los libros incluyendo el autor
+                    lista = ctx.PlanesCobro
+                        .Where(l => l.ID == id)
+                        .Include("RubroCobro")
+                        .Include("EstadoCuenta")
+                        .Include("EstadoPlanesCobro").
+                        ToList();
+
+                    //lista = ctx.Libro.Include(x=>x.Autor).ToList();
+
+                }
+                return lista;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
+
         public PlanesCobro Save(PlanesCobro planesCobro) //Review Code
         {
             int retorno = 0;
