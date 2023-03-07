@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-    public interface IServicesRubroCobro
+    public interface IServicesIncidencias
     {
-        IEnumerable<RubroCobro> GetRubroCobros();
-        RubroCobro GetRubroCobroByID(int id);
-        RubroCobro Save(RubroCobro rubroCobro);
+        IEnumerable<Incidencias> GetIncidencias();
+        Incidencias GetIncidenciasByID(int id);
+        Incidencias Save(Incidencias incidencias);
     }
 }

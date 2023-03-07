@@ -10,7 +10,7 @@ namespace ApplicationCore.Services
 {
     public class ServicesRubroCobro : IServicesRubroCobro
     {
-        public IEnumerable<RubroCobro> GetResidencias()
+        public IEnumerable<RubroCobro> GetRubroCobros()
         {
             IRepositoryRubroCobros repository = new RepositoryRubroCobros();
             return repository.GetRubroCobros();

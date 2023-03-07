@@ -122,8 +122,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\EstadoCuentaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IncidenciasController.cs" />
     <Compile Include="Controllers\PlanesCobroController.cs" />
     <Compile Include="Controllers\ResidenciasController.cs" />
+    <Compile Include="Controllers\RubroCobroController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -204,6 +206,14 @@
     <Content Include="Views\PlanesCobro\Details.cshtml" />
     <Content Include="Views\Residencias\Details.cshtml" />
     <Content Include="Views\Residencias\Create.cshtml" />
+    <Content Include="Views\RubroCobro\Index.cshtml" />
+    <Content Include="Views\RubroCobro\Details.cshtml" />
+    <Content Include="Views\RubroCobro\Create.cshtml" />
+    <Content Include="Views\RubroCobro\Edit.cshtml" />
+    <Content Include="Views\Incidencias\Details.cshtml" />
+    <Content Include="Views\Incidencias\Create.cshtml" />
+    <Content Include="Views\Incidencias\Edit.cshtml" />
+    <Content Include="Views\Incidencias\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

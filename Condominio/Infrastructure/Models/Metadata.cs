@@ -95,5 +95,20 @@ namespace Infrastructure.Models
 
         }
 
+        internal partial class IncidenciasMetadata
+        {
+            [Display(Name = "ID")]
+            public int ID { get; set; }
+            [Display(Name = "ID Estado")]
+            public Nullable<int> IDEstado { get; set; }
+            [Display(Name = "ID Residencias")]
+            public Nullable<int> IDResidencias { get; set; }
+            [Display(Name = "Descripcion")]
+            public string Descripcion { get; set; }
+
+            public virtual EstadoIncidencia EstadoIncidencia { get; set; }
+            public virtual Residencias Residencias { get; set; }
+        }
+
     }
 }

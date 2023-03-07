@@ -152,25 +152,44 @@ namespace Web.Controllers
         }
 
         // GET: Residencias/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+        //public ActionResult Edit(int? id)
+        //{
+        //    ServiceLibro _ServiceLibro = new ServiceLibro();
+        //    Libro libro = null;
 
-        // POST: Residencias/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+        //    try
+        //    {
+        //        // Si va null
+        //        if (id == null)
+        //        {
+        //            return RedirectToAction("Index");
+        //        }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        libro = _ServiceLibro.GetLibroByID(Convert.ToInt32(id));
+        //        if (libro == null)
+        //        {
+        //            TempData["Message"] = "No existe el libro solicitado";
+        //            TempData["Redirect"] = "Libro";
+        //            TempData["Redirect-Action"] = "Index";
+        //            // Redireccion a la captura del Error
+        //            return RedirectToAction("Default", "Error");
+        //        }
+        //        //Listados
+        //        ViewBag.IdAutor = listAutores(libro.IdAutor);
+        //        ViewBag.IdCategoria = listaCategorias(libro.Categoria);
+        //        return View(libro);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Salvar el error en un archivo 
+        //        Log.Error(ex, MethodBase.GetCurrentMethod());
+        //        TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+        //        TempData["Redirect"] = "Libro";
+        //        TempData["Redirect-Action"] = "IndexAdmin";
+        //        // Redireccion a la captura del Error
+        //        return RedirectToAction("Default", "Error");
+        //    }
+        //}
+
     }
 }
