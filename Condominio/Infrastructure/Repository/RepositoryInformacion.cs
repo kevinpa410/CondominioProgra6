@@ -10,18 +10,18 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repository
 {
-    public class RepositoryPlanCobro : IRepositoryPlanCobro
+    public class RepositoryInformacion : IRepositoryInformacion
     {
-        public IEnumerable<PlanesCobro> GetPlanesCobro()
+        public IEnumerable<Informacion> GetInformacion()
         {
-            IEnumerable<PlanesCobro> lista = null;
+            IEnumerable<Informacion> lista = null;
             try
             {
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener todos los libros incluyendo el autor
-                    lista = ctx.PlanesCobro.
+                    lista = ctx.Informacion.
                     ToList();
 
                     //lista = ctx.Libro.Include(x=>x.Autor).ToList();
@@ -44,23 +44,21 @@ namespace Infrastructure.Repository
             }
         }
 
-        public PlanesCobro GetPlanesCobroByID(int id)
+        public Informacion GetInformacionByID(int id)
         {
-            PlanesCobro oPlanesCobro = null;
+            Informacion oInformacion = null;
             try
             {
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener libro por ID incluyendo el autor y todas sus categorías
-                    oPlanesCobro = ctx.PlanesCobro.
-                        Where(l => l.ID == id)
-                        .Include("RubroCobro")
-                        .Include("EstadoCuenta").
+                    oInformacion = ctx.Informacion.
+                        Where(l => l.ID == id).
                         FirstOrDefault();
 
                 }
-                return oPlanesCobro;
+                return oInformacion;
             }
             catch (DbUpdateException dbEx)
             {
@@ -76,36 +74,20 @@ namespace Infrastructure.Repository
             }
         }
 
-        public PlanesCobro Save(PlanesCobro planesCobro, string[] selectedRubroCobro) 
+        public Informacion Save(Informacion informacion)
         {
             int retorno = 0;
-            PlanesCobro oPlanesCobro = null;
+            Informacion oInformacion = null;
 
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                oPlanesCobro = GetPlanesCobroByID((int)planesCobro.ID);
-                IRepositoryRubroCobros _RepositoryRubroCobros = new RepositoryRubroCobros();
+                oInformacion = GetInformacionByID((int)informacion.ID);
 
-                if (oPlanesCobro == null)
+                if (oInformacion == null)
                 {
-
-                    //Insertar
-                    //Logica para agregar las categorias al libro
-                    if (selectedRubroCobro != null)
-                    {
-
-                        planesCobro.RubroCobro = new List<RubroCobro>();
-                        foreach (var rubroCobro in selectedRubroCobro)
-                        {
-                            var RubroCobroToAdd = _RepositoryRubroCobros.GetRubroCobroByID(int.Parse(rubroCobro));
-                            ctx.RubroCobro.Attach(RubroCobroToAdd); //sin esto, EF intentará crear una categoría
-                            planesCobro.RubroCobro.Add(RubroCobroToAdd);// asociar a la categoría existente con el libro
-
-                        }
-                    }
                     //Insertar Libro
-                    ctx.PlanesCobro.Add(planesCobro);
+                    ctx.Informacion.Add(informacion);
                     //SaveChanges
                     //guarda todos los cambios realizados en el contexto de la base de datos.
                     retorno = ctx.SaveChanges();
@@ -117,29 +99,16 @@ namespace Infrastructure.Repository
                     //Actualizar: 1,3,4
 
                     //Actualizar Libro
-                    ctx.PlanesCobro.Add(planesCobro);
-                    ctx.Entry(planesCobro).State = EntityState.Modified;
+                    ctx.Informacion.Add(informacion);
+                    ctx.Entry(informacion).State = EntityState.Modified;
                     retorno = ctx.SaveChanges();
-
-                    //Logica para actualizar Categorias
-                    var selectedRubroCobroID = new HashSet<string>(selectedRubroCobro);
-                    if (selectedRubroCobro != null)
-                    {
-                        ctx.Entry(planesCobro).Collection(p => p.RubroCobro).Load();
-                        var newCategoriaForLibro = ctx.RubroCobro
-                         .Where(x => selectedRubroCobroID.Contains(x.ID.ToString())).ToList();
-                        planesCobro.RubroCobro = newCategoriaForLibro;
-
-                        ctx.Entry(planesCobro).State = EntityState.Modified;
-                        retorno = ctx.SaveChanges();
-                    }
                 }
             }
 
             if (retorno >= 0)
-                oPlanesCobro = GetPlanesCobroByID((int)planesCobro.ID);
+                oInformacion = GetInformacionByID((int)informacion.ID);
 
-            return oPlanesCobro;
+            return oInformacion;
         }
     }
 }

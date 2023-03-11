@@ -123,6 +123,7 @@
     <Compile Include="Controllers\EstadoCuentaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IncidenciasController.cs" />
+    <Compile Include="Controllers\InformacionController.cs" />
     <Compile Include="Controllers\PlanesCobroController.cs" />
     <Compile Include="Controllers\ResidenciasController.cs" />
     <Compile Include="Controllers\RubroCobroController.cs" />
@@ -216,6 +217,10 @@
     <Content Include="Views\PlanesCobro\Index.cshtml" />
     <Content Include="Views\PlanesCobro\Edit.cshtml" />
     <Content Include="Views\PlanesCobro\Create.cshtml" />
+    <Content Include="Views\Informacion\Index.cshtml" />
+    <Content Include="Views\Informacion\Details.cshtml" />
+    <Content Include="Views\Informacion\Create.cshtml" />
+    <Content Include="Views\Informacion\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
