@@ -12,18 +12,18 @@ namespace Infrastructure.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class EstadoPlanesCobro
+    public partial class Estado_EstadoCuenta
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public EstadoPlanesCobro()
+        public Estado_EstadoCuenta()
         {
-            this.PlanesCobro = new HashSet<PlanesCobro>();
+            this.EstadoCuenta = new HashSet<EstadoCuenta>();
         }
     
         public int ID { get; set; }
         public string Descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PlanesCobro> PlanesCobro { get; set; }
+        public virtual ICollection<EstadoCuenta> EstadoCuenta { get; set; }
     }
 }

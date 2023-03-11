@@ -123,22 +123,22 @@ Go
 
 Create Table PlanesCobro(
 ID int IDENTITY (1,1) not null,
-IDEstado int
+Total numeric,
+
 );
 Go
 alter table PlanesCobro add constraint PK_PlanesCobro primary key (ID);
 Go
-ALTER TABLE PlanesCobro ADD CONSTRAINT FKPlanesCobro_EstadoPlanesCobro FOREIGN KEY(IDEstado)REFERENCES EstadoPlanesCobro(ID)
-Go
+
 
 --------------------------------------------------------------------------------------
 
-Create Table EstadoPlanesCobro(
+Create Table Estado_EstadoCuenta(
 ID int IDENTITY (1,1) not null,
 Descripcion varchar(50),
 );
 Go
-alter table EstadoPlanesCobro add constraint PK_EstadoPlanesCobro primary key (ID);
+alter table Estado_EstadoCuenta add constraint PK_EstadoCuenta primary key (ID);
 Go
 --------------------------------------------------------------------------------------
 
@@ -173,7 +173,7 @@ ID int IDENTITY (1,1) not null,
 IDPlanCobro int,
 IDUsuario int,
 IDResidencia int,
-Total numeric,
+IDEstado int,
 Mes date
 );
 
@@ -184,6 +184,8 @@ Go
 ALTER TABLE EstadoCuenta ADD CONSTRAINT FKEstadoCuenta_Usuario FOREIGN KEY(IDUsuario)REFERENCES Usuario(ID)
 Go
 ALTER TABLE EstadoCuenta ADD CONSTRAINT FKEstadoCuenta_Residencia FOREIGN KEY(IDResidencia)REFERENCES Residencias(ID)
+Go
+ALTER TABLE EstadoCuenta ADD CONSTRAINT FKEstadoCuenta_Estado_EstadoCuenta FOREIGN KEY(IDEstado)REFERENCES Estado_EstadoCuenta(ID)
 Go
 
 --------------------------------------------------------------------------------------

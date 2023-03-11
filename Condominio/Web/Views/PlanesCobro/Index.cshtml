@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Plan de Cobro</h2>
+<h2>Planes de Cobro</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -15,7 +15,7 @@
             @Html.DisplayNameFor(model => model.ID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EstadoPlanesCobro.Descripcion)
+            @Html.DisplayNameFor(model => model.Total)
         </th>
         <th></th>
     </tr>
@@ -26,7 +26,7 @@
             @Html.DisplayFor(modelItem => item.ID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EstadoPlanesCobro.Descripcion)
+            @Html.DisplayFor(modelItem => item.Total)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |

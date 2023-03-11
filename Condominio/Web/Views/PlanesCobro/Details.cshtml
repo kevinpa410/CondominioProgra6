@@ -4,33 +4,21 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Detalles</h2>
 
-<div>
-    <h4>PlanesCobro</h4>
+    <h4>Rubros de Cobro Asociados</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.EstadoPlanesCobro.Descripcion)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.EstadoPlanesCobro.Descripcion)
-        </dd>
+    <div class="list-group">
+        <ul>
+            @foreach (var item in Model.RubroCobro)
+            {
+                <li class="list-group-item list-group-item-action list-group-item-secondary">
+                    @item.Descripcion - @item.Monto
+                </li>
+            }
 
-    </dl>
-
-    <ul>
-        @foreach (var item in Model.RubroCobro)
-        {
-            <li>
-                @item.Descripcion - @item.Monto
-            </li>
-        }
-
-    </ul>
-
-</div>
+        </ul>
+    </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")

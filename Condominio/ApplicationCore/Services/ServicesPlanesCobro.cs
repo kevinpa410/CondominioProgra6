@@ -22,10 +22,10 @@ namespace ApplicationCore.Services
             return repository.GetPlanesCobroByID(id);
         }
 
-        public PlanesCobro Save(PlanesCobro planesCobro)
+        public PlanesCobro Save(PlanesCobro planesCobro, string[] selectedRubroCobro)
         {
             IRepositoryPlanCobro repository = new RepositoryPlanCobro();
-            return repository.Save(planesCobro);
+            return repository.Save(planesCobro, selectedRubroCobro);
         }
     }
 }

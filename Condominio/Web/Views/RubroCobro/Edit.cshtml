@@ -4,10 +4,10 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Editar un Rubro de Cobro</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Save", "RubroCobro", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     

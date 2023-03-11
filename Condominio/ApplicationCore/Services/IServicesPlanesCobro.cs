@@ -11,6 +11,6 @@ namespace ApplicationCore.Services
     {
         IEnumerable<PlanesCobro> GetPlanesCobro();
         PlanesCobro GetPlanesCobroByID(int id);
-        PlanesCobro Save(PlanesCobro planesCobro);
+        PlanesCobro Save(PlanesCobro planesCobro, string[] selectedRubroCobro);
     }
 }

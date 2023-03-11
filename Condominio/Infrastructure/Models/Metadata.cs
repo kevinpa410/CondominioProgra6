@@ -62,9 +62,6 @@ namespace Infrastructure.Models
             [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
             [Display(Name = "Estado de Cuenta")]
             public virtual ICollection<EstadoCuenta> EstadoCuenta { get; set; }
-            [Display(Name = "Estado Planes de Cobro")]
-            public virtual EstadoPlanesCobro EstadoPlanesCobro { get; set; }
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
             [Display(Name = "Planes de Cobro")]
             public virtual ICollection<RubroCobro> RubroCobro { get; set; }
 

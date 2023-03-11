@@ -35,7 +35,7 @@ namespace Web.Controllers
             }
         }
         // GET: RubroCobro/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             IServicesRubroCobro _ServicesRubroCobro = new ServicesRubroCobro();
             RubroCobro rubroCobro = null;
@@ -119,7 +119,7 @@ namespace Web.Controllers
             }
         }
         // GET: RubroCobro/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
             ServicesRubroCobro _ServicesRubroCobro = new ServicesRubroCobro();
             RubroCobro rubroCobro = null;

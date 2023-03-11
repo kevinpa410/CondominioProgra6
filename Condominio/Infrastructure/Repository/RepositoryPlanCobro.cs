@@ -17,15 +17,12 @@ namespace Infrastructure.Repository
             IEnumerable<PlanesCobro> lista = null;
             try
             {
-
-
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener todos los libros incluyendo el autor
-                    lista = ctx.PlanesCobro
-                        .Include("EstadoPlanesCobro").
-                        ToList();
+                    lista = ctx.PlanesCobro.
+                    ToList();
 
                     //lista = ctx.Libro.Include(x=>x.Autor).ToList();
 
@@ -59,8 +56,7 @@ namespace Infrastructure.Repository
                     oPlanesCobro = ctx.PlanesCobro.
                         Where(l => l.ID == id)
                         .Include("RubroCobro")
-                        .Include("EstadoCuenta")
-                        .Include("EstadoPlanesCobro").
+                        .Include("EstadoCuenta").
                         FirstOrDefault();
 
                 }
@@ -80,84 +76,7 @@ namespace Infrastructure.Repository
             }
         }
 
-        public IEnumerable<PlanesCobro> GetEstadoCuentaByDeudasVigentes(int id = 1)
-        {
-            IEnumerable<PlanesCobro> lista = null;
-            try
-            {
-
-
-                using (MyContext ctx = new MyContext())
-                {
-                    ctx.Configuration.LazyLoadingEnabled = false;
-                    //Obtener todos los libros incluyendo el autor
-                    lista = ctx.PlanesCobro
-                        .Where(l => l.ID == id)
-                        .Include("RubroCobro")
-                        .Include("EstadoCuenta")
-                        .Include("EstadoPlanesCobro").
-                        ToList();
-
-                    //lista = ctx.Libro.Include(x=>x.Autor).ToList();
-
-                }
-                return lista;
-            }
-
-            catch (DbUpdateException dbEx)
-            {
-                string mensaje = "";
-                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                throw new Exception(mensaje);
-            }
-            catch (Exception ex)
-            {
-                string mensaje = "";
-                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                throw;
-            }
-        }
-
-        public IEnumerable<PlanesCobro> GetEstadoCuentaByHistorialPagos(int id = 2)
-        {
-            IEnumerable<PlanesCobro> lista = null;
-            try
-            {
-
-
-                using (MyContext ctx = new MyContext())
-                {
-                    ctx.Configuration.LazyLoadingEnabled = false;
-                    //Obtener todos los libros incluyendo el autor
-                    lista = ctx.PlanesCobro
-                        .Where(l => l.ID == id)
-                        .Include("RubroCobro")
-                        .Include("EstadoCuenta")
-                        .Include("EstadoPlanesCobro").
-                        ToList();
-
-                    //lista = ctx.Libro.Include(x=>x.Autor).ToList();
-
-                }
-                return lista;
-            }
-
-            catch (DbUpdateException dbEx)
-            {
-                string mensaje = "";
-                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                throw new Exception(mensaje);
-            }
-            catch (Exception ex)
-            {
-                string mensaje = "";
-                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                throw;
-            }
-        }
-
-
-        public PlanesCobro Save(PlanesCobro planesCobro) //Review Code
+        public PlanesCobro Save(PlanesCobro planesCobro, string[] selectedRubroCobro) 
         {
             int retorno = 0;
             PlanesCobro oPlanesCobro = null;
@@ -166,12 +85,26 @@ namespace Infrastructure.Repository
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
                 oPlanesCobro = GetPlanesCobroByID((int)planesCobro.ID);
-                //IRepositoryResidencias _RepositoryCategoria = new RepositoryResidencias();
+                IRepositoryRubroCobros _RepositoryRubroCobros = new RepositoryRubroCobros();
 
                 if (oPlanesCobro == null)
                 {
 
+                    //Insertar
+                    //Logica para agregar las categorias al libro
+                    if (selectedRubroCobro != null)
+                    {
 
+                        planesCobro.RubroCobro = new List<RubroCobro>();
+                        foreach (var rubroCobro in selectedRubroCobro)
+                        {
+                            var RubroCobroToAdd = _RepositoryRubroCobros.GetRubroCobroByID(int.Parse(rubroCobro));
+                            ctx.RubroCobro.Attach(RubroCobroToAdd); //sin esto, EF intentará crear una categoría
+                            planesCobro.RubroCobro.Add(RubroCobroToAdd);// asociar a la categoría existente con el libro
+
+
+                        }
+                    }
                     //Insertar Libro
                     ctx.PlanesCobro.Add(planesCobro);
                     //SaveChanges
@@ -188,6 +121,19 @@ namespace Infrastructure.Repository
                     ctx.PlanesCobro.Add(planesCobro);
                     ctx.Entry(planesCobro).State = EntityState.Modified;
                     retorno = ctx.SaveChanges();
+
+                    //Logica para actualizar Categorias
+                    var selectedRubroCobroID = new HashSet<string>(selectedRubroCobro);
+                    if (selectedRubroCobro != null)
+                    {
+                        ctx.Entry(planesCobro).Collection(p => p.RubroCobro).Load();
+                        var newCategoriaForLibro = ctx.RubroCobro
+                         .Where(x => selectedRubroCobroID.Contains(x.ID.ToString())).ToList();
+                        planesCobro.RubroCobro = newCategoriaForLibro;
+
+                        ctx.Entry(planesCobro).State = EntityState.Modified;
+                        retorno = ctx.SaveChanges();
+                    }
                 }
             }
 

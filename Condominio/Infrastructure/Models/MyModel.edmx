@@ -12,6 +12,15 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="Estado_EstadoCuenta">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Condominio.dbo.EstadoCuenta' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EstadoCuenta">
           <Key>
             <PropertyRef Name="ID" />
@@ -20,17 +29,10 @@
           <Property Name="IDPlanCobro" Type="int" />
           <Property Name="IDUsuario" Type="int" />
           <Property Name="IDResidencia" Type="int" />
-          <Property Name="Total" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IDEstado" Type="int" />
           <Property Name="Mes" Type="date" />
         </EntityType>
         <EntityType Name="EstadoIncidencia">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="EstadoPlanesCobro">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -66,7 +68,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IDEstado" Type="int" />
+          <Property Name="Total" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="Reservaciones">
           <Key>
@@ -123,6 +125,18 @@
           <Property Name="IDRol" Type="int" />
           <Property Name="activo" Type="int" />
         </EntityType>
+        <Association Name="FKEstadoCuenta_Estado_EstadoCuenta">
+          <End Role="Estado_EstadoCuenta" Type="Self.Estado_EstadoCuenta" Multiplicity="0..1" />
+          <End Role="EstadoCuenta" Type="Self.EstadoCuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado_EstadoCuenta">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EstadoCuenta">
+              <PropertyRef Name="IDEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FKEstadoCuenta_PlanesCobro">
           <End Role="PlanesCobro" Type="Self.PlanesCobro" Multiplicity="0..1" />
           <End Role="EstadoCuenta" Type="Self.EstadoCuenta" Multiplicity="*" />
@@ -180,18 +194,6 @@
             </Principal>
             <Dependent Role="Incidencias">
               <PropertyRef Name="IDResidencias" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FKPlanesCobro_EstadoPlanesCobro">
-          <End Role="EstadoPlanesCobro" Type="Self.EstadoPlanesCobro" Multiplicity="0..1" />
-          <End Role="PlanesCobro" Type="Self.PlanesCobro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EstadoPlanesCobro">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PlanesCobro">
-              <PropertyRef Name="IDEstado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -281,9 +283,8 @@
         </Association>
         <EntityContainer Name="CondominioModelStoreContainer">
           <EntitySet Name="AreaComunal" EntityType="Self.AreaComunal" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="EstadoCuenta" EntityType="Self.EstadoCuenta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estado_EstadoCuenta" EntityType="Self.Estado_EstadoCuenta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstadoIncidencia" EntityType="Self.EstadoIncidencia" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="EstadoPlanesCobro" EntityType="Self.EstadoPlanesCobro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstadoResidencias" EntityType="Self.EstadoResidencias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Incidencias" EntityType="Self.Incidencias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Informacion" EntityType="Self.Informacion" Schema="dbo" store:Type="Tables" />
@@ -294,6 +295,20 @@
           <EntitySet Name="RubroCobro" EntityType="Self.RubroCobro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RubroPlanes" EntityType="Self.RubroPlanes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoCuenta" EntityType="Self.EstadoCuenta" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [EstadoCuenta].[ID] AS [ID], 
+    [EstadoCuenta].[IDPlanCobro] AS [IDPlanCobro], 
+    [EstadoCuenta].[IDUsuario] AS [IDUsuario], 
+    [EstadoCuenta].[IDResidencia] AS [IDResidencia], 
+    [EstadoCuenta].[IDEstado] AS [IDEstado], 
+    [EstadoCuenta].[Mes] AS [Mes]
+    FROM [dbo].[EstadoCuenta] AS [EstadoCuenta]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FKEstadoCuenta_Estado_EstadoCuenta" Association="Self.FKEstadoCuenta_Estado_EstadoCuenta">
+            <End Role="Estado_EstadoCuenta" EntitySet="Estado_EstadoCuenta" />
+            <End Role="EstadoCuenta" EntitySet="EstadoCuenta" />
+          </AssociationSet>
           <AssociationSet Name="FKEstadoCuenta_PlanesCobro" Association="Self.FKEstadoCuenta_PlanesCobro">
             <End Role="PlanesCobro" EntitySet="PlanesCobro" />
             <End Role="EstadoCuenta" EntitySet="EstadoCuenta" />
@@ -313,10 +328,6 @@
           <AssociationSet Name="FKIncidencias_Residencias" Association="Self.FKIncidencias_Residencias">
             <End Role="Residencias" EntitySet="Residencias" />
             <End Role="Incidencias" EntitySet="Incidencias" />
-          </AssociationSet>
-          <AssociationSet Name="FKPlanesCobro_EstadoPlanesCobro" Association="Self.FKPlanesCobro_EstadoPlanesCobro">
-            <End Role="EstadoPlanesCobro" EntitySet="EstadoPlanesCobro" />
-            <End Role="PlanesCobro" EntitySet="PlanesCobro" />
           </AssociationSet>
           <AssociationSet Name="FKReservaciones_AreaComunal" Association="Self.FKReservaciones_AreaComunal">
             <End Role="AreaComunal" EntitySet="AreaComunal" />
@@ -360,19 +371,13 @@
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Reservaciones" Relationship="Self.FKReservaciones_AreaComunal" FromRole="AreaComunal" ToRole="Reservaciones" />
         </EntityType>
-        <EntityType Name="EstadoCuenta">
+        <EntityType Name="Estado_EstadoCuenta">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDPlanCobro" Type="Int32" />
-          <Property Name="IDUsuario" Type="Int32" />
-          <Property Name="IDResidencia" Type="Int32" />
-          <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Mes" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="PlanesCobro" Relationship="Self.FKEstadoCuenta_PlanesCobro" FromRole="EstadoCuenta" ToRole="PlanesCobro" />
-          <NavigationProperty Name="Residencias" Relationship="Self.FKEstadoCuenta_Residencia" FromRole="EstadoCuenta" ToRole="Residencias" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FKEstadoCuenta_Usuario" FromRole="EstadoCuenta" ToRole="Usuario" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EstadoCuenta" Relationship="Self.FKEstadoCuenta_Estado_EstadoCuenta" FromRole="Estado_EstadoCuenta" ToRole="EstadoCuenta" />
         </EntityType>
         <EntityType Name="EstadoIncidencia">
           <Key>
@@ -381,14 +386,6 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Incidencias" Relationship="Self.FKIncidencias_Estado" FromRole="EstadoIncidencia" ToRole="Incidencias" />
-        </EntityType>
-        <EntityType Name="EstadoPlanesCobro">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PlanesCobro" Relationship="Self.FKPlanesCobro_EstadoPlanesCobro" FromRole="EstadoPlanesCobro" ToRole="PlanesCobro" />
         </EntityType>
         <EntityType Name="EstadoResidencias">
           <Key>
@@ -422,9 +419,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDEstado" Type="Int32" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="EstadoCuenta" Relationship="Self.FKEstadoCuenta_PlanesCobro" FromRole="PlanesCobro" ToRole="EstadoCuenta" />
-          <NavigationProperty Name="EstadoPlanesCobro" Relationship="Self.FKPlanesCobro_EstadoPlanesCobro" FromRole="PlanesCobro" ToRole="EstadoPlanesCobro" />
           <NavigationProperty Name="RubroCobro" Relationship="Self.RubroPlanes" FromRole="PlanesCobro" ToRole="RubroCobro" />
         </EntityType>
         <EntityType Name="Reservaciones">
@@ -448,9 +444,9 @@
           <Property Name="CantPersonas" Type="Int32" />
           <Property Name="AnnoInicio" Type="DateTime" Precision="0" />
           <Property Name="CantCarros" Type="Int32" />
-          <NavigationProperty Name="EstadoCuenta" Relationship="Self.FKEstadoCuenta_Residencia" FromRole="Residencias" ToRole="EstadoCuenta" />
           <NavigationProperty Name="EstadoResidencias" Relationship="Self.FKResidencias_EstadoResidencias" FromRole="Residencias" ToRole="EstadoResidencias" />
           <NavigationProperty Name="Incidencias" Relationship="Self.FKIncidencias_Residencias" FromRole="Residencias" ToRole="Incidencias" />
+          <NavigationProperty Name="EstadoCuenta" Relationship="Self.FKEstadoCuenta_Residencia" FromRole="Residencias" ToRole="EstadoCuenta" />
           <NavigationProperty Name="Usuario" Relationship="Self.FKResidencias_Usuario" FromRole="Residencias" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Rol">
@@ -481,10 +477,25 @@
           <Property Name="apellido" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IDRol" Type="Int32" />
           <Property Name="activo" Type="Int32" />
-          <NavigationProperty Name="EstadoCuenta" Relationship="Self.FKEstadoCuenta_Usuario" FromRole="Usuario" ToRole="EstadoCuenta" />
           <NavigationProperty Name="Reservaciones" Relationship="Self.FKReservaciones_Usuario" FromRole="Usuario" ToRole="Reservaciones" />
           <NavigationProperty Name="Residencias" Relationship="Self.FKResidencias_Usuario" FromRole="Usuario" ToRole="Residencias" />
           <NavigationProperty Name="Rol" Relationship="Self.FKUsuario_Rol" FromRole="Usuario" ToRole="Rol" />
+          <NavigationProperty Name="EstadoCuenta" Relationship="Self.FKEstadoCuenta_Usuario" FromRole="Usuario" ToRole="EstadoCuenta" />
+        </EntityType>
+        <EntityType Name="EstadoCuenta">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDPlanCobro" Type="Int32" />
+          <Property Name="IDUsuario" Type="Int32" />
+          <Property Name="IDResidencia" Type="Int32" />
+          <Property Name="IDEstado" Type="Int32" />
+          <Property Name="Mes" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Estado_EstadoCuenta" Relationship="Self.FKEstadoCuenta_Estado_EstadoCuenta" FromRole="EstadoCuenta" ToRole="Estado_EstadoCuenta" />
+          <NavigationProperty Name="PlanesCobro" Relationship="Self.FKEstadoCuenta_PlanesCobro" FromRole="EstadoCuenta" ToRole="PlanesCobro" />
+          <NavigationProperty Name="Residencias" Relationship="Self.FKEstadoCuenta_Residencia" FromRole="EstadoCuenta" ToRole="Residencias" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FKEstadoCuenta_Usuario" FromRole="EstadoCuenta" ToRole="Usuario" />
         </EntityType>
         <Association Name="FKReservaciones_AreaComunal">
           <End Role="AreaComunal" Type="Self.AreaComunal" Multiplicity="0..1" />
@@ -498,39 +509,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FKEstadoCuenta_PlanesCobro">
-          <End Role="PlanesCobro" Type="Self.PlanesCobro" Multiplicity="0..1" />
+        <Association Name="FKEstadoCuenta_Estado_EstadoCuenta">
+          <End Role="Estado_EstadoCuenta" Type="Self.Estado_EstadoCuenta" Multiplicity="0..1" />
           <End Role="EstadoCuenta" Type="Self.EstadoCuenta" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PlanesCobro">
+            <Principal Role="Estado_EstadoCuenta">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="EstadoCuenta">
-              <PropertyRef Name="IDPlanCobro" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FKEstadoCuenta_Residencia">
-          <End Role="Residencias" Type="Self.Residencias" Multiplicity="0..1" />
-          <End Role="EstadoCuenta" Type="Self.EstadoCuenta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Residencias">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="EstadoCuenta">
-              <PropertyRef Name="IDResidencia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FKEstadoCuenta_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-          <End Role="EstadoCuenta" Type="Self.EstadoCuenta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="EstadoCuenta">
-              <PropertyRef Name="IDUsuario" />
+              <PropertyRef Name="IDEstado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -542,18 +529,6 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Incidencias">
-              <PropertyRef Name="IDEstado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FKPlanesCobro_EstadoPlanesCobro">
-          <End Role="EstadoPlanesCobro" Type="Self.EstadoPlanesCobro" Multiplicity="0..1" />
-          <End Role="PlanesCobro" Type="Self.PlanesCobro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EstadoPlanesCobro">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PlanesCobro">
               <PropertyRef Name="IDEstado" />
             </Dependent>
           </ReferentialConstraint>
@@ -582,6 +557,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FKEstadoCuenta_PlanesCobro">
+          <End Role="PlanesCobro" Type="Self.PlanesCobro" Multiplicity="0..1" />
+          <End Role="EstadoCuenta" Type="Self.EstadoCuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlanesCobro">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EstadoCuenta">
+              <PropertyRef Name="IDPlanCobro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FKReservaciones_Usuario">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Reservaciones" Type="Self.Reservaciones" Multiplicity="*" />
@@ -591,6 +578,18 @@
             </Principal>
             <Dependent Role="Reservaciones">
               <PropertyRef Name="IDUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKEstadoCuenta_Residencia">
+          <End Role="Residencias" Type="Self.Residencias" Multiplicity="0..1" />
+          <End Role="EstadoCuenta" Type="Self.EstadoCuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Residencias">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EstadoCuenta">
+              <PropertyRef Name="IDResidencia" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -618,15 +617,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FKEstadoCuenta_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="EstadoCuenta" Type="Self.EstadoCuenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EstadoCuenta">
+              <PropertyRef Name="IDUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="RubroPlanes">
           <End Role="PlanesCobro" Type="Self.PlanesCobro" Multiplicity="*" />
           <End Role="RubroCobro" Type="Self.RubroCobro" Multiplicity="*" />
         </Association>
         <EntityContainer Name="CondominioEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AreaComunal" EntityType="Self.AreaComunal" />
-          <EntitySet Name="EstadoCuenta" EntityType="Self.EstadoCuenta" />
+          <EntitySet Name="Estado_EstadoCuenta" EntityType="Self.Estado_EstadoCuenta" />
           <EntitySet Name="EstadoIncidencia" EntityType="Self.EstadoIncidencia" />
-          <EntitySet Name="EstadoPlanesCobro" EntityType="Self.EstadoPlanesCobro" />
           <EntitySet Name="EstadoResidencias" EntityType="Self.EstadoResidencias" />
           <EntitySet Name="Incidencias" EntityType="Self.Incidencias" />
           <EntitySet Name="Informacion" EntityType="Self.Informacion" />
@@ -636,29 +646,18 @@
           <EntitySet Name="Rol" EntityType="Self.Rol" />
           <EntitySet Name="RubroCobro" EntityType="Self.RubroCobro" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="EstadoCuenta" EntityType="Self.EstadoCuenta" />
           <AssociationSet Name="FKReservaciones_AreaComunal" Association="Self.FKReservaciones_AreaComunal">
             <End Role="AreaComunal" EntitySet="AreaComunal" />
             <End Role="Reservaciones" EntitySet="Reservaciones" />
           </AssociationSet>
-          <AssociationSet Name="FKEstadoCuenta_PlanesCobro" Association="Self.FKEstadoCuenta_PlanesCobro">
-            <End Role="PlanesCobro" EntitySet="PlanesCobro" />
-            <End Role="EstadoCuenta" EntitySet="EstadoCuenta" />
-          </AssociationSet>
-          <AssociationSet Name="FKEstadoCuenta_Residencia" Association="Self.FKEstadoCuenta_Residencia">
-            <End Role="Residencias" EntitySet="Residencias" />
-            <End Role="EstadoCuenta" EntitySet="EstadoCuenta" />
-          </AssociationSet>
-          <AssociationSet Name="FKEstadoCuenta_Usuario" Association="Self.FKEstadoCuenta_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
+          <AssociationSet Name="FKEstadoCuenta_Estado_EstadoCuenta" Association="Self.FKEstadoCuenta_Estado_EstadoCuenta">
+            <End Role="Estado_EstadoCuenta" EntitySet="Estado_EstadoCuenta" />
             <End Role="EstadoCuenta" EntitySet="EstadoCuenta" />
           </AssociationSet>
           <AssociationSet Name="FKIncidencias_Estado" Association="Self.FKIncidencias_Estado">
             <End Role="EstadoIncidencia" EntitySet="EstadoIncidencia" />
             <End Role="Incidencias" EntitySet="Incidencias" />
-          </AssociationSet>
-          <AssociationSet Name="FKPlanesCobro_EstadoPlanesCobro" Association="Self.FKPlanesCobro_EstadoPlanesCobro">
-            <End Role="EstadoPlanesCobro" EntitySet="EstadoPlanesCobro" />
-            <End Role="PlanesCobro" EntitySet="PlanesCobro" />
           </AssociationSet>
           <AssociationSet Name="FKResidencias_EstadoResidencias" Association="Self.FKResidencias_EstadoResidencias">
             <End Role="EstadoResidencias" EntitySet="EstadoResidencias" />
@@ -668,9 +667,17 @@
             <End Role="Residencias" EntitySet="Residencias" />
             <End Role="Incidencias" EntitySet="Incidencias" />
           </AssociationSet>
+          <AssociationSet Name="FKEstadoCuenta_PlanesCobro" Association="Self.FKEstadoCuenta_PlanesCobro">
+            <End Role="PlanesCobro" EntitySet="PlanesCobro" />
+            <End Role="EstadoCuenta" EntitySet="EstadoCuenta" />
+          </AssociationSet>
           <AssociationSet Name="FKReservaciones_Usuario" Association="Self.FKReservaciones_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Reservaciones" EntitySet="Reservaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FKEstadoCuenta_Residencia" Association="Self.FKEstadoCuenta_Residencia">
+            <End Role="Residencias" EntitySet="Residencias" />
+            <End Role="EstadoCuenta" EntitySet="EstadoCuenta" />
           </AssociationSet>
           <AssociationSet Name="FKResidencias_Usuario" Association="Self.FKResidencias_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -679,6 +686,10 @@
           <AssociationSet Name="FKUsuario_Rol" Association="Self.FKUsuario_Rol">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FKEstadoCuenta_Usuario" Association="Self.FKEstadoCuenta_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="EstadoCuenta" EntitySet="EstadoCuenta" />
           </AssociationSet>
           <AssociationSet Name="RubroPlanes" Association="Self.RubroPlanes">
             <End Role="PlanesCobro" EntitySet="PlanesCobro" />
@@ -699,29 +710,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="EstadoCuenta">
-            <EntityTypeMapping TypeName="CondominioModel.EstadoCuenta">
-              <MappingFragment StoreEntitySet="EstadoCuenta">
+          <EntitySetMapping Name="Estado_EstadoCuenta">
+            <EntityTypeMapping TypeName="CondominioModel.Estado_EstadoCuenta">
+              <MappingFragment StoreEntitySet="Estado_EstadoCuenta">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="IDPlanCobro" ColumnName="IDPlanCobro" />
-                <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
-                <ScalarProperty Name="IDResidencia" ColumnName="IDResidencia" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EstadoIncidencia">
             <EntityTypeMapping TypeName="CondominioModel.EstadoIncidencia">
               <MappingFragment StoreEntitySet="EstadoIncidencia">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EstadoPlanesCobro">
-            <EntityTypeMapping TypeName="CondominioModel.EstadoPlanesCobro">
-              <MappingFragment StoreEntitySet="EstadoPlanesCobro">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
               </MappingFragment>
@@ -758,7 +757,7 @@
             <EntityTypeMapping TypeName="CondominioModel.PlanesCobro">
               <MappingFragment StoreEntitySet="PlanesCobro">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="IDEstado" ColumnName="IDEstado" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -811,6 +810,18 @@
                 <ScalarProperty Name="apellido" ColumnName="apellido" />
                 <ScalarProperty Name="IDRol" ColumnName="IDRol" />
                 <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoCuenta">
+            <EntityTypeMapping TypeName="CondominioModel.EstadoCuenta">
+              <MappingFragment StoreEntitySet="EstadoCuenta">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDPlanCobro" ColumnName="IDPlanCobro" />
+                <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+                <ScalarProperty Name="IDResidencia" ColumnName="IDResidencia" />
+                <ScalarProperty Name="IDEstado" ColumnName="IDEstado" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

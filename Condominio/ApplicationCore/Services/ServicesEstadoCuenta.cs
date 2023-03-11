@@ -16,6 +16,12 @@ namespace ApplicationCore.Services
             return repository.GetEstadoCuenta();
         }
 
+        public IEnumerable<EstadoCuenta> GetEstadoCuentaByEstado(int IDResidencia, int IDEstado)
+        {
+            IRepositoryEstadoCuenta repository = new RepositoryEstadoCuenta();
+            return repository.GetEstadoCuentaByEstado(IDResidencia, IDEstado);
+        }
+
         //public IEnumerable<EstadoCuenta> GetEstadoCuentaByDeudasVigentes(int id = 1)
         //{
         //    IRepositoryEstadoCuenta repository = new RepositoryEstadoCuenta();

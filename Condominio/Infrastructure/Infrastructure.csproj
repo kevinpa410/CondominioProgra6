@@ -68,10 +68,10 @@
     <Compile Include="Models\EstadoIncidencia.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EstadoPlanesCobro.cs">
+    <Compile Include="Models\EstadoResidencias.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EstadoResidencias.cs">
+    <Compile Include="Models\Estado_EstadoCuenta.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Incidencias.cs">

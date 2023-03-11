@@ -2,6 +2,7 @@
 using Infraestructure.Utils;
 using Infrastructure.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -34,25 +35,26 @@ namespace Web.Controllers
             }
         }
 
-        // GET: EstadoCuenta/Details/5
-        public ActionResult Details(int? id)
+        //GET: EstadoCuenta/Details/5
+        public ActionResult Details(int? ID)
         {
-
-            ViewBag.DeudasVigentes = GetEstadoCuentaByDeudasVigentes();
-            ViewBag.HistorialPagos = GetEstadoCuentaByHistorialPagos();
-
             ServicesEstadoCuenta _ServicesEstadoCuenta = new ServicesEstadoCuenta();
             EstadoCuenta estadoCuenta = null;
+
+            IServicesEstadoCuenta _ServiceEstadoCuenta = new ServicesEstadoCuenta();
+            ViewBag.DeudasVigentes = _ServiceEstadoCuenta.GetEstadoCuentaByEstado(Convert.ToInt32(ID), 1);
+            ViewBag.HistorialPagos = _ServiceEstadoCuenta.GetEstadoCuentaByEstado(Convert.ToInt32(ID), 2);
 
             try
             {
                 // Si va null
-                if (id == null)
+                if (ID == null)
                 {
                     return RedirectToAction("Index");
                 }
 
-                estadoCuenta = _ServicesEstadoCuenta.GetEstadoCuentaByID(Convert.ToInt32(id));
+                estadoCuenta = _ServicesEstadoCuenta.GetEstadoCuentaByID(Convert.ToInt32(ID));
+
                 if (estadoCuenta == null)
                 {
                     TempData["Message"] = "No existe el libro solicitado";
@@ -79,20 +81,6 @@ namespace Web.Controllers
         public ActionResult Create()
         {
             return View();
-        }
-
-        private SelectList GetEstadoCuentaByDeudasVigentes(int IDEstado = 1)
-        {
-            IServicesPlanesCobro _ServicesPlanesCobro = new ServicesPlanesCobro();
-            IEnumerable<PlanesCobro> lista = _ServicesPlanesCobro.GetPlanesCobro();
-            return new SelectList(lista, "ID", "descripcion", IDEstado);
-        }
-
-        private SelectList GetEstadoCuentaByHistorialPagos(int IDEstado = 2)
-        {
-            IServicesPlanesCobro _ServicesPlanesCobro = new ServicesPlanesCobro();
-            IEnumerable<PlanesCobro> lista = _ServicesPlanesCobro.GetPlanesCobro();
-            return new SelectList(lista, "ID", "IDEstado", IDEstado);
         }
 
         // POST: EstadoCuenta/Create

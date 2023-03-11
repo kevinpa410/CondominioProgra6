@@ -200,9 +200,7 @@
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\EstadoCuenta\Index.cshtml" />
-    <Content Include="Views\EstadoCuenta\Details.cshtml" />
     <Content Include="Views\Residencias\IndexAdmin.cshtml" />
-    <Content Include="Views\PlanesCobro\Index.cshtml" />
     <Content Include="Views\PlanesCobro\Details.cshtml" />
     <Content Include="Views\Residencias\Details.cshtml" />
     <Content Include="Views\Residencias\Create.cshtml" />
@@ -214,6 +212,10 @@
     <Content Include="Views\Incidencias\Create.cshtml" />
     <Content Include="Views\Incidencias\Edit.cshtml" />
     <Content Include="Views\Incidencias\Index.cshtml" />
+    <Content Include="Views\EstadoCuenta\Details.cshtml" />
+    <Content Include="Views\PlanesCobro\Index.cshtml" />
+    <Content Include="Views\PlanesCobro\Edit.cshtml" />
+    <Content Include="Views\PlanesCobro\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

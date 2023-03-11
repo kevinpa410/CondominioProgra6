@@ -4,14 +4,12 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Detalles</h2>
+<h2>Details</h2>
 
 <div>
     <h4>EstadoCuenta</h4>
     <hr />
-
     <dl class="dl-horizontal">
-
         <dt>
             @Html.DisplayNameFor(model => model.Usuario.nombre)
         </dt>
@@ -42,7 +40,7 @@
 
         <dd>
             <ul>
-                @foreach (var c in ViewBag.HistorialPagos)
+                @foreach (var c in (List<Infrastructure.Models.EstadoCuenta>)ViewBag.HistorialPagos)
                 {
 
                     <li>@c.ID</li>
@@ -56,20 +54,17 @@
 
         <dd>
             <ul>
-                @foreach (var item in ViewBag.HistorialPagos)
+                @foreach (var item in (List<Infrastructure.Models.EstadoCuenta>)ViewBag.HistorialPagos)
                 {
 
                     <li>@item.ID</li>
                 }
             </ul>
         </dd>
-        
-
-
 
     </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

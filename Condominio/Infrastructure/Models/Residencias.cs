@@ -11,17 +11,14 @@ namespace Infrastructure.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using static Infrastructure.Models.Metadata;
-
-    [MetadataType(typeof(RecidenciaMetadata))]
+    
     public partial class Residencias
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Residencias()
         {
-            this.EstadoCuenta = new HashSet<EstadoCuenta>();
             this.Incidencias = new HashSet<Incidencias>();
+            this.EstadoCuenta = new HashSet<EstadoCuenta>();
         }
     
         public int ID { get; set; }
@@ -31,11 +28,11 @@ namespace Infrastructure.Models
         public Nullable<System.DateTime> AnnoInicio { get; set; }
         public Nullable<int> CantCarros { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EstadoCuenta> EstadoCuenta { get; set; }
         public virtual EstadoResidencias EstadoResidencias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Incidencias> Incidencias { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EstadoCuenta> EstadoCuenta { get; set; }
         public virtual Usuario Usuario { get; set; }
     }
 }

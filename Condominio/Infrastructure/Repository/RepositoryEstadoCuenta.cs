@@ -48,6 +48,41 @@ namespace Infrastructure.Repository
                 throw;
             }
         }
+        public IEnumerable<EstadoCuenta> GetEstadoCuentaByEstado(int IDResidencia, int IDEstado)
+        {
+            IEnumerable<EstadoCuenta> lista = null;
+            try
+            {
+
+
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    lista = ctx.EstadoCuenta.
+                        Where(x => x.IDResidencia == IDResidencia && x.IDEstado == IDEstado)
+                        .Include("PlanesCobro")
+                        .Include("PlanesCobro.RubroCobro")
+                        .Include("Residencias")
+                        .Include("Usuario").
+                        ToList();
+
+                }
+                return lista;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
         public EstadoCuenta GetEstadoCuentaByID(int id)
         {
             EstadoCuenta oEstadoCuenta = null;
