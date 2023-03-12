@@ -75,8 +75,17 @@ namespace Web.Controllers
         {
             return View();
         }
+
+
+        private SelectList listEstadoIncidencias(int? IDEstadoIncidencias = 0)
+        {
+            IServicesEstadoIncidencias _EstadoIncidencias = new ServicesEstadoIncidencias();
+            IEnumerable<EstadoIncidencia> lista = _EstadoIncidencias.GetEstadoIncidencia();
+            return new SelectList(lista, "ID", "Descripcion", IDEstadoIncidencias);
+        }
+
         // GET: Incidencias/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
             ServicesIncidencias _ServicesIncidencias = new ServicesIncidencias();
             Incidencias incidencias = null;
@@ -99,6 +108,7 @@ namespace Web.Controllers
                     return RedirectToAction("Default", "Error");
                 }
                 //Listados
+                ViewBag.IDEstado = listEstadoIncidencias(incidencias.IDEstado);
                 return View(incidencias);
             }
             catch (Exception ex)
@@ -114,6 +124,7 @@ namespace Web.Controllers
         }
         public ActionResult Save(Incidencias incidencias)
         {
+            
             //Gestión de archivos
             MemoryStream target = new MemoryStream();
             //Servicio Libro
@@ -123,13 +134,17 @@ namespace Web.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    if (incidencias.IDEstado == null)
+                    {
+                        incidencias.IDEstado = 1;
+                    }
                     Incidencias oIncidencias = _ServicesIncidencias.Save(incidencias);
                 }
                 else
                 {
                     // Valida Errores si Javascript está deshabilitado
                     Util.ValidateErrors(this);
-
+                    ViewBag.IDEstado = listEstadoIncidencias(incidencias.IDEstado);
                     //Cargar la vista crear o actualizar
                     //Lógica para cargar vista correspondiente
                     if (incidencias.ID > 0)
@@ -138,6 +153,7 @@ namespace Web.Controllers
                     }
                     else
                     {
+                        
                         return View("Create", incidencias);
                     }
                 }
