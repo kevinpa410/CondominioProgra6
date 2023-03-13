@@ -45,10 +45,12 @@ insert into EstadoCuenta values(1,1,1,1,'2-1-2023');
 insert into EstadoCuenta values(2,2,2,1,'2-1-2023');
 insert into EstadoCuenta values(3,3,3,2,'2-1-2023');
 
-select * from Incidencias 
+
 
 insert into EstadoIncidencia values('Enviado');--ID 1
 insert into EstadoIncidencia values('En Proceso');--ID 2
 insert into EstadoIncidencia values('Completo');--ID 3
 
 
+delete from Informacion where id = 3
+select * from Informacion

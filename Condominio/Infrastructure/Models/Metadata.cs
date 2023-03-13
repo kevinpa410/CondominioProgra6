@@ -92,6 +92,15 @@ namespace Infrastructure.Models
 
         }
 
+        internal partial class InformacionMetadata
+        {
+            [Display(Name = "ID ")]
+            public int ID { get; set; }
+            [Display(Name = "Descripcion")]
+            public string Descripcion { get; set; }
+        public byte[] Imagen { get; set; }
+    }
+
         internal partial class IncidenciasMetadata
         {
             [Display(Name = "ID")]
@@ -106,6 +115,22 @@ namespace Infrastructure.Models
             public virtual EstadoIncidencia EstadoIncidencia { get; set; }
             public virtual Residencias Residencias { get; set; }
         }
+
+        internal partial class RubroCobroMetadata
+        {
+            public int ID { get; set; }
+            public Nullable<decimal> Monto { get; set; }
+            public string Descripcion { get; set; }
+
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+            public virtual ICollection<PlanesCobro> PlanesCobro { get; set; }
+        }
+
+
+        //internal partial class Metadata
+        //{
+
+        //}
 
     }
 }

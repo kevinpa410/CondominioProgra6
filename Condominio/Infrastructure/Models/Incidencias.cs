@@ -11,7 +11,10 @@ namespace Infrastructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using static Infrastructure.Models.Metadata;
+
+    [MetadataType(typeof(IncidenciasMetadata))]
     public partial class Incidencias
     {
         public int ID { get; set; }

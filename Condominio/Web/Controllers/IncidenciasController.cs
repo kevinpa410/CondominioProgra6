@@ -35,7 +35,7 @@ namespace Web.Controllers
             }
         }
         // GET: Incidencias/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             ServicesIncidencias _ServicesIncidencias = new ServicesIncidencias();
             Incidencias incidencias = null;
@@ -143,7 +143,7 @@ namespace Web.Controllers
                 else
                 {
                     // Valida Errores si Javascript está deshabilitado
-                    Util.ValidateErrors(this);
+                    Utils.Util.ValidateErrors(this);
                     ViewBag.IDEstado = listEstadoIncidencias(incidencias.IDEstado);
                     //Cargar la vista crear o actualizar
                     //Lógica para cargar vista correspondiente

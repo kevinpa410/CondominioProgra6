@@ -62,10 +62,10 @@
     <Compile Include="Services\ServicesRol.cs" />
     <Compile Include="Services\ServicesRubroCobro.cs" />
     <Compile Include="Services\ServicesUsuario.cs" />
+    <Compile Include="Utils\Cryptography.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOS\" />
-    <Folder Include="Utils\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">

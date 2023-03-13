@@ -1,0 +1,1 @@
+﻿public enum Rols { Administrador = 1, Residente = 2}

@@ -120,7 +120,7 @@ namespace Web.Controllers
                 else
                 {
                     // Valida Errores si Javascript está deshabilitado
-                    Util.ValidateErrors(this);
+                    Utils.Util.ValidateErrors(this);
                     ViewBag.IDEstadoResidencias = listaEstadoResidencias(Convert.ToInt32(residencias.IDEstado));
                     ViewBag.idUsuario = listaUsuario(residencias.IDUsuario);
                     

@@ -91,7 +91,7 @@ namespace Web.Controllers
                 else
                 {
                     // Valida Errores si Javascript está deshabilitado
-                    Util.ValidateErrors(this);
+                    Utils.Util.ValidateErrors(this);
 
                     //Cargar la vista crear o actualizar
                     //Lógica para cargar vista correspondiente
