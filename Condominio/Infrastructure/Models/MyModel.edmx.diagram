@@ -4,18 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="05cb3a4a47264b339d55f56872ec6ffe" Name="Diagram1">
+      <Diagram DiagramId="12f22f068a104600b895559f17661dbb" Name="Diagram1">
         <EntityTypeShape EntityType="CondominioModel.AreaComunal" Width="1.5" PointX="1.5" PointY="18.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominioModel.Estado_EstadoCuenta" Width="1.5" PointX="3.75" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominioModel.EstadoIncidencia" Width="1.5" PointX="3.75" PointY="17.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominioModel.EstadoResidencias" Width="1.5" PointX="1.5" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominioModel.Incidencias" Width="1.5" PointX="6" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CondominioModel.Informacion" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CondominioModel.Informacion" Width="1.5" PointX="8" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominioModel.PlanesCobro" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominioModel.Reservaciones" Width="1.5" PointX="3.75" PointY="14.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominioModel.Residencias" Width="1.5" PointX="3.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominioModel.Rol" Width="1.5" PointX="1.5" PointY="15.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominioModel.RubroCobro" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="CondominioModel.TipoInformacion" Width="1.5" PointX="5.75" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominioModel.Usuario" Width="1.5" PointX="1.5" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CondominioModel.EstadoCuenta" Width="1.5" PointX="6" PointY="2.375" IsExpanded="true" />
         <AssociationConnector Association="CondominioModel.FKReservaciones_AreaComunal" ManuallyRouted="false" />
@@ -23,6 +24,7 @@
         <AssociationConnector Association="CondominioModel.FKIncidencias_Estado" ManuallyRouted="false" />
         <AssociationConnector Association="CondominioModel.FKResidencias_EstadoResidencias" ManuallyRouted="false" />
         <AssociationConnector Association="CondominioModel.FKIncidencias_Residencias" ManuallyRouted="false" />
+        <AssociationConnector Association="CondominioModel.FKInformacion_TipoInformacion" ManuallyRouted="false" />
         <AssociationConnector Association="CondominioModel.FKEstadoCuenta_PlanesCobro" ManuallyRouted="false" />
         <AssociationConnector Association="CondominioModel.FKReservaciones_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="CondominioModel.FKEstadoCuenta_Residencia" ManuallyRouted="false" />

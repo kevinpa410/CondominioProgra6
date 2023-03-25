@@ -48,8 +48,11 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDTipoInformacion" Type="Int32" />
+    <Property Name="Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="TipoInformacion" Relationship="Self.FKInformacion_TipoInformacion" FromRole="Informacion" ToRole="TipoInformacion" />
   </EntityType>
   <EntityType Name="PlanesCobro">
     <Key>
@@ -103,13 +106,21 @@
     <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="PlanesCobro" Relationship="Self.RubroPlanes" FromRole="RubroCobro" ToRole="PlanesCobro" />
   </EntityType>
+  <EntityType Name="TipoInformacion">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Informacion" Relationship="Self.FKInformacion_TipoInformacion" FromRole="TipoInformacion" ToRole="Informacion" />
+  </EntityType>
   <EntityType Name="Usuario">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="contrasenna" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="contrasenna" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="apellido" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="IDRol" Type="Int32" />
@@ -191,6 +202,18 @@
       </Principal>
       <Dependent Role="Incidencias">
         <PropertyRef Name="IDResidencias" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKInformacion_TipoInformacion">
+    <End Role="TipoInformacion" Type="Self.TipoInformacion" Multiplicity="0..1" />
+    <End Role="Informacion" Type="Self.Informacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoInformacion">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Informacion">
+        <PropertyRef Name="IDTipoInformacion" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -282,6 +305,7 @@
     <EntitySet Name="Residencias" EntityType="Self.Residencias" />
     <EntitySet Name="Rol" EntityType="Self.Rol" />
     <EntitySet Name="RubroCobro" EntityType="Self.RubroCobro" />
+    <EntitySet Name="TipoInformacion" EntityType="Self.TipoInformacion" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" />
     <EntitySet Name="EstadoCuenta" EntityType="Self.EstadoCuenta" />
     <AssociationSet Name="FKReservaciones_AreaComunal" Association="Self.FKReservaciones_AreaComunal">
@@ -303,6 +327,10 @@
     <AssociationSet Name="FKIncidencias_Residencias" Association="Self.FKIncidencias_Residencias">
       <End Role="Residencias" EntitySet="Residencias" />
       <End Role="Incidencias" EntitySet="Incidencias" />
+    </AssociationSet>
+    <AssociationSet Name="FKInformacion_TipoInformacion" Association="Self.FKInformacion_TipoInformacion">
+      <End Role="TipoInformacion" EntitySet="TipoInformacion" />
+      <End Role="Informacion" EntitySet="Informacion" />
     </AssociationSet>
     <AssociationSet Name="FKEstadoCuenta_PlanesCobro" Association="Self.FKEstadoCuenta_PlanesCobro">
       <End Role="PlanesCobro" EntitySet="PlanesCobro" />

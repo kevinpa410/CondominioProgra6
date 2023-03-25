@@ -134,10 +134,7 @@ namespace Web.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    if (incidencias.IDEstado == null)
-                    {
-                        incidencias.IDEstado = 1;
-                    }
+                    
                     Incidencias oIncidencias = _ServicesIncidencias.Save(incidencias);
                 }
                 else

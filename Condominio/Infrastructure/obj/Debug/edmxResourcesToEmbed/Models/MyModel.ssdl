@@ -55,6 +55,8 @@ warning 6002: The table/view 'Condominio.dbo.EstadoCuenta' does not have a prima
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDTipoInformacion" Type="int" />
+    <Property Name="Titulo" Type="varchar" MaxLength="100" />
     <Property Name="Descripcion" Type="varchar" MaxLength="100" />
     <Property Name="Imagen" Type="varbinary(max)" />
   </EntityType>
@@ -108,13 +110,20 @@ warning 6002: The table/view 'Condominio.dbo.EstadoCuenta' does not have a prima
     <Property Name="IDRubro" Type="int" Nullable="false" />
     <Property Name="IDPlanes" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="TipoInformacion">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+  </EntityType>
   <EntityType Name="Usuario">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="correo" Type="varchar" MaxLength="50" />
-    <Property Name="contrasenna" Type="varchar" MaxLength="20" />
+    <Property Name="contrasenna" Type="varchar" MaxLength="100" />
     <Property Name="nombre" Type="varchar" MaxLength="20" />
     <Property Name="apellido" Type="varchar" MaxLength="20" />
     <Property Name="IDRol" Type="int" />
@@ -189,6 +198,18 @@ warning 6002: The table/view 'Condominio.dbo.EstadoCuenta' does not have a prima
       </Principal>
       <Dependent Role="Incidencias">
         <PropertyRef Name="IDResidencias" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKInformacion_TipoInformacion">
+    <End Role="TipoInformacion" Type="Self.TipoInformacion" Multiplicity="0..1" />
+    <End Role="Informacion" Type="Self.Informacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoInformacion">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Informacion">
+        <PropertyRef Name="IDTipoInformacion" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -289,6 +310,7 @@ warning 6002: The table/view 'Condominio.dbo.EstadoCuenta' does not have a prima
     <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RubroCobro" EntityType="Self.RubroCobro" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RubroPlanes" EntityType="Self.RubroPlanes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoInformacion" EntityType="Self.TipoInformacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstadoCuenta" EntityType="Self.EstadoCuenta" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
@@ -323,6 +345,10 @@ warning 6002: The table/view 'Condominio.dbo.EstadoCuenta' does not have a prima
     <AssociationSet Name="FKIncidencias_Residencias" Association="Self.FKIncidencias_Residencias">
       <End Role="Residencias" EntitySet="Residencias" />
       <End Role="Incidencias" EntitySet="Incidencias" />
+    </AssociationSet>
+    <AssociationSet Name="FKInformacion_TipoInformacion" Association="Self.FKInformacion_TipoInformacion">
+      <End Role="TipoInformacion" EntitySet="TipoInformacion" />
+      <End Role="Informacion" EntitySet="Informacion" />
     </AssociationSet>
     <AssociationSet Name="FKReservaciones_AreaComunal" Association="Self.FKReservaciones_AreaComunal">
       <End Role="AreaComunal" EntitySet="AreaComunal" />

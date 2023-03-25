@@ -9,7 +9,7 @@
 <h2>Login</h2>
 
 
-@using (Html.BeginForm("Login", "Usuario"))
+@using (Html.BeginForm("Login", "Ususario", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 

@@ -56,14 +56,7 @@ namespace Infrastructure.Models
         {
             [Display(Name = "ID Plan de Cobro")]
             public int ID { get; set; }
-            [Display(Name = "ID de Estado")]
-            public Nullable<int> IDEstado { get; set; }
-
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-            [Display(Name = "Estado de Cuenta")]
-            public virtual ICollection<EstadoCuenta> EstadoCuenta { get; set; }
-            [Display(Name = "Planes de Cobro")]
-            public virtual ICollection<RubroCobro> RubroCobro { get; set; }
+            public Nullable<decimal> Total { get; set; }
 
         }
 
@@ -80,14 +73,6 @@ namespace Infrastructure.Models
             public string apellido { get; set; }
             [Display(Name = "Rol")]
             public Nullable<int> IDRol { get; set; }
-            public Nullable<int> activo { get; set; }
-
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-            public virtual ICollection<EstadoCuenta> EstadoCuenta { get; set; }
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-            public virtual ICollection<Reservaciones> Reservaciones { get; set; }
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-            public virtual ICollection<Residencias> Residencias { get; set; }
             public virtual Rol Rol { get; set; }
 
         }

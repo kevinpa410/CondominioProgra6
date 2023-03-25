@@ -11,71 +11,52 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     @RenderSection("styles", required: false)
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Librería</a>
+
+            @* Logo Section *@
+            <div navbar-brand>
+                <a href="@Url.Action("Index", "Home")">
+                    <img class="resize" style="width: 13em; height: 5em; border-radius: 0.3em;" src="~/imgs/Roble Logo.png" />
+                </a>
+            </div>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
 
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                    @* Información usuario *@
-                    @{
-                        String nombre = "";
-                        String email = "Perfil";
-
-                        if (Session["User"] != null)
-                        {
-                            Infrastructure.Models.Usuario usuario = new Infrastructure.Models.Usuario();
-                            usuario = (Infrastructure.Models.Usuario)Session["User"];
-                            nombre = $"{usuario.nombre} {usuario.apellido}";
-                            email = usuario.correo;
-                        }
-                    }
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-                           href="#" role="button" aria-haspopup="true"
-                           aria-expanded="false"><i class="fa-solid fa-user"></i>@email</a>
-
-
-                        <div class="dropdown-menu">
-                            @if (Session["User"] != null)
-                            {
-                                <div class="dropdown-item">
-                                    @* Nombre Usuario *@
-                                    Usuario: @nombre
-                                </div>
-                            }
-
-                            @if (Session["User"] == null)
-                            {
-                                <a class="dropdown-item"
-                                   @*Accion, Controlador*@
-                                   href="@Url.Action("Index","Usuario")">
-                                    <i class="fa-solid fa-user-plus"></i>
-                                    Login
-                                </a>
-                            }
-                            else
-                            {
-                                <a class="dropdown-item"
-                                   href="@Url.Action("Logout","Usuario")">
-                                    <i class="fa-solid fa-right-from-bracket"></i>
-                                    Logout
-                                </a>
-                            }
-                        </div>
-                    </li>
-                </ul>
-            </div>
         </div>
+
+        @* Login Section *@
+        <div style="padding-right: 5.5em" class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                @* Información usuario *@
+                @{
+                    String nombre = "";
+                    String email = "Perfil";
+
+                    if (Session["User"] != null)
+                    {
+                        Infrastructure.Models.Usuario usuario = new Infrastructure.Models.Usuario();
+                        usuario = (Infrastructure.Models.Usuario)Session["User"];
+                        nombre = $"{usuario.nombre} {usuario.apellido}";
+                        email = usuario.correo;
+                    }
+                }
+
+                
+            </ul>
+        </div>
+
+        @* Login Section *@
+
+
     </nav>
+
     <div class="container body-content">
         @RenderBody()
         @RenderSection("footer", false)

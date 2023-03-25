@@ -112,6 +112,9 @@
     <Compile Include="Models\RubroCobro.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TipoInformacion.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
@@ -125,6 +128,7 @@
     <Compile Include="Repository\IRepositoryResidencias.cs" />
     <Compile Include="Repository\IRepositoryRol.cs" />
     <Compile Include="Repository\IRepositoryRubroCobros.cs" />
+    <Compile Include="Repository\IRepositoryTipoInformacion.cs" />
     <Compile Include="Repository\IRepositoryUsuario.cs" />
     <Compile Include="Repository\RepositoryEstadoCuenta.cs" />
     <Compile Include="Repository\RepositoryEstadoIncidencias.cs" />
@@ -135,6 +139,7 @@
     <Compile Include="Repository\RepositoryResidencias.cs" />
     <Compile Include="Repository\RepositoryRol.cs" />
     <Compile Include="Repository\RepositoryRubroCobros.cs" />
+    <Compile Include="Repository\RepositoryTipoInformacion.cs" />
     <Compile Include="Repository\RepositoryUsuario.cs" />
     <Compile Include="Utils\Log.cs" />
   </ItemGroup>

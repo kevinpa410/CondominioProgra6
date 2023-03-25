@@ -6,12 +6,13 @@ Go
 Create Table Usuario(
 ID int IDENTITY (1,1) not null,
 correo varchar(50),
-contrasenna varchar(20),
+contrasenna varchar(100),
 nombre varchar(20),
 apellido varchar(20),
 IDRol int,
 activo int
 );
+
 Go
 Alter Table Usuario add constraint PK_Usuario primary key (ID);
 Go

@@ -47,6 +47,8 @@
       <EntityTypeMapping TypeName="CondominioModel.Informacion">
         <MappingFragment StoreEntitySet="Informacion">
           <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IDTipoInformacion" ColumnName="IDTipoInformacion" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="Imagen" ColumnName="Imagen" />
         </MappingFragment>
@@ -95,6 +97,14 @@
         <MappingFragment StoreEntitySet="RubroCobro">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoInformacion">
+      <EntityTypeMapping TypeName="CondominioModel.TipoInformacion">
+        <MappingFragment StoreEntitySet="TipoInformacion">
+          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
         </MappingFragment>
       </EntityTypeMapping>
