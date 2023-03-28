@@ -139,7 +139,7 @@ ID int IDENTITY (1,1) not null,
 Descripcion varchar(50),
 );
 Go
-alter table Estado_EstadoCuenta add constraint PK_EstadoCuenta primary key (ID);
+alter table Estado_EstadoCuenta add constraint PK_Estado_EstadoCuenta primary key (ID);
 Go
 --------------------------------------------------------------------------------------
 
