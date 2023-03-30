@@ -27,6 +27,7 @@ namespace Infrastructure.Models
     
         public virtual DbSet<AreaComunal> AreaComunal { get; set; }
         public virtual DbSet<Estado_EstadoCuenta> Estado_EstadoCuenta { get; set; }
+        public virtual DbSet<EstadoCuenta> EstadoCuenta { get; set; }
         public virtual DbSet<EstadoIncidencia> EstadoIncidencia { get; set; }
         public virtual DbSet<EstadoResidencias> EstadoResidencias { get; set; }
         public virtual DbSet<Incidencias> Incidencias { get; set; }
@@ -38,6 +39,5 @@ namespace Infrastructure.Models
         public virtual DbSet<RubroCobro> RubroCobro { get; set; }
         public virtual DbSet<TipoInformacion> TipoInformacion { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
-        public virtual DbSet<EstadoCuenta> EstadoCuenta { get; set; }
     }
 }

@@ -38,17 +38,17 @@ insert into RubroPlanes values(2,3);
 insert into RubroPlanes values(3,3);
 
 insert into Residencias values(1,1,3,'1-1-2020',1);
-insert into Residencias values(2,2,5,'4-16-2021',2);
-insert into Residencias values(3,1,4,'7-20-2019',1);
+--insert into Residencias values(2,2,5,'4-16-2021',2);
+--insert into Residencias values(3,1,4,'7-20-2019',1);
 
-insert into EstadoCuenta values(1,1,1,1,'2-1-2023');
-insert into EstadoCuenta values(2,2,2,1,'2-1-2023');
-insert into EstadoCuenta values(3,3,3,2,'2-1-2023');
+--insert into EstadoCuenta values(1,1,1,1,'2-1-2023');
+--insert into EstadoCuenta values(2,2,2,1,'2-1-2023');
+--insert into EstadoCuenta values(3,3,3,2,'2-1-2023');
 
 insert into EstadoIncidencia values('Enviado');--ID 1
 insert into EstadoIncidencia values('En Proceso');--ID 2
 insert into EstadoIncidencia values('Completo');--ID 3
 
 
-delete from Informacion where id = 3
-select * from Usuario
+--delete from Informacion where id = 3
+--select * from Usuario

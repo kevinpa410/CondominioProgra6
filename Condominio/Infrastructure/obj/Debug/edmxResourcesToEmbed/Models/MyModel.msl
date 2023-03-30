@@ -17,6 +17,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="EstadoCuenta">
+      <EntityTypeMapping TypeName="CondominioModel.EstadoCuenta">
+        <MappingFragment StoreEntitySet="EstadoCuenta">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IDPlanCobro" ColumnName="IDPlanCobro" />
+          <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+          <ScalarProperty Name="IDResidencia" ColumnName="IDResidencia" />
+          <ScalarProperty Name="IDEstado" ColumnName="IDEstado" />
+          <ScalarProperty Name="Mes" ColumnName="Mes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="EstadoIncidencia">
       <EntityTypeMapping TypeName="CondominioModel.EstadoIncidencia">
         <MappingFragment StoreEntitySet="EstadoIncidencia">
@@ -119,18 +131,6 @@
           <ScalarProperty Name="apellido" ColumnName="apellido" />
           <ScalarProperty Name="IDRol" ColumnName="IDRol" />
           <ScalarProperty Name="activo" ColumnName="activo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="EstadoCuenta">
-      <EntityTypeMapping TypeName="CondominioModel.EstadoCuenta">
-        <MappingFragment StoreEntitySet="EstadoCuenta">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="IDPlanCobro" ColumnName="IDPlanCobro" />
-          <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
-          <ScalarProperty Name="IDResidencia" ColumnName="IDResidencia" />
-          <ScalarProperty Name="IDEstado" ColumnName="IDEstado" />
-          <ScalarProperty Name="Mes" ColumnName="Mes" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

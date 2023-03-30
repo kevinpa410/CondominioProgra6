@@ -12,7 +12,6 @@ apellido varchar(20),
 IDRol int,
 activo int
 );
-
 Go
 Alter Table Usuario add constraint PK_Usuario primary key (ID);
 Go
@@ -159,6 +158,8 @@ Go
 
 Create Table Informacion(
 ID int IDENTITY (1,1) not null,
+IDTipoInformacion int,
+Titulo varchar(100),
 Descripcion varchar(100),
 Imagen varbinary (max),
 
@@ -166,9 +167,21 @@ Imagen varbinary (max),
 
 alter table Informacion add constraint PK_Informacion primary key (ID);
 Go
+ALTER TABLE Informacion ADD CONSTRAINT FKInformacion_TipoInformacion FOREIGN KEY(IDTipoInformacion)REFERENCES TipoInformacion(ID)
+Go
 
 --------------------------------------------------------------------------------------
 
+Create Table TipoInformacion(
+ID int IDENTITY (1,1) not null,
+Descripcion varchar(100),
+
+);
+
+alter table TipoInformacion add constraint PK_TipoInformacion primary key (ID);
+Go
+
+--------------------------------------------------------------------------------------
 Create Table EstadoCuenta(
 ID int IDENTITY (1,1) not null,
 IDPlanCobro int,

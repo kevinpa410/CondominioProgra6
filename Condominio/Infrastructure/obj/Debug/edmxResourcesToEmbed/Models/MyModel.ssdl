@@ -14,8 +14,6 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'Condominio.dbo.EstadoCuenta' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="EstadoCuenta">
     <Key>
       <PropertyRef Name="ID" />
@@ -300,6 +298,7 @@ warning 6002: The table/view 'Condominio.dbo.EstadoCuenta' does not have a prima
   <EntityContainer Name="CondominioModelStoreContainer">
     <EntitySet Name="AreaComunal" EntityType="Self.AreaComunal" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Estado_EstadoCuenta" EntityType="Self.Estado_EstadoCuenta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EstadoCuenta" EntityType="Self.EstadoCuenta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstadoIncidencia" EntityType="Self.EstadoIncidencia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstadoResidencias" EntityType="Self.EstadoResidencias" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Incidencias" EntityType="Self.Incidencias" Schema="dbo" store:Type="Tables" />
@@ -312,16 +311,6 @@ warning 6002: The table/view 'Condominio.dbo.EstadoCuenta' does not have a prima
     <EntitySet Name="RubroPlanes" EntityType="Self.RubroPlanes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoInformacion" EntityType="Self.TipoInformacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="EstadoCuenta" EntityType="Self.EstadoCuenta" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [EstadoCuenta].[ID] AS [ID], 
-    [EstadoCuenta].[IDPlanCobro] AS [IDPlanCobro], 
-    [EstadoCuenta].[IDUsuario] AS [IDUsuario], 
-    [EstadoCuenta].[IDResidencia] AS [IDResidencia], 
-    [EstadoCuenta].[IDEstado] AS [IDEstado], 
-    [EstadoCuenta].[Mes] AS [Mes]
-    FROM [dbo].[EstadoCuenta] AS [EstadoCuenta]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FKEstadoCuenta_Estado_EstadoCuenta" Association="Self.FKEstadoCuenta_Estado_EstadoCuenta">
       <End Role="Estado_EstadoCuenta" EntitySet="Estado_EstadoCuenta" />
       <End Role="EstadoCuenta" EntitySet="EstadoCuenta" />
