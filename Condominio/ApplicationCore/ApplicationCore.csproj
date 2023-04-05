@@ -48,6 +48,7 @@
     <Compile Include="Services\IServicesIncidencias.cs" />
     <Compile Include="Services\IServicesInformacion.cs" />
     <Compile Include="Services\IServicesPlanesCobro.cs" />
+    <Compile Include="Services\IServicesReservacion.cs" />
     <Compile Include="Services\IServicesResidencias.cs" />
     <Compile Include="Services\IServicesRol.cs" />
     <Compile Include="Services\IServicesRubroCobro.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Services\ServicesIncidencias.cs" />
     <Compile Include="Services\ServicesInformacion.cs" />
     <Compile Include="Services\ServicesPlanesCobro.cs" />
+    <Compile Include="Services\ServicesReservacion.cs" />
     <Compile Include="Services\ServicesResidencias.cs" />
     <Compile Include="Services\ServicesRol.cs" />
     <Compile Include="Services\ServicesRubroCobro.cs" />

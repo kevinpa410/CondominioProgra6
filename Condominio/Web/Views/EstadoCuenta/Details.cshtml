@@ -11,19 +11,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Usuario.nombre)
+            @Html.DisplayNameFor(model => model.Usuario.nombre) y @Html.DisplayNameFor(model => model.Usuario.apellido)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Usuario.nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Usuario.apellido)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Usuario.apellido)
+            @Html.DisplayFor(model => model.Usuario.nombre)@Html.DisplayFor(model => model.Usuario.apellido)
         </dd>
 
         <dt>
@@ -40,7 +32,7 @@
 
         <dd>
             <ul>
-                @foreach (var c in (List<Infrastructure.Models.EstadoCuenta>)ViewBag.HistorialPagos)
+                @foreach (var c in (List<Infrastructure.Models.EstadoCuenta>)ViewBag.DeudasVigentes)
                 {
 
                     <li>@c.ID</li>

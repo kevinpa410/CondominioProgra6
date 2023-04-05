@@ -19,7 +19,8 @@
                     <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.Imagen)"
                          alt="Imagen @Html.DisplayFor(modelItem => item.Descripcion)" class="img-thumbnail" />
                     <div class="card-body">
-                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Descripcion)</h5>
+                        <h5 class="card-title"> >@Html.DisplayFor(modelItem => item.Titulo) </h5>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Descripcion)</p>
 
                         <div class="btn-group">
                             <a href="@Url.Action("Edit", "Informacion", new { id = item.ID })" class="btn btn-warning" style="border-radius: 10rem" ;>Editar</a>

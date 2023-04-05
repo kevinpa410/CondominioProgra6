@@ -21,6 +21,7 @@ namespace Web.Controllers
         {
             return View();
         }
+
         // GET: Residencias
         public ActionResult IndexAdmin()
         {

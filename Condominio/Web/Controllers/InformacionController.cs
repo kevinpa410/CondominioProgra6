@@ -74,6 +74,7 @@ namespace Web.Controllers
         // GET: Informacion/Create
         public ActionResult Create()
         {
+            ViewBag.IDTipoInformacion = listTipoInformacion();
             return View();
         }
 
@@ -115,7 +116,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Save(Informacion informacion, HttpPostedFileBase ImageFile)
+        public ActionResult Save(Informacion informacion, HttpPostedFileBase ImageFile, string[] selectedCategorias)
         {
             //Gestión de archivos
             MemoryStream target = new MemoryStream();
@@ -139,9 +140,12 @@ namespace Web.Controllers
                 }
                 else
                 {
+                    // Valida Errores si Javascript está deshabilitado
                     Utils.Util.ValidateErrors(this);
-
-                    if (informacion.ID > 0)
+                    ViewBag.IDTipoInformacion = listTipoInformacion(Convert.ToInt32(informacion.IDTipoInformacion));
+                    //Cargar la vista crear o actualizar
+                    //Lógica para cargar vista correspondiente
+                    if (informacion.IDTipoInformacion > 0)
                     {
                         return (ActionResult)View("Edit", informacion);
                     }
@@ -163,6 +167,13 @@ namespace Web.Controllers
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
+        }
+
+        private SelectList listTipoInformacion(int idAutor = 0)
+        {
+            IServicesTipoInformacion _ServicesTipoInformacion = new ServicesTipoInformacion();
+            IEnumerable<TipoInformacion> lista = _ServicesTipoInformacion.GetTipoInformacion();
+            return new SelectList(lista, "ID", "Descripcion", idAutor);
         }
 
     }

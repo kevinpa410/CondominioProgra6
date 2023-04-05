@@ -126,6 +126,7 @@
     <Compile Include="Controllers\IncidenciasController.cs" />
     <Compile Include="Controllers\InformacionController.cs" />
     <Compile Include="Controllers\PlanesCobroController.cs" />
+    <Compile Include="Controllers\ReservacionController.cs" />
     <Compile Include="Controllers\ResidenciasController.cs" />
     <Compile Include="Controllers\RubroCobroController.cs" />
     <Compile Include="Controllers\UsusarioController.cs" />
@@ -210,7 +211,7 @@
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
-    <Content Include="Views\EstadoCuenta\Index.cshtml" />
+    <Content Include="Views\EstadoCuenta\IndexAdmin.cshtml" />
     <Content Include="Views\Residencias\IndexAdmin.cshtml" />
     <Content Include="Views\PlanesCobro\Details.cshtml" />
     <Content Include="Views\Residencias\Details.cshtml" />
@@ -235,10 +236,12 @@
     <Content Include="Views\Ususario\Index.cshtml" />
     <Content Include="Views\Ususario\Create.cshtml" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
+    <Content Include="Views\EstadoCuenta\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Reservacion\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

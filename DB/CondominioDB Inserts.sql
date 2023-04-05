@@ -44,6 +44,7 @@ insert into Residencias values(1,1,3,'1-1-2020',1);
 --insert into EstadoCuenta values(1,1,1,1,'2-1-2023');
 --insert into EstadoCuenta values(2,2,2,1,'2-1-2023');
 --insert into EstadoCuenta values(3,3,3,2,'2-1-2023');
+--select * from EstadoCuenta
 
 insert into EstadoIncidencia values('Enviado');--ID 1
 insert into EstadoIncidencia values('En Proceso');--ID 2
