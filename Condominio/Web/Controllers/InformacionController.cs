@@ -115,7 +115,6 @@ namespace Web.Controllers
             }
         }
 
-        [HttpPost]
         public ActionResult Save(Informacion informacion, HttpPostedFileBase ImageFile, string[] selectedCategorias)
         {
             //Gestión de archivos
