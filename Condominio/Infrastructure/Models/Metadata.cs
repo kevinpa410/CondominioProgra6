@@ -111,6 +111,16 @@ namespace Infrastructure.Models
             public virtual ICollection<PlanesCobro> PlanesCobro { get; set; }
         }
 
+        internal partial class MetadataReservaciones
+        {
+            [Display(Name = "ID de Reservacion")]
+            public int ID { get; set; }
+            [Display(Name = "ID de Usuario")]
+            public Nullable<int> IDUsuario { get; set; }
+            [Display(Name = "ID de Area Comunal")]
+            public Nullable<int> IDAreaComunal { get; set; }
+            public Nullable<System.DateTime> Fecha { get; set; }
+        }
 
         //internal partial class Metadata
         //{

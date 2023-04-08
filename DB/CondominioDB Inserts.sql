@@ -50,6 +50,11 @@ insert into EstadoIncidencia values('Enviado');--ID 1
 insert into EstadoIncidencia values('En Proceso');--ID 2
 insert into EstadoIncidencia values('Completo');--ID 3
 
+insert into AreaComunal values('Piscina');--ID 1
+insert into AreaComunal values('Rancho');--ID 2
+insert into AreaComunal values('Area de Juegos');--ID 3
+insert into AreaComunal values('Salon Comunal');--ID 4
+
 
 --delete from Informacion where id = 3
 --select * from Usuario

@@ -24,6 +24,7 @@ namespace Infrastructure.Repository
                     lista = ctx.Reservaciones.
                         Include("Usuario").
                         Include("AreaComunal").
+                        Include("EstadoReservaciones").
                         ToList();
                 }
                 return lista;
@@ -56,6 +57,7 @@ namespace Infrastructure.Repository
                         Where(l => l.ID == id).
                         Include("Usuario").
                         Include("AreaComunal").
+                        Include("EstadoReservaciones").
                         FirstOrDefault();
 
                 }

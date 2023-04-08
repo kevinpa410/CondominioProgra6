@@ -88,6 +88,7 @@ Create Table Reservaciones(
 ID int IDENTITY (1,1) not null,
 IDUsuario int,
 IDAreaComunal int,
+IDEstadoReservaciones int,
 Fecha date,
 );
 Go
@@ -96,6 +97,17 @@ Go
 ALTER TABLE Reservaciones ADD CONSTRAINT FKReservaciones_Usuario FOREIGN KEY(IDUsuario)REFERENCES Usuario(ID)
 Go
 ALTER TABLE Reservaciones ADD CONSTRAINT FKReservaciones_AreaComunal FOREIGN KEY(IDAreaComunal)REFERENCES AreaComunal(ID)
+Go
+ALTER TABLE Reservaciones ADD CONSTRAINT FKReservaciones_EstadoReservaciones FOREIGN KEY(IDEstadoReservaciones)REFERENCES EstadoReservaciones(ID)
+Go
+--------------------------------------------------------------------------------------
+
+Create Table EstadoReservaciones(
+ID int IDENTITY (1,1) not null,
+Descripcion varchar(100),
+);
+
+alter table EstadoReservaciones add constraint PK_EstadoReservaciones primary key (ID);
 Go
 
 --------------------------------------------------------------------------------------

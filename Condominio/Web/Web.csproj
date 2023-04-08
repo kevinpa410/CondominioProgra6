@@ -229,7 +229,6 @@
     <Content Include="Views\PlanesCobro\Edit.cshtml" />
     <Content Include="Views\PlanesCobro\Create.cshtml" />
     <Content Include="Views\Informacion\Index.cshtml" />
-    <Content Include="Views\Informacion\Details.cshtml" />
     <Content Include="Views\Informacion\Create.cshtml" />
     <Content Include="Views\Informacion\Edit.cshtml" />
     <Content Include="Views\Ususario\UnAuthorized.cshtml" />
@@ -238,6 +237,10 @@
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\EstadoCuenta\Index.cshtml" />
     <Content Include="Views\Reservacion\Index.cshtml" />
+    <Content Include="Views\Reservacion\Details.cshtml" />
+    <Content Include="Views\Reservacion\Create.cshtml" />
+    <Content Include="Views\Reservacion\Edit.cshtml" />
+    <Content Include="Views\Reservacion\IndexAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

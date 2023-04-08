@@ -42,8 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IServiceAreaComunal.cs" />
     <Compile Include="Services\IServicesEstadoCuenta.cs" />
     <Compile Include="Services\IServicesEstadoIncidencias.cs" />
+    <Compile Include="Services\IServicesEstadoReservaciones.cs" />
     <Compile Include="Services\IServicesEstadoResidencias.cs" />
     <Compile Include="Services\IServicesIncidencias.cs" />
     <Compile Include="Services\IServicesInformacion.cs" />
@@ -54,8 +56,10 @@
     <Compile Include="Services\IServicesRubroCobro.cs" />
     <Compile Include="Services\IServicesTipoInformacion.cs" />
     <Compile Include="Services\IServicesUsuario.cs" />
+    <Compile Include="Services\ServiceAreaComunal.cs" />
     <Compile Include="Services\ServicesEstadoCuenta.cs" />
     <Compile Include="Services\ServicesEstadoIncidencias.cs" />
+    <Compile Include="Services\ServicesEstadoReservaciones.cs" />
     <Compile Include="Services\ServicesEstadoResidencias.cs" />
     <Compile Include="Services\ServicesIncidencias.cs" />
     <Compile Include="Services\ServicesInformacion.cs" />

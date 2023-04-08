@@ -9,19 +9,18 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repository
 {
-    public class RepositoryEstadoResidencias : IRepositoryEstadoResidencias
+    public class RepositoryEstadoReservaciones : IRepositoryEstadoReservaciones
     {
-
-        public IEnumerable<EstadoResidencias> GetEstadoResidencias()
+        public IEnumerable<EstadoReservaciones> GetEstadoReservaciones()
         {
-            IEnumerable<EstadoResidencias> lista = null;
+            IEnumerable<EstadoReservaciones> lista = null;
             try
             {
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     //Obtener todos los Rols incluyendo el autor
-                    lista = ctx.EstadoResidencias.ToList();
+                    lista = ctx.EstadoReservaciones.ToList();
                 }
                 return lista;
             }

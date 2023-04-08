@@ -93,6 +93,8 @@ namespace Web.Controllers
         public ActionResult Create()
         {
             ViewBag.IDAreaComunal = listaAreaComunal();
+            ViewBag.IDUsuario = listaUsuarios();
+            ViewBag.IDEstadoResidencias = listaEstadoResidencias();
             return View();
         }
 
@@ -121,6 +123,8 @@ namespace Web.Controllers
                 }
                 //Listados
                 ViewBag.IDAreaComunal = listaAreaComunal(Convert.ToInt32(reservaciones.IDAreaComunal));
+                ViewBag.IDUsuario = listaUsuarios(Convert.ToInt32(reservaciones.IDUsuario));
+                ViewBag.IDEstadoResidencias = listaEstadoResidencias(Convert.ToInt32(reservaciones.IDEstadoReservaciones));
                 return View(reservaciones);
             }
             catch (Exception ex)
@@ -142,6 +146,20 @@ namespace Web.Controllers
             return new SelectList(lista, "ID", "Descripcion", IDArea);
         }
 
+        private SelectList listaUsuarios(int IDUsuario = 0)
+        {
+            IServicesUsuario _ServicesUsuario = new ServicesUsuario();
+            IEnumerable<Usuario> lista = _ServicesUsuario.GetUsuarios();
+            return new SelectList(lista, "ID", "nombre", IDUsuario);
+        }
+
+        private SelectList listaEstadoResidencias(int IDEstado = 0)
+        {
+            IServicesEstadoReservaciones _ServicesEstadoReservaciones = new ServicesEstadoReservaciones();
+            IEnumerable<EstadoReservaciones> lista = _ServicesEstadoReservaciones.GetEstadoReservaciones();
+            return new SelectList(lista, "ID", "Descripcion", IDEstado);
+        }
+
         public ActionResult Save(Reservaciones reservaciones)
         {
             //Gestión de archivos
@@ -160,7 +178,8 @@ namespace Web.Controllers
                     // Valida Errores si Javascript está deshabilitado
                     Utils.Util.ValidateErrors(this);
                     ViewBag.IDAreaComunal = listaAreaComunal(Convert.ToInt32(reservaciones.IDAreaComunal));
-
+                    ViewBag.IDUsuario = listaUsuarios(Convert.ToInt32(reservaciones.IDUsuario));
+                    ViewBag.IDEstadoResidencias = listaEstadoResidencias(Convert.ToInt32(reservaciones.IDEstadoReservaciones));
 
                     //Cargar la vista crear o actualizar
                     //Lógica para cargar vista correspondiente

@@ -12,16 +12,18 @@ namespace Infrastructure.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Reservaciones
+    public partial class EstadoReservaciones
     {
-        public int ID { get; set; }
-        public Nullable<int> IDUsuario { get; set; }
-        public Nullable<int> IDAreaComunal { get; set; }
-        public Nullable<int> IDEstadoReservaciones { get; set; }
-        public Nullable<System.DateTime> Fecha { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public EstadoReservaciones()
+        {
+            this.Reservaciones = new HashSet<Reservaciones>();
+        }
     
-        public virtual AreaComunal AreaComunal { get; set; }
-        public virtual EstadoReservaciones EstadoReservaciones { get; set; }
-        public virtual Usuario Usuario { get; set; }
+        public int ID { get; set; }
+        public string Descripcion { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Reservaciones> Reservaciones { get; set; }
     }
 }

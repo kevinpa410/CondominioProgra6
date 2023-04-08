@@ -32,6 +32,13 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="EstadoReservaciones">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+  </EntityType>
   <EntityType Name="EstadoResidencias">
     <Key>
       <PropertyRef Name="ID" />
@@ -72,6 +79,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IDUsuario" Type="int" />
     <Property Name="IDAreaComunal" Type="int" />
+    <Property Name="IDEstadoReservaciones" Type="int" />
     <Property Name="Fecha" Type="date" />
   </EntityType>
   <EntityType Name="Residencias">
@@ -223,6 +231,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FKReservaciones_EstadoReservaciones">
+    <End Role="EstadoReservaciones" Type="Self.EstadoReservaciones" Multiplicity="0..1" />
+    <End Role="Reservaciones" Type="Self.Reservaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstadoReservaciones">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Reservaciones">
+        <PropertyRef Name="IDEstadoReservaciones" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FKReservaciones_Usuario">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Reservaciones" Type="Self.Reservaciones" Multiplicity="*" />
@@ -300,6 +320,7 @@
     <EntitySet Name="Estado_EstadoCuenta" EntityType="Self.Estado_EstadoCuenta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstadoCuenta" EntityType="Self.EstadoCuenta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstadoIncidencia" EntityType="Self.EstadoIncidencia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EstadoReservaciones" EntityType="Self.EstadoReservaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstadoResidencias" EntityType="Self.EstadoResidencias" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Incidencias" EntityType="Self.Incidencias" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Informacion" EntityType="Self.Informacion" Schema="dbo" store:Type="Tables" />
@@ -341,6 +362,10 @@
     </AssociationSet>
     <AssociationSet Name="FKReservaciones_AreaComunal" Association="Self.FKReservaciones_AreaComunal">
       <End Role="AreaComunal" EntitySet="AreaComunal" />
+      <End Role="Reservaciones" EntitySet="Reservaciones" />
+    </AssociationSet>
+    <AssociationSet Name="FKReservaciones_EstadoReservaciones" Association="Self.FKReservaciones_EstadoReservaciones">
+      <End Role="EstadoReservaciones" EntitySet="EstadoReservaciones" />
       <End Role="Reservaciones" EntitySet="Reservaciones" />
     </AssociationSet>
     <AssociationSet Name="FKReservaciones_Usuario" Association="Self.FKReservaciones_Usuario">

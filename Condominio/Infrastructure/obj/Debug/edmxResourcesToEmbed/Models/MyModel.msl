@@ -37,6 +37,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="EstadoReservaciones">
+      <EntityTypeMapping TypeName="CondominioModel.EstadoReservaciones">
+        <MappingFragment StoreEntitySet="EstadoReservaciones">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="EstadoResidencias">
       <EntityTypeMapping TypeName="CondominioModel.EstadoResidencias">
         <MappingFragment StoreEntitySet="EstadoResidencias">
@@ -80,6 +88,7 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
           <ScalarProperty Name="IDAreaComunal" ColumnName="IDAreaComunal" />
+          <ScalarProperty Name="IDEstadoReservaciones" ColumnName="IDEstadoReservaciones" />
           <ScalarProperty Name="Fecha" ColumnName="Fecha" />
         </MappingFragment>
       </EntityTypeMapping>

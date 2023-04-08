@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Repository
+namespace ApplicationCore.Services
 {
-    public interface IServiceAreaComunal
+    public interface IServicesEstadoReservaciones
     {
-        IEnumerable<AreaComunal> GetAreaComunal();
+        IEnumerable<EstadoReservaciones> GetEstadoReservaciones();
     }
 }

@@ -68,6 +68,9 @@
     <Compile Include="Models\EstadoIncidencia.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EstadoReservaciones.cs">
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EstadoResidencias.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
@@ -122,6 +125,7 @@
     <Compile Include="Repository\IRepositoryAreaComunal.cs" />
     <Compile Include="Repository\IRepositoryEstadoCuenta.cs" />
     <Compile Include="Repository\IRepositoryEstadoIncidencias.cs" />
+    <Compile Include="Repository\IRepositoryEstadoReservaciones.cs" />
     <Compile Include="Repository\IRepositoryEstadoResidencias.cs" />
     <Compile Include="Repository\IRepositoryIncidencias.cs" />
     <Compile Include="Repository\IRepositoryInformacion.cs" />
@@ -132,10 +136,10 @@
     <Compile Include="Repository\IRepositoryRubroCobros.cs" />
     <Compile Include="Repository\IRepositoryTipoInformacion.cs" />
     <Compile Include="Repository\IRepositoryUsuario.cs" />
-    <Compile Include="Repository\IServiceAreaComunal.cs" />
     <Compile Include="Repository\RepositoryAreaComunal.cs" />
     <Compile Include="Repository\RepositoryEstadoCuenta.cs" />
     <Compile Include="Repository\RepositoryEstadoIncidencias.cs" />
+    <Compile Include="Repository\RepositoryEstadoReservaciones.cs" />
     <Compile Include="Repository\RepositoryEstadoResidencias.cs" />
     <Compile Include="Repository\RepositoryIncidencias.cs" />
     <Compile Include="Repository\RepositoryInformacion.cs" />
@@ -146,7 +150,6 @@
     <Compile Include="Repository\RepositoryRubroCobros.cs" />
     <Compile Include="Repository\RepositoryTipoInformacion.cs" />
     <Compile Include="Repository\RepositoryUsuario.cs" />
-    <Compile Include="Repository\ServiceAreaComunal.cs" />
     <Compile Include="Utils\Log.cs" />
   </ItemGroup>
   <ItemGroup>

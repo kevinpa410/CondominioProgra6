@@ -39,6 +39,14 @@
     <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Incidencias" Relationship="Self.FKIncidencias_Estado" FromRole="EstadoIncidencia" ToRole="Incidencias" />
   </EntityType>
+  <EntityType Name="EstadoReservaciones">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Reservaciones" Relationship="Self.FKReservaciones_EstadoReservaciones" FromRole="EstadoReservaciones" ToRole="Reservaciones" />
+  </EntityType>
   <EntityType Name="EstadoResidencias">
     <Key>
       <PropertyRef Name="ID" />
@@ -85,8 +93,10 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IDUsuario" Type="Int32" />
     <Property Name="IDAreaComunal" Type="Int32" />
+    <Property Name="IDEstadoReservaciones" Type="Int32" />
     <Property Name="Fecha" Type="DateTime" Precision="0" />
     <NavigationProperty Name="AreaComunal" Relationship="Self.FKReservaciones_AreaComunal" FromRole="Reservaciones" ToRole="AreaComunal" />
+    <NavigationProperty Name="EstadoReservaciones" Relationship="Self.FKReservaciones_EstadoReservaciones" FromRole="Reservaciones" ToRole="EstadoReservaciones" />
     <NavigationProperty Name="Usuario" Relationship="Self.FKReservaciones_Usuario" FromRole="Reservaciones" ToRole="Usuario" />
   </EntityType>
   <EntityType Name="Residencias">
@@ -217,6 +227,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FKReservaciones_EstadoReservaciones">
+    <End Role="EstadoReservaciones" Type="Self.EstadoReservaciones" Multiplicity="0..1" />
+    <End Role="Reservaciones" Type="Self.Reservaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstadoReservaciones">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Reservaciones">
+        <PropertyRef Name="IDEstadoReservaciones" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FKResidencias_EstadoResidencias">
     <End Role="EstadoResidencias" Type="Self.EstadoResidencias" Multiplicity="0..1" />
     <End Role="Residencias" Type="Self.Residencias" Multiplicity="*" />
@@ -298,6 +320,7 @@
     <EntitySet Name="Estado_EstadoCuenta" EntityType="Self.Estado_EstadoCuenta" />
     <EntitySet Name="EstadoCuenta" EntityType="Self.EstadoCuenta" />
     <EntitySet Name="EstadoIncidencia" EntityType="Self.EstadoIncidencia" />
+    <EntitySet Name="EstadoReservaciones" EntityType="Self.EstadoReservaciones" />
     <EntitySet Name="EstadoResidencias" EntityType="Self.EstadoResidencias" />
     <EntitySet Name="Incidencias" EntityType="Self.Incidencias" />
     <EntitySet Name="Informacion" EntityType="Self.Informacion" />
@@ -331,6 +354,10 @@
     <AssociationSet Name="FKIncidencias_Estado" Association="Self.FKIncidencias_Estado">
       <End Role="EstadoIncidencia" EntitySet="EstadoIncidencia" />
       <End Role="Incidencias" EntitySet="Incidencias" />
+    </AssociationSet>
+    <AssociationSet Name="FKReservaciones_EstadoReservaciones" Association="Self.FKReservaciones_EstadoReservaciones">
+      <End Role="EstadoReservaciones" EntitySet="EstadoReservaciones" />
+      <End Role="Reservaciones" EntitySet="Reservaciones" />
     </AssociationSet>
     <AssociationSet Name="FKResidencias_EstadoResidencias" Association="Self.FKResidencias_EstadoResidencias">
       <End Role="EstadoResidencias" EntitySet="EstadoResidencias" />

@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Mis Reservaciones</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Crear Reservacion")
 </p>
 <table class="table">
     <tr>
@@ -27,7 +27,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Usuario.nombre)@Html.DisplayFor(modelItem => item.Usuario.apellido)
+            @Html.DisplayFor(modelItem => item.Usuario.nombre) @Html.DisplayFor(modelItem => item.Usuario.apellido)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Fecha)
@@ -37,7 +37,8 @@
         </td>
 
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id = item.ID })
+            @Html.ActionLink("Editar", "Edit", new { id = item.ID })|
+            @Html.ActionLink("Detalles", "Details", new { id = item.ID })
 
         </td>
     </tr>
