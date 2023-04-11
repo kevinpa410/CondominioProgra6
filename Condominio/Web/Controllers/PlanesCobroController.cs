@@ -95,6 +95,7 @@ namespace Web.Controllers
 
             return new MultiSelectList(lista, "ID", "Descripcion", listaRubroCobroSelect);
         }
+
         // GET: PlanesCobro/Edit/5
         public ActionResult Edit(int? id)
         {

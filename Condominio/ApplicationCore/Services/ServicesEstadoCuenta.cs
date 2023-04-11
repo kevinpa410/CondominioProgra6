@@ -22,22 +22,16 @@ namespace ApplicationCore.Services
             return repository.GetEstadoCuentaByEstado(IDResidencia, IDEstado);
         }
 
-        //public IEnumerable<EstadoCuenta> GetEstadoCuentaByDeudasVigentes(int id = 1)
-        //{
-        //    IRepositoryEstadoCuenta repository = new RepositoryEstadoCuenta();
-        //    return repository.GetEstadoCuentaByDeudasVigentes(id);
-        //}
-
-        //public IEnumerable<EstadoCuenta> GetEstadoCuentaByHistorialPagos(int id = 2)
-        //{
-        //    IRepositoryEstadoCuenta repository = new RepositoryEstadoCuenta();
-        //    return repository.GetEstadoCuentaByHistorialPagos(id);
-        //}
-
         public EstadoCuenta GetEstadoCuentaByID(int id)
         {
             IRepositoryEstadoCuenta repository = new RepositoryEstadoCuenta();
             return repository.GetEstadoCuentaByID(id);
+        }
+
+        public EstadoCuenta GetEstadoCuentaByUsuario(int idusuario)
+        {
+            IRepositoryEstadoCuenta repository = new RepositoryEstadoCuenta();
+            return repository.GetEstadoCuentaByUsuario(idusuario);
         }
 
         public EstadoCuenta Save(EstadoCuenta estadoCuenta)

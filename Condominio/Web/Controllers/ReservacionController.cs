@@ -53,7 +53,7 @@ namespace Web.Controllers
         }
 
         // GET: Reservacion/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             ServicesReservacion _ServicesReservacion = new ServicesReservacion();
             Reservaciones reservaciones = null;
@@ -94,12 +94,12 @@ namespace Web.Controllers
         {
             ViewBag.IDAreaComunal = listaAreaComunal();
             ViewBag.IDUsuario = listaUsuarios();
-            ViewBag.IDEstadoResidencias = listaEstadoResidencias();
+            ViewBag.IDEstadoReservaciones = listaEstadoReservaciones();
             return View();
         }
 
         // GET: Reservaciones/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
             ServicesReservacion _ServicesReservacion = new ServicesReservacion();
             Reservaciones reservaciones = null;
@@ -124,7 +124,7 @@ namespace Web.Controllers
                 //Listados
                 ViewBag.IDAreaComunal = listaAreaComunal(Convert.ToInt32(reservaciones.IDAreaComunal));
                 ViewBag.IDUsuario = listaUsuarios(Convert.ToInt32(reservaciones.IDUsuario));
-                ViewBag.IDEstadoResidencias = listaEstadoResidencias(Convert.ToInt32(reservaciones.IDEstadoReservaciones));
+                ViewBag.IDEstadoResidencias = listaEstadoReservaciones(Convert.ToInt32(reservaciones.IDEstadoReservaciones));
                 return View(reservaciones);
             }
             catch (Exception ex)
@@ -153,7 +153,7 @@ namespace Web.Controllers
             return new SelectList(lista, "ID", "nombre", IDUsuario);
         }
 
-        private SelectList listaEstadoResidencias(int IDEstado = 0)
+        private SelectList listaEstadoReservaciones(int IDEstado = 0)
         {
             IServicesEstadoReservaciones _ServicesEstadoReservaciones = new ServicesEstadoReservaciones();
             IEnumerable<EstadoReservaciones> lista = _ServicesEstadoReservaciones.GetEstadoReservaciones();
@@ -179,7 +179,7 @@ namespace Web.Controllers
                     Utils.Util.ValidateErrors(this);
                     ViewBag.IDAreaComunal = listaAreaComunal(Convert.ToInt32(reservaciones.IDAreaComunal));
                     ViewBag.IDUsuario = listaUsuarios(Convert.ToInt32(reservaciones.IDUsuario));
-                    ViewBag.IDEstadoResidencias = listaEstadoResidencias(Convert.ToInt32(reservaciones.IDEstadoReservaciones));
+                    ViewBag.IDEstadoReservaciones = listaEstadoReservaciones(Convert.ToInt32(reservaciones.IDEstadoReservaciones));
 
                     //Cargar la vista crear o actualizar
                     //Lógica para cargar vista correspondiente

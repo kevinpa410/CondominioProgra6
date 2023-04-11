@@ -1,5 +1,5 @@
-﻿
-using Infraestructure.Utils;
+﻿using Infraestructure.Utils;
+using Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
@@ -7,7 +7,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Infrastructure.Models;
+
 
 namespace Infrastructure.Repository
 {
@@ -100,9 +100,7 @@ namespace Infrastructure.Repository
                     //Actualizar Libro
                     ctx.Usuario.Add(usuario);
                     ctx.Entry(usuario).State = EntityState.Modified;
-                    retorno = ctx.SaveChanges();
-
-                    
+                    retorno = ctx.SaveChanges();                    
                 }
             }
 
@@ -120,9 +118,7 @@ namespace Infrastructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    //Select * from Autor 
                     lista = ctx.Usuario.ToList<Usuario>();
-                    //lista = ctx.Autor.ToList();
                 }
                 return lista;
             }

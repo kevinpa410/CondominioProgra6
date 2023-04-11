@@ -57,8 +57,8 @@ namespace Web.Controllers
 
                 if (estadoCuenta == null)
                 {
-                    TempData["Message"] = "No existe el libro solicitado";
-                    TempData["Redirect"] = "Libro";
+                    TempData["Message"] = "No existe el Estado de Cuenta solicitado";
+                    TempData["Redirect"] = "EstadoCuenta";
                     TempData["Redirect-Action"] = "Index";
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
@@ -77,6 +77,54 @@ namespace Web.Controllers
             }
         }
 
+        // GET: EstadoCuenta/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            ServicesEstadoCuenta _ServiceEstadoCuenta = new ServicesEstadoCuenta();
+            EstadoCuenta estadoCuenta = null;
+            try
+            {
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                //Get by Usuario ID//////////////////////////////
+                estadoCuenta = _ServiceEstadoCuenta.GetEstadoCuentaByUsuario(Convert.ToInt32(id));
+                //Get by Usuario ID//////////////////////////////
+                if (estadoCuenta == null)
+                {
+                    TempData["Message"] = "No existe el Plane de Cobro solicitado";
+                    TempData["Redirect"] = "PlanesCobro";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+
+                //Listados//////////////////////////////
+                ViewBag.IDPlanesCobro = listaPlanesCobro(estadoCuenta.ID);
+                //Listados//////////////////////////////
+
+                return View(estadoCuenta);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Libro";
+                TempData["Redirect-Action"] = "IndexAdmin";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
+        private SelectList listaPlanesCobro(int idUsuario = 0)
+        {
+            IServicesUsuario _ServicesUsuario = new ServicesUsuario();
+            IEnumerable<Usuario> lista = _ServicesUsuario.GetUsuarios();
+            return new SelectList(lista, "ID", "Total", idUsuario);
+        }
 
     }
 }

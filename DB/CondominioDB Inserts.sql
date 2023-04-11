@@ -38,7 +38,7 @@ insert into RubroPlanes values(2,3);
 insert into RubroPlanes values(3,3);
 
 insert into Residencias values(1,1,3,'1-1-2020',1);
---insert into Residencias values(2,2,5,'4-16-2021',2);
+insert into Residencias values(2,2,5,'4-16-2021',2);
 --insert into Residencias values(3,1,4,'7-20-2019',1);
 
 --insert into EstadoCuenta values(1,1,1,1,'2-1-2023');
@@ -58,3 +58,5 @@ insert into AreaComunal values('Salon Comunal');--ID 4
 
 --delete from Informacion where id = 3
 --select * from Usuario
+
+insert into EstadoCuenta values(null,null,null,null,'1-1-2022');--ID 1

@@ -20,11 +20,8 @@ namespace Infrastructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    //Obtener todos los libros incluyendo el autor
                     lista = ctx.PlanesCobro.
                     ToList();
-
-                    //lista = ctx.Libro.Include(x=>x.Autor).ToList();
 
                 }
                 return lista;

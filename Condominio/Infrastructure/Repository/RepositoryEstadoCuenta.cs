@@ -115,7 +115,39 @@ namespace Infrastructure.Repository
                 throw;
             }
         }
-        public EstadoCuenta Save(EstadoCuenta estadoCuenta)//Review Code
+        public EstadoCuenta GetEstadoCuentaByUsuario(int idusuario)
+        {
+            EstadoCuenta oEstadoCuenta = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener libros por Autor
+                    oEstadoCuenta = ctx.EstadoCuenta.
+                        Where(l => l.IDUsuario == idusuario).
+                         Include("PlanesCobro")
+                        .Include("Residencias")
+                        .Include("Usuario").FirstOrDefault();
+
+                }
+                return oEstadoCuenta;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+        public EstadoCuenta Save(EstadoCuenta estadoCuenta)
         {
             int retorno = 0;
             EstadoCuenta oEstadoCuenta = null;
@@ -124,7 +156,6 @@ namespace Infrastructure.Repository
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
                 oEstadoCuenta = GetEstadoCuentaByID((int)estadoCuenta.ID);
-                IRepositoryEstadoCuenta _RepositoryEstadoCuenta = new RepositoryEstadoCuenta();
 
                 if (oEstadoCuenta == null)
                 {

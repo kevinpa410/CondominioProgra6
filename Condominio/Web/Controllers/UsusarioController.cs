@@ -21,6 +21,26 @@ namespace Web.Controllers
         {
             return View();
         }
+
+        public ActionResult Indexadmin()
+        {
+            IEnumerable<Usuario> lista = null;
+            try
+            {
+                IServicesUsuario _ServiceUsuario = new ServicesUsuario();
+                lista = _ServiceUsuario.GetUsuarios();
+                return View(lista);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
         [HttpPost]
         public ActionResult Login(Usuario usuario)
         {
@@ -102,7 +122,6 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-
         //[HttpGet]
         //[CustomAuthorize((int)Rols.Administrador)]
         public ActionResult Create()
@@ -116,7 +135,6 @@ namespace Web.Controllers
             IEnumerable<Rol> lista = _ServiceRol.GetRol();
             return new SelectList(lista, "ID", "descripcion", IDRol);
         }
-
         public ActionResult Save(Usuario usuario)
         {
             //Gestión de archivos
