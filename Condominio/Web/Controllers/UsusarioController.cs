@@ -21,7 +21,6 @@ namespace Web.Controllers
         {
             return View();
         }
-
         public ActionResult Indexadmin()
         {
             IEnumerable<Usuario> lista = null;
@@ -40,7 +39,6 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-
         [HttpPost]
         public ActionResult Login(Usuario usuario)
         {
@@ -68,14 +66,13 @@ namespace Web.Controllers
                     {
                         Log.Warn($"Intento de inicio: {usuario.correo}");
                         ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Login",
-                            "Usuario no válido", Util.SweetAlertMessageType.error
-                            );
+                            "Usuario no válido", Util.SweetAlertMessageType.error);
                     }
                 }
             }
             catch (DbEntityValidationException ex)
             {
-                //Loop through the validation errors and log them
+                ////Loop through the validation errors and log them
                 //foreach (var error in ex.EntityValidationErrors)
                 //{
                 //    foreach (var validationError in error.ValidationErrors)
@@ -111,7 +108,7 @@ namespace Web.Controllers
                 Session["User"] = null;
                 Session.Remove("User");
 
-                return RedirectToAction("Index", "Usuario");
+                return RedirectToAction("Index", "Ususario");
             }
             catch (Exception ex)
             {
@@ -187,6 +184,42 @@ namespace Web.Controllers
                 TempData["Redirect"] = "Usuario";
                 TempData["Redirect-Action"] = "Index";
 
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+        //GET: Usuario/Details/5
+        public ActionResult Details(int? id)
+        {
+            ServicesUsuario _ServicesUsuario = new ServicesUsuario();
+            Usuario usuario = null;
+
+            try
+            {
+                // Si va null
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                usuario = _ServicesUsuario.GetUsuarioByID(Convert.ToInt32(id));
+                if (usuario == null)
+                {
+                    TempData["Message"] = "No existe el libro solicitado";
+                    TempData["Redirect"] = "Libro";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                return View(usuario);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Libro";
+                TempData["Redirect-Action"] = "IndexAdmin";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }

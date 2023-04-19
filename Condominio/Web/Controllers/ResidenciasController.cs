@@ -138,14 +138,14 @@ namespace Web.Controllers
                     }
                 }
 
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexAdmin");
             }
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Libro";
+                TempData["Redirect"] = "Residencias";
                 TempData["Redirect-Action"] = "IndexAdmin";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");

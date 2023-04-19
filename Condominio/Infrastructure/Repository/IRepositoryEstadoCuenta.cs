@@ -12,6 +12,8 @@ namespace Infrastructure.Repository
         IEnumerable<EstadoCuenta> GetEstadoCuenta();
         EstadoCuenta GetEstadoCuentaByID(int id);
         IEnumerable<EstadoCuenta> GetEstadoCuentaByEstado(int IDResidencia, int IDEstado);
+        IEnumerable<EstadoCuenta> GetEstadoCuentaByPagosPendientes(int IDUsuario);
+        IEnumerable<EstadoCuenta> GetEstadoCuentaByHistorialPagos(int IDUsuario);
         EstadoCuenta Save(EstadoCuenta estadoCuenta);
         EstadoCuenta GetEstadoCuentaByUsuario(int idusuario);
     }

@@ -7,39 +7,35 @@
 <h2>Mis Reservaciones</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Crear Reservacion")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Usuario.nombre) @Html.DisplayNameFor(model => model.Usuario.apellido)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.Fecha)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.AreaComunal.Descripcion)
         </th>
-
+        <th>
+            @Html.DisplayNameFor(model => model.EstadoReservaciones.Descripcion)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Usuario.nombre) @Html.DisplayFor(modelItem => item.Usuario.apellido)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Fecha)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.AreaComunal.Descripcion)
         </td>
-
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id = item.ID })|
-            @Html.ActionLink("Detalles", "Details", new { id = item.ID })
-
+            @Html.DisplayFor(modelItem => item.EstadoReservaciones.Descripcion)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.ID })
         </td>
     </tr>
 }

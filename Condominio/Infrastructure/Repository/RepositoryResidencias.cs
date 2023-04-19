@@ -76,6 +76,38 @@ namespace Infrastructure.Repository
             }
         }
 
+        public Residencias GetResidenciasByUsuario(int idusuario)
+        {
+            Residencias oResidencias = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener libros por Autor
+                    oResidencias = ctx.Residencias.
+                        Where(l => l.IDUsuario == idusuario)
+                         .Include("EstadoResidencias")
+                        .Include("Usuario").FirstOrDefault();
+
+                }
+                return oResidencias;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
         public Residencias Save(Residencias residencias)
         {
             int retorno = 0;

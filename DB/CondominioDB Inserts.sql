@@ -22,8 +22,7 @@ insert into RubroCobro values(5000,'Basura');
 
 insert into PlanesCobro values(1); --Pendiente
 insert into PlanesCobro values(2); --Pagado
-insert into PlanesCobro values(1); --Pendiente
-insert into PlanesCobro values(2); --Pagado
+
 
 insert into RubroPlanes values(1,1);
 insert into RubroPlanes values(2,1);
@@ -50,13 +49,20 @@ insert into EstadoIncidencia values('Enviado');--ID 1
 insert into EstadoIncidencia values('En Proceso');--ID 2
 insert into EstadoIncidencia values('Completo');--ID 3
 
+insert into EstadoReservaciones values('En Proceso');--ID 1
+insert into EstadoReservaciones values('Confirmada');--ID 2
+insert into EstadoReservaciones values('Rechazada');--ID 3
+
+
 insert into AreaComunal values('Piscina');--ID 1
 insert into AreaComunal values('Rancho');--ID 2
 insert into AreaComunal values('Area de Juegos');--ID 3
 insert into AreaComunal values('Salon Comunal');--ID 4
 
 
---delete from Informacion where id = 3
---select * from Usuario
+delete from Residencias where id = 5
+--select * from EstadoCuenta
 
-insert into EstadoCuenta values(null,null,null,null,'1-1-2022');--ID 1
+insert into EstadoCuenta values(null,2,null,null,'1-1-2022');--ID 1
+
+UPDATE EstadoCuenta SET IDUsuario = 1, IDResidencia  WHERE id=1;

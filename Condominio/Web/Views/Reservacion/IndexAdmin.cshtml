@@ -6,9 +6,6 @@
 
 <h2>Reservaciones</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -19,6 +16,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.AreaComunal.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EstadoReservaciones.Descripcion)
         </th>
 
         <th></th>
@@ -36,10 +36,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.AreaComunal.Descripcion)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstadoReservaciones.Descripcion)
+            </td>
 
             <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.ID })
+                @Html.ActionLink("Editar Reservacion", "EditAdmin", new { id = item.ID })
             </td>
+
         </tr>
     }
 

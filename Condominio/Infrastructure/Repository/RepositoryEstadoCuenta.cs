@@ -48,6 +48,7 @@ namespace Infrastructure.Repository
                 throw;
             }
         }
+
         public IEnumerable<EstadoCuenta> GetEstadoCuentaByEstado(int IDResidencia, int IDEstado)
         {
             IEnumerable<EstadoCuenta> lista = null;
@@ -61,12 +62,14 @@ namespace Infrastructure.Repository
                     lista = ctx.EstadoCuenta.
                         Where(x => x.IDResidencia == IDResidencia && x.IDEstado == IDEstado)
                         .Include("PlanesCobro")
+                        .Include("Estado_EstadoCuenta")
                         .Include("PlanesCobro.RubroCobro")
                         .Include("Residencias")
                         .Include("Usuario").
                         ToList();
-
+                    
                 }
+
                 return lista;
             }
 
@@ -83,6 +86,83 @@ namespace Infrastructure.Repository
                 throw;
             }
         }
+
+        public IEnumerable<EstadoCuenta> GetEstadoCuentaByPagosPendientes(int IDUsuario)
+        {
+            IEnumerable<EstadoCuenta> lista = null;
+            try
+            {
+
+
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    lista = ctx.EstadoCuenta.
+                        Where(x => x.IDUsuario == IDUsuario && x.IDEstado == 1)
+                        .Include("PlanesCobro")
+                        .Include("Estado_EstadoCuenta")
+                        .Include("PlanesCobro.RubroCobro")
+                        .Include("Residencias")
+                        .Include("Usuario").
+                        ToList();
+
+                }
+
+                return lista;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
+        public IEnumerable<EstadoCuenta> GetEstadoCuentaByHistorialPagos(int IDUsuario)
+        {
+            IEnumerable<EstadoCuenta> lista = null;
+            try
+            {
+
+
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    lista = ctx.EstadoCuenta.
+                        Where(x => x.IDUsuario == IDUsuario && x.IDEstado == 2)
+                        .Include("PlanesCobro")
+                        .Include("Estado_EstadoCuenta")
+                        .Include("PlanesCobro.RubroCobro")
+                        .Include("Residencias")
+                        .Include("Usuario").
+                        ToList();
+
+                }
+
+                return lista;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
         public EstadoCuenta GetEstadoCuentaByID(int id)
         {
             EstadoCuenta oEstadoCuenta = null;

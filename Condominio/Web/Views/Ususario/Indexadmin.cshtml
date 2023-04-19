@@ -4,16 +4,14 @@
     ViewBag.Title = "Indexadmin";
 }
 
-<h2>Indexadmin</h2>
+<h2>Administrar Usuarios</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.correo)
-        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.nombre)
         </th>
@@ -21,7 +19,7 @@
             @Html.DisplayNameFor(model => model.apellido)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Rol.descripcion)
+            @Html.DisplayNameFor(model => model.correo)
         </th>
         <th></th>
     </tr>
@@ -29,20 +27,18 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.correo)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.nombre)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.apellido)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Rol.descripcion)
+            @Html.DisplayFor(modelItem => item.correo)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID })
+
+            @Html.ActionLink("Asignar Plan de Cobro", "EditAdmin", "EstadoCuenta", new { id = item.ID }, null) |
+            @Html.ActionLink("Detalles del Plan de Cobro", "Details", "EstadoCuenta", new { id = item.ID }, null)
 
         </td>
     </tr>

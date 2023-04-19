@@ -2,6 +2,7 @@
 using Infrastructure.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -76,7 +77,6 @@ namespace Web.Controllers
             return View();
         }
 
-
         private SelectList listEstadoIncidencias(int? IDEstadoIncidencias = 0)
         {
             IServicesEstadoIncidencias _EstadoIncidencias = new ServicesEstadoIncidencias();
@@ -124,7 +124,7 @@ namespace Web.Controllers
         }
         public ActionResult Save(Incidencias incidencias)
         {
-            
+
             //Gestión de archivos
             MemoryStream target = new MemoryStream();
             //Servicio Libro
@@ -134,11 +134,15 @@ namespace Web.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    
+                    if (incidencias.IDEstado == null)
+                    {
+                        incidencias.IDEstado = 1;
+                    }
                     Incidencias oIncidencias = _ServicesIncidencias.Save(incidencias);
                 }
                 else
                 {
+
                     // Valida Errores si Javascript está deshabilitado
                     Utils.Util.ValidateErrors(this);
                     ViewBag.IDEstado = listEstadoIncidencias(incidencias.IDEstado);
@@ -150,15 +154,26 @@ namespace Web.Controllers
                     }
                     else
                     {
-                        
+
                         return View("Create", incidencias);
                     }
                 }
 
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch (DbEntityValidationException ex)
             {
+
+                ////Loop through the validation errors and log them
+                //foreach (var error in ex.EntityValidationErrors)
+                //{
+                //    foreach (var validationError in error.ValidationErrors)
+                //    {
+                //        string errorMessage = $"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}";
+                //        // log the error message or handle it as appropriate
+                //    }
+                //}
+
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;

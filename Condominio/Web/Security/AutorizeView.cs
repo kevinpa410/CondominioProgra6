@@ -11,8 +11,14 @@ namespace Web.Security
     {
         public static bool IsUserInRole(string[] nombreRoles)
         {
-            IEnumerable<Rols> allowedroles = nombreRoles.
-                Select(a => (Rols)Enum.Parse(typeof(Rols), a));
+            // Ensure that only valid role names are used
+            var validRoles = new[] { "Administrador", "Residente" };
+            var rolesToCheck = nombreRoles.Intersect(validRoles);
+
+            // Convert valid roles to enum values
+            IEnumerable<Rols> allowedroles = rolesToCheck
+                .Select(a => (Rols)Enum.Parse(typeof(Rols), a));
+
             bool authorize = false;
             var oUsuario = (Usuario)HttpContext.Current.Session["User"];
             if (oUsuario != null)

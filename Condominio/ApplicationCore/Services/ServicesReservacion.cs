@@ -27,5 +27,11 @@ namespace ApplicationCore.Services
             IRepositoryReservacion repository = new RepositoryReservacion();
             return repository.Save(reservaciones);
         }
+        public IEnumerable<Reservaciones> GetReservacionesByUsuario(int idusuario)
+        {
+            IRepositoryReservacion repository = new RepositoryReservacion();
+            return repository.GetReservacionesByUsuario(idusuario);
+        }
+
     }
 }

@@ -12,5 +12,7 @@ namespace ApplicationCore.Services
         IEnumerable<Reservaciones> GetReservaciones();
         Reservaciones GetReservacionesByID(int id);
         Reservaciones Save(Reservaciones reservaciones);
+        IEnumerable<Reservaciones> GetReservacionesByUsuario(int idusuario);
+
     }
 }

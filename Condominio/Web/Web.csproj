@@ -236,16 +236,21 @@
     <Content Include="Views\Ususario\Create.cshtml" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\EstadoCuenta\Index.cshtml" />
-    <Content Include="Views\Reservacion\Index.cshtml" />
     <Content Include="Views\Reservacion\Details.cshtml" />
     <Content Include="Views\Reservacion\Create.cshtml" />
     <Content Include="Views\Reservacion\Edit.cshtml" />
     <Content Include="Views\Reservacion\IndexAdmin.cshtml" />
     <Content Include="Views\Ususario\Indexadmin.cshtml" />
+    <Content Include="Views\EstadoCuenta\Edit.cshtml" />
+    <Content Include="Views\Ususario\Details.cshtml" />
+    <Content Include="Views\EstadoCuenta\EditAdmin.cshtml" />
+    <Content Include="Views\Reservacion\Index.cshtml" />
+    <Content Include="Views\Reservacion\EditAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

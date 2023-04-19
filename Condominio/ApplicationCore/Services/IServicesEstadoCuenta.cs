@@ -9,8 +9,8 @@ namespace ApplicationCore.Services
 {
     public interface IServicesEstadoCuenta
     {
-        //IEnumerable<EstadoCuenta> GetEstadoCuentaByDeudasVigentes(int id = 1);
-        //IEnumerable<EstadoCuenta> GetEstadoCuentaByHistorialPagos(int id = 2);
+        IEnumerable<EstadoCuenta> GetEstadoCuentaByPagosPendientes(int IDResidencia);
+        IEnumerable<EstadoCuenta> GetEstadoCuentaByHistorialPagos(int IDResidencia);
         IEnumerable<EstadoCuenta> GetEstadoCuentaByEstado(int IDResidencia, int IDEstado);
         IEnumerable<EstadoCuenta> GetEstadoCuenta();
         EstadoCuenta GetEstadoCuentaByID(int id);

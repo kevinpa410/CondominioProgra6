@@ -15,7 +15,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Usuario.nombre)@Html.DisplayFor(model => model.Usuario.apellido)
+            @Html.DisplayFor(model => model.Usuario.nombre) @Html.DisplayFor(model => model.Usuario.apellido)
         </dd>
 
         <dt>
@@ -27,34 +27,52 @@
         </dd>
 
         <dt>
-            Deudas vigentes
+            @Html.DisplayNameFor(model => model.IDPlanCobro)
         </dt>
 
         <dd>
-            <ul>
-                @foreach (var c in (List<Infrastructure.Models.EstadoCuenta>)ViewBag.DeudasVigentes)
-                {
-
-                    <li>@c.ID</li>
-                }
-            </ul>
+            @Html.DisplayFor(model => model.IDPlanCobro)
         </dd>
-
-        <dt>
-            Historial de pagos
-        </dt>
-
-        <dd>
-            <ul>
-                @foreach (var item in (List<Infrastructure.Models.EstadoCuenta>)ViewBag.HistorialPagos)
-                {
-
-                    <li>@item.ID</li>
-                }
-            </ul>
-        </dd>
-
     </dl>
+
+    <h2> Pagos Pendientes</h2>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>IDPlanCobro</th>
+            <th>IDResidencia</th>
+            <th>Mes</th>
+        </tr>
+        @foreach (var item in (IEnumerable<Infrastructure.Models.EstadoCuenta>)ViewBag.PagosPendientes)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.IDPlanCobro</td>
+                <td>@item.IDResidencia</td>
+                <td>@item.Mes</td>
+            </tr>
+        }
+    </table>
+
+    <h2> Historial de pagos</h2>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>IDPlanCobro</th>
+            <th>IDResidencia</th>
+            <th>Mes</th>
+        </tr>
+        @foreach (var item in (IEnumerable<Infrastructure.Models.EstadoCuenta>)ViewBag.HistorialPagos)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.IDPlanCobro</td>
+                <td>@item.IDResidencia</td>
+                <td>@item.Mes</td>
+            </tr>
+        }
+    </table>
+
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |

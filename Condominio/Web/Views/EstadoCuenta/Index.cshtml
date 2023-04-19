@@ -23,9 +23,7 @@
         nombre = $"{usuario.nombre} {usuario.apellido}";
         ID = usuario.ID;
         email = usuario.correo;
-
     }
-
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Usuario.nombre)
@@ -51,7 +49,8 @@
         </dd>
 
     </dl>
-        @Html.ActionLink("Details", "Details", new { id = ID })
-        @*@Html.ActionLink("Información", "Index", "Informacion", null, new { @class = "nav-item dropdown" })*@
+    @Html.ActionLink("Details", "Details", new { id = ID }) 
+    <br />
+    @Html.ActionLink("Pagar Plan de Cobro", "Edit", "EstadoCuenta", new {id = @ID }, null)
 
 }

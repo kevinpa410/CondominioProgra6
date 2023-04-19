@@ -10,7 +10,9 @@ namespace ApplicationCore.Services
     public interface IServicesIncidencias
     {
         IEnumerable<Incidencias> GetIncidencias();
+
         Incidencias GetIncidenciasByID(int id);
+
         Incidencias Save(Incidencias incidencias);
     }
 }
