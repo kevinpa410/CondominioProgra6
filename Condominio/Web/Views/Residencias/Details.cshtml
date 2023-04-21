@@ -4,76 +4,92 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Detalles</h2>
+<h2>Detalles de la Residencia</h2>
 
-<div>
-    <h4>Residencias</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ID)
-        </dt>
+<div class="container">
+    <h2 class="text-center mb-5">Detalles</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.Usuario.ID)
-        </dd>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Usuario.nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Usuario.nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Usuario.apellido)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Usuario.apellido)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CantPersonas)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CantPersonas)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AnnoInicio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AnnoInicio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EstadoResidencias.Descripcion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EstadoResidencias.Descripcion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CantCarros)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CantCarros)
-        </dd>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Residencias</h4>
+                    <hr />
 
 
 
 
+                    <dl class="row">
+                        <dt class="col-md-4">
+                            @Html.DisplayNameFor(model => model.ID)
+                        </dt>
+
+                        <dd class="col-md-8">
+                            @Html.DisplayFor(model => model.Usuario.ID)
+                        </dd>
+
+                        <dt class="col-md-4">
+                            @Html.DisplayNameFor(model => model.Usuario.nombre)
+                        </dt>
+
+                        <dd class="col-md-8">
+                            @Html.DisplayFor(model => model.Usuario.nombre)
+                        </dd>
+
+                        <dt class="col-md-4">
+                            @Html.DisplayNameFor(model => model.Usuario.apellido)
+                        </dt>
+
+                        <dd class="col-md-8">
+                            @Html.DisplayFor(model => model.Usuario.apellido)
+                        </dd>
+
+                        <dt class="col-md-4">
+                            @Html.DisplayNameFor(model => model.CantPersonas)
+                        </dt>
+
+                        <dd class="col-md-8">
+                            @Html.DisplayFor(model => model.CantPersonas)
+                        </dd>
+
+                        <dt class="col-md-4">
+                            @Html.DisplayNameFor(model => model.AnnoInicio)
+                        </dt>
+
+                        <dd class="col-md-8">
+                            @Html.DisplayFor(model => model.AnnoInicio)
+                        </dd>
+
+                        <dt class="col-md-4">
+                            @Html.DisplayNameFor(model => model.EstadoResidencias.Descripcion)
+                        </dt>
+
+                        <dd class="col-md-8">
+                            @Html.DisplayFor(model => model.EstadoResidencias.Descripcion)
+                        </dd>
+
+                        <dt class="col-md-4">
+                            @Html.DisplayNameFor(model => model.CantCarros)
+                        </dt>
+
+                        <dd class="col-md-8">
+                            @Html.DisplayFor(model => model.CantCarros)
+                        </dd>
+                    </dl>
 
 
-    </dl>
+
+
+
+                </div>
+            </div>
+
+            <div class="mt-4">
+                @Html.ActionLink("Editar", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary me-2" })
+                @Html.ActionLink("Volver al Listado", "IndexAdmin", null, new { @class = "btn btn-secondary" })
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "IndexAdmin")
-</p>
+

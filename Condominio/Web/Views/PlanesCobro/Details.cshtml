@@ -4,22 +4,35 @@
     ViewBag.Title = "Details";
 }
 
+<hr />
 
-    <h4>Rubros de Cobro Asociados</h4>
-    <hr />
+<div class="container">
+    <h2 class="text-center mb-5">Detalles</h2>
 
-    <div class="list-group">
-        <ul>
-            @foreach (var item in Model.RubroCobro)
-            {
-                <li class="list-group-item list-group-item-action list-group-item-secondary">
-                    @item.Descripcion - @item.Monto
-                </li>
-            }
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card ">
+                <div class="card-body">
+                    <h4 class="card-title">Rubros de Cobro Asociados</h4>
+                    <hr />
 
-        </ul>
+                    <ul class="list-group">
+                        @foreach (var item in Model.RubroCobro)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>@item.Descripcion: @item.Monto</span>
+                                <span class="badge badge-primary badge-pill"></span>
+                            </li>
+                        }
+                    </ul>
+
+                </div>
+            </div>
+
+            <div class="mt-4">
+                @Html.ActionLink("Editar", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary me-2" })
+                @Html.ActionLink("Volver al Listado", "Index", null, new { @class = "btn btn-secondary" })
+            </div>
+        </div>
     </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+</div>

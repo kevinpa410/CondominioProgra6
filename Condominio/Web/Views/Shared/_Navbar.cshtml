@@ -19,24 +19,28 @@
                     @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })
                 </li>
 
+                @*Enlace a la lista de autores*@
+                @{
+                    String nombre = "";
+                    String email = "Perfil";
+                    int ID = 0;
+
+                    if (Session["User"] != null)
+                    {
+                        Infrastructure.Models.Usuario usuario = new Infrastructure.Models.Usuario();
+                        usuario = (Infrastructure.Models.Usuario)Session["User"];
+                        nombre = $"{usuario.nombre} {usuario.apellido}";
+                        ID = usuario.ID;
+                        email = usuario.correo;
+                    }
+                }
+
+
+                @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Administrador", "Residente" }))
+                {
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mantenimientos</a>
                     <div class="dropdown-menu">
-                        @*Enlace a la lista de autores*@
-                        @{
-                            String nombre = "";
-                            String email = "Perfil";
-                            int ID = 0;
-
-                            if (Session["User"] != null)
-                            {
-                                Infrastructure.Models.Usuario usuario = new Infrastructure.Models.Usuario();
-                                usuario = (Infrastructure.Models.Usuario)Session["User"];
-                                nombre = $"{usuario.nombre} {usuario.apellido}";
-                                ID = usuario.ID;
-                                email = usuario.correo;
-                            }
-                        }
 
                         @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Administrador" }))
                         {
@@ -53,70 +57,82 @@
                         <div class="dropdown-divider"></div>
                         @Html.ActionLink("Incidencias", "Index", "Incidencias", null, new { @class = "dropdown-item" })
 
-                        @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Administrador" }))
-                        {
-                            <div class="dropdown-divider"></div>
-                            @Html.ActionLink("Reservaciones", "IndexAdmin", "Reservacion", null, new { @class = "dropdown-item" })
-                        }
-
-                        @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Residente" }))
-                        {
-                            <div class="dropdown-divider"></div>
-                            @Html.ActionLink("Reservaciones", "Index", "Reservacion", null, new { @class = "dropdown-item" })
-                        }
-
-                        @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Administrador" }))
-                        {
-                            <div class="dropdown-divider"></div>
-                            @Html.ActionLink("Usuario", "IndexAdmin", "Ususario", null, new { @class = "dropdown-item" })
-                        }
-
-                        @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Residente" }))
-                        {
-                            <div class="dropdown-divider"></div>
-                            @Html.ActionLink("Usuario", "Index", "Ususario", null, new { @class = "dropdown-item" })
-                        }
-
-
                     </div>
                 </li>
+                }                    
 
-                <li class="nav-item dropdown">
-                    @* Información usuario *@
+                    @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Administrador", "Residente" }))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Procesos</a>
+                            <div class="dropdown-menu">
 
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-                       href="#" role="button" aria-haspopup="true"
-                       aria-expanded="false"><i class="fa-solid fa-user"></i>@email</a>
+                                @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Administrador" }))
+                                {
+                                    <div class="dropdown-divider"></div>
+                                    @Html.ActionLink("Reservaciones", "IndexAdmin", "Reservacion", null, new { @class = "dropdown-item" })
+                                }
 
-                    <div class="dropdown-menu">
-                        @if (Session["User"] != null)
-                        {
-                            <div class="dropdown-item">
-                                @* Nombre Usuario *@
-                                Usuario: @nombre
+                                @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Residente" }))
+                                {
+                                    <div class="dropdown-divider"></div>
+                                    @Html.ActionLink("Reservaciones", "Index", "Reservacion", null, new { @class = "dropdown-item" })
+                                }
+
+                                @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Administrador" }))
+                                {
+                                    <div class="dropdown-divider"></div>
+                                    @Html.ActionLink("Usuario", "IndexAdmin", "Ususario", null, new { @class = "dropdown-item" })
+                                }
+
+                                @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Residente" }))
+                                {
+                                    <div class="dropdown-divider"></div>
+                                    @Html.ActionLink("Usuario", "Index", "Ususario", null, new { @class = "dropdown-item" })
+                                }
+
                             </div>
-                        }
+                        </li>
+                    }
 
-                        @if (Session["User"] == null)
-                        {
-                            <a class="dropdown-item"
-                               @*Accion, Controlador*@
-                               href="@Url.Action("Index","Ususario")">
-                                <i class="fa-solid fa-user-plus"></i>
-                                Login
-                            </a>
-                        }
-                        else
-                        {
-                            <a class="dropdown-item"
-                               href="@Url.Action("Logout","Ususario")">
-                                <i class="fa-solid fa-right-from-bracket"></i>
-                                Logout
-                            </a>
-                        }
-                    </div>
-                </li>
-            </ul>
+
+
+                    <li class="nav-item dropdown">
+                        @* Información usuario *@
+
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                           href="#" role="button" aria-haspopup="true"
+                           aria-expanded="false"><i class="fa-solid fa-user"></i>@email</a>
+
+                        <div class="dropdown-menu">
+                            @if (Session["User"] != null)
+                            {
+                                <div class="dropdown-item">
+                                    @* Nombre Usuario *@
+                                    Usuario: @nombre
+                                </div>
+                            }
+
+                            @if (Session["User"] == null)
+                            {
+                                <a class="dropdown-item"
+                                   @*Accion, Controlador*@
+                                   href="@Url.Action("Index","Ususario")">
+                                    <i class="fa-solid fa-user-plus"></i>
+                                    Login
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="dropdown-item"
+                                   href="@Url.Action("Logout","Ususario")">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                    Logout
+                                </a>
+                            }
+                        </div>
+                    </li>
+                </ul>
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
