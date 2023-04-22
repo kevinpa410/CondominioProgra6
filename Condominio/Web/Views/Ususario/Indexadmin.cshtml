@@ -6,42 +6,54 @@
 
 <h2>Administrar Usuarios</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-auto">
+            <h2>Planes de Cobro</h2>
+            <p>
+                @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+            </p>
 
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.apellido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.correo)
-        </th>
-        <th></th>
-    </tr>
+            <table class="table">
+                <tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.apellido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.correo)
-        </td>
-        <td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.apellido)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.correo)
+                    </th>
+                    <th></th>
+                </tr>
 
-            @Html.ActionLink("Asignar Plan de Cobro", "EditAdmin", "EstadoCuenta", new { id = item.ID }, null) |
-            @Html.ActionLink("Detalles del Plan de Cobro", "Details", "EstadoCuenta", new { id = item.ID }, null)
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.apellido)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.correo)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Detalles del Usuario", "Details", "Ususario", new { id = item.ID },new { @class = "btn btn-sm btn-success" })|
+                            @Html.ActionLink("Editar Usuario", "Edit", "Ususario", new { id = item.ID }, new { @class = "btn btn-sm btn-warning" })|
+                            @Html.ActionLink("Asignar Plan de Cobro", "EditAdmin", "EstadoCuenta", new { id = item.ID },new { @class = "btn btn-sm btn-primary" }) |
+                            @Html.ActionLink("Detalles del Plan de Cobro", "Details", "EstadoCuenta", new { id = item.ID }, new { @class = "btn btn-sm btn-primary" })
 
-        </td>
-    </tr>
-}
 
-</table>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+    </div>
+</div>

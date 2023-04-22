@@ -85,6 +85,7 @@
     <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
     <NavigationProperty Name="EstadoCuenta" Relationship="Self.FKEstadoCuenta_PlanesCobro" FromRole="PlanesCobro" ToRole="EstadoCuenta" />
     <NavigationProperty Name="RubroCobro" Relationship="Self.RubroPlanes" FromRole="PlanesCobro" ToRole="RubroCobro" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Reservaciones">
     <Key>

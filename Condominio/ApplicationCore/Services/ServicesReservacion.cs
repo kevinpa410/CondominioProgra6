@@ -33,5 +33,10 @@ namespace ApplicationCore.Services
             return repository.GetReservacionesByUsuario(idusuario);
         }
 
+        public Reservaciones GetReservacionesByUsuarioID(int id)
+        {
+            IRepositoryReservacion repository = new RepositoryReservacion();
+            return repository.GetReservacionesByUsuarioID(id);
+        }
     }
 }

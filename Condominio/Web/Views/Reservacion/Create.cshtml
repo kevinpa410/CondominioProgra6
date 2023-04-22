@@ -4,53 +4,82 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Crear</h2>
+<head>
+    <!-- ... other head content ... -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+    <link href="~/Content/sweetalert.css" rel="stylesheet" />
+</head>
+
+
+<br />
 
 @using (Html.BeginForm("Save", "Reservacion", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>Reservaciones</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.IDUsuario, "IDUsuario", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("IDUsuario", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.IDUsuario, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    <div class="row justify-content-center" style="padding-top: 1em">
+        <div class="col-md-5">
+            <div class="card text-center">
+                <div class="card-body ">
+                    <h4 class="card-title">Create</h4>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.IDAreaComunal, "IDAreaComunal", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("IDAreaComunal", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.IDAreaComunal, "", new { @class = "text-danger" })
-        </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <input type="date" @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control" } })
-                   @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
-        </div>
-    </div>
+                    @{
+                        String nombre = "";
+                        String email = "Perfil";
+                        int ID = 0;
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+                        if (Session["User"] != null)
+                        {
+                            Infrastructure.Models.Usuario usuario = new Infrastructure.Models.Usuario();
+                            usuario = (Infrastructure.Models.Usuario)Session["User"];
+                            nombre = $"{usuario.nombre} {usuario.apellido}";
+                            email = usuario.correo;
+                            ID = usuario.ID;
+                        }
+                    }
+
+                    @Html.HiddenFor(model => model.IDUsuario)
+                    @Html.LabelFor(model => model.IDUsuario, htmlAttributes: new { @class = "control-label col-md-2 mx-auto", @readonly = "readonly" })
+                    <div class="col-md-10 mx-auto">
+                        @Html.DisplayFor(model => model.IDUsuario, new { htmlAttributes = new { @class = "form-control mx-auto" } })
+                        @nombre
+                        @Html.ValidationMessageFor(model => model.IDUsuario, "", new { @class = "text-danger" })
+                    </div>
+
+                    <hr />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IDAreaComunal, "IDAreaComunal", htmlAttributes: new { @class = "control-label col-md-2 mx-auto" })
+                        <div class="w-50 mx-auto">
+                            @Html.DropDownList("IDAreaComunal", null, htmlAttributes: new { @class = "form-control mx-auto" })
+                            @Html.ValidationMessageFor(model => model.IDAreaComunal, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2 mx-auto" })
+                        <div class="w-50 mx-auto">
+                            <input type="date" @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control mx-auto" } })
+                                   @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                            <a href="@Url.Action("Index")" class="btn btn-default">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 
-}
+

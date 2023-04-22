@@ -11,7 +11,10 @@ namespace Infrastructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using static Infrastructure.Models.Metadata;
+
+    [MetadataType(typeof(TipoInformacionMetadata))]
     public partial class TipoInformacion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

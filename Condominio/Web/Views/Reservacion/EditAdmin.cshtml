@@ -4,69 +4,89 @@
     ViewBag.Title = "EditAdmin";
 }
 
-<h2>EditAdmin</h2>
-
 
 @using (Html.BeginForm("SaveAdmin", "Reservacion", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>Reservaciones</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.ID)
+    <br />
 
-    @Html.LabelFor(model => model.Usuario.nombre, htmlAttributes: new { @class = "control-label col-md-2", @readonly = "readonly" })
-    <div class="col-md-10">
-        @Html.DisplayFor(model => model.Usuario.nombre, new { htmlAttributes = new { @class = "form-control" } }) y @Html.DisplayFor(model => model.Usuario.apellido, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.HiddenFor(model => model.Usuario.nombre, new { htmlAttributes = new { @class = "form-control" } }) @Html.HiddenFor(model => model.Usuario.apellido, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.Usuario.nombre, "", new { @class = "text-danger" }) @Html.ValidationMessageFor(model => model.Usuario.apellido, "", new { @class = "text-danger" })
-    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h2>Editar Reservacion</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-horizontal">
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.ID)
+                            @Html.HiddenFor(model => model.IDUsuario)
+                            @Html.HiddenFor(model => model.AreaComunal.ID)
+                            @Html.HiddenFor(model => model.IDAreaComunal)
 
 
-    @Html.LabelFor(model => model.AreaComunal.Descripcion, htmlAttributes: new { @class = "control-label col-md-2", @readonly = "readonly" })
-    <div class="col-md-10">
-        @Html.DisplayFor(model => model.AreaComunal.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.HiddenFor(model => model.AreaComunal.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.AreaComunal.Descripcion, "", new { @class = "text-danger" })
-    </div>
+                            @Html.LabelFor(model => model.IDUsuario, htmlAttributes: new { @class = "control-label col-md-2 mx-auto", @readonly = "readonly" })
+                            <div class="col-md-10 mx-auto">
+                                @Html.DisplayFor(model => model.IDUsuario, new { htmlAttributes = new { @class = "form-control mx-auto" } })
+                                @Html.HiddenFor(model => model.IDUsuario, new { htmlAttributes = new { @class = "form-control mx-auto" } })
+                                @Html.ValidationMessageFor(model => model.IDUsuario, "", new { @class = "text-danger" })
+                            </div>
 
-    @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2", @readonly = "readonly" })
-    <div class="col-md-10">
-        @Html.DisplayFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.HiddenFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2", @readonly = "readonly" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.HiddenFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+                            <hr />
+                            @Html.LabelFor(model => model.AreaComunal.Descripcion, htmlAttributes: new { @class = "control-label col-md-2 mx-auto", @readonly = "readonly" })
+                            <div class="col-md-10 mx-auto">
+                                @Html.DisplayFor(model => model.AreaComunal.Descripcion, new { htmlAttributes = new { @class = "form-control mx-auto" } })
+                                @Html.HiddenFor(model => model.AreaComunal.Descripcion, new { htmlAttributes = new { @class = "form-control mx-auto" } })
+                                @Html.ValidationMessageFor(model => model.AreaComunal.Descripcion, "", new { @class = "text-danger" })
+                            </div>
+                            <hr />
+                            @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2 mx-auto", @readonly = "readonly" })
+                            <div class="col-md-10 mx-auto">
+                                @Html.DisplayFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control mx-auto" } })
+                                @Html.HiddenFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control mx-auto" } })
+                                @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+                            </div>
+                            <hr />
+                            @if (Model.IDEstadoReservaciones != 1)
+                            {
+                                @Html.LabelFor(model => model.EstadoReservaciones.Descripcion, htmlAttributes: new { @class = "control-label col-md-2 mx-auto", @readonly = "readonly" })
+                                <div class="col-md-10 mx-auto">
+                                    @Html.DisplayFor(model => model.EstadoReservaciones.Descripcion, new { htmlAttributes = new { @class = "form-control mx-auto" } })
+                                    @Html.HiddenFor(model => model.EstadoReservaciones.Descripcion, new { htmlAttributes = new { @class = "form-control mx-auto" } })
+                                    @Html.ValidationMessageFor(model => model.EstadoReservaciones.Descripcion, "", new { @class = "text-danger" })
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.IDEstadoReservaciones, "IDEstadoReservaciones", htmlAttributes: new { @class = "control-label col-md-2 mx-auto" })
+                                    <div class="col-md-10 mx-auto">
+                                        @Html.DropDownList("IDEstadoReservaciones", null, htmlAttributes: new { @class = "form-control mx-auto" })
+                                        @Html.ValidationMessageFor(model => model.IDEstadoReservaciones, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <hr />
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10 mx-auto">
+                                        <input type="submit" value="Save" class="btn btn-success" />
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <br />
+                        <div class="card-footer text-center">
+                            @Html.ActionLink("Back to List", "IndexAdmin", null, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.IDEstadoReservaciones, "IDEstadoReservaciones", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("IDEstadoReservaciones", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.IDEstadoReservaciones, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "IndexAdmin")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

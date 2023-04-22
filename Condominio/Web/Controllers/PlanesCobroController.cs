@@ -113,8 +113,8 @@ namespace Web.Controllers
                 planesCobro = _ServicePlanesCobro.GetPlanesCobroByID(Convert.ToInt32(id));
                 if (planesCobro == null)
                 {
-                    TempData["Message"] = "No existe el libro solicitado";
-                    TempData["Redirect"] = "Libro";
+                    TempData["Message"] = "No existe el Planes de Cobro solicitado";
+                    TempData["Redirect"] = "PlanesCobro";
                     TempData["Redirect-Action"] = "Index";
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
@@ -131,8 +131,8 @@ namespace Web.Controllers
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Libro";
-                TempData["Redirect-Action"] = "IndexAdmin";
+                TempData["Redirect"] = "PlanesCobro";
+                TempData["Redirect-Action"] = "Index";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }

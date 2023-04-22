@@ -9,9 +9,13 @@
 
 namespace Infrastructure.Models
 {
+    using Microsoft.SqlServer.Server;
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using static Infrastructure.Models.Metadata;
+
+    [MetadataType(typeof(RolMetadata))]
     public partial class Rol
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

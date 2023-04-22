@@ -77,6 +77,7 @@
     <EntitySetMapping Name="PlanesCobro">
       <EntityTypeMapping TypeName="CondominioModel.PlanesCobro">
         <MappingFragment StoreEntitySet="PlanesCobro">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Total" ColumnName="Total" />
         </MappingFragment>

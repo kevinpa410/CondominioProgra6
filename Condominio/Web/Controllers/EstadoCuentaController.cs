@@ -209,7 +209,7 @@ namespace Web.Controllers
         {
             IServicesPlanesCobro _ServicesPlanesCobro = new ServicesPlanesCobro();
             IEnumerable<PlanesCobro> lista = _ServicesPlanesCobro.GetPlanesCobro();
-            return new SelectList(lista, "ID", "ID", idPlanesCobro);
+            return new SelectList(lista, "ID", "Descripcion", idPlanesCobro);
         }        
 
         public ActionResult Save(EstadoCuenta estadoCuenta)

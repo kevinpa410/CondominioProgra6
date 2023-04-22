@@ -136,12 +136,11 @@ Go
 Create Table PlanesCobro(
 ID int IDENTITY (1,1) not null,
 Total numeric,
-
+Descripcion varchar(50),
 );
 Go
 alter table PlanesCobro add constraint PK_PlanesCobro primary key (ID);
 Go
-
 
 --------------------------------------------------------------------------------------
 

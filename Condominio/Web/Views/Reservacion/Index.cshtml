@@ -6,38 +6,41 @@
 
 <h2>Mis Reservaciones</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Fecha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AreaComunal.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EstadoReservaciones.Descripcion)
-        </th>
-        <th></th>
-    </tr>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2>Reservaciones</h2>
+            <p>
+                @Html.ActionLink("Nueva Reservacion", "Create", null, new { @class = "btn btn-primary" })
+            </p>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AreaComunal.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EstadoReservaciones.Descripcion)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.ID })
-        </td>
-    </tr>
-}
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+                        <th>@Html.DisplayNameFor(model => model.AreaComunal.Descripcion)</th>
+                        <th>@Html.DisplayNameFor(model => model.EstadoReservaciones.Descripcion)</th>
 
-</table>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                            <td>@Html.DisplayFor(modelItem => item.AreaComunal.Descripcion)</td>
+                            <td>@Html.DisplayFor(modelItem => item.EstadoReservaciones.Descripcion)</td>
+
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-sm btn-primary" })
+                                @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-sm btn-info" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

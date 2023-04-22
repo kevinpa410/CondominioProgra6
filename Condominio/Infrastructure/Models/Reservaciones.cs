@@ -11,7 +11,10 @@ namespace Infrastructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using static Infrastructure.Models.Metadata;
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(ReservacionesMetadata))]
     public partial class Reservaciones
     {
         public int ID { get; set; }

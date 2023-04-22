@@ -11,7 +11,10 @@ namespace Infrastructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using static Infrastructure.Models.Metadata;
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(AreaComunalMetadata))]
     public partial class AreaComunal
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

@@ -11,6 +11,7 @@ namespace Infrastructure.Repository
     {
         IEnumerable<Reservaciones> GetReservaciones();
         Reservaciones GetReservacionesByID(int id);
+        Reservaciones GetReservacionesByUsuarioID(int id);
         Reservaciones Save(Reservaciones reservaciones);
         IEnumerable<Reservaciones> GetReservacionesByUsuario(int idusuario);
     }

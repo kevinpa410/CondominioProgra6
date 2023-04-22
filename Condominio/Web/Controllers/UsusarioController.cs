@@ -21,6 +21,27 @@ namespace Web.Controllers
         {
             return View();
         }
+        //[HttpGet]
+        //[CustomAuthorize((int)Rols.Administrador)]
+        public ActionResult IndexUsuario()
+        {
+            IEnumerable<Usuario> lista = null;
+            try
+            {
+                IServicesUsuario _ServiceUsuario = new ServicesUsuario();
+                lista = _ServiceUsuario.GetUsuarios();
+
+                return View(lista);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
         public ActionResult Indexadmin()
         {
             IEnumerable<Usuario> lista = null;
@@ -57,10 +78,9 @@ namespace Web.Controllers
                     {
                         Session["User"] = oUsuario;
                         Log.Info($"Inicio sesion: {usuario.correo}");
-                        TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Login",
-                            "Usuario autenticado", Util.SweetAlertMessageType.success
-                            );
-                        return RedirectToAction("Index", "Home");
+                        TempData["NotificationMessage"] = Util.SweetAlertHelper.Mensaje("Login",
+                            "Usuario autenticado", Util.SweetAlertMessageType.success);
+                        return RedirectToAction("Index", "Home");                       
                     }
                     else
                     {

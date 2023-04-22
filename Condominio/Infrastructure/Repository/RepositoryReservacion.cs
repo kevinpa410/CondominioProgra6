@@ -89,8 +89,6 @@ namespace Infrastructure.Repository
 
                 if (oReservaciones == null)
                 {
-
-
                     //Insertar Libro
                     ctx.Reservaciones.Add(reservaciones);
                     //SaveChanges
@@ -138,6 +136,39 @@ namespace Infrastructure.Repository
                 return lista;
             }
 
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
+        public Reservaciones GetReservacionesByUsuarioID(int id)
+        {
+            Reservaciones oReservaciones = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener libro por ID incluyendo el autor y todas sus categorías
+                    oReservaciones = ctx.Reservaciones.
+                        Where(l => l.IDUsuario == id).
+                        Include("Usuario").
+                        Include("AreaComunal").
+                        Include("EstadoReservaciones").
+                        FirstOrDefault();
+
+                }
+                return oReservaciones;
+            }
             catch (DbUpdateException dbEx)
             {
                 string mensaje = "";

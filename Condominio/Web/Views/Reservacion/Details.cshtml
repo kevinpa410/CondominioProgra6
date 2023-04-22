@@ -4,39 +4,63 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Detalles</h2>
+<br />
 
-<div>
-    <h4>Reservaciones</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Fecha)
-        </dt>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
 
-        <dd>
-            @Html.DisplayFor(model => model.Fecha)
-        </dd>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Detalles de la Reservacion</h4>
+                    <hr />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AreaComunal.Descripcion)
-        </dt>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Fecha)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.AreaComunal.Descripcion)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Fecha)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Usuario.correo)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.AreaComunal.Descripcion)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Usuario.correo)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.AreaComunal.Descripcion)
+                        </dd>
 
-    </dl>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Usuario.correo)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Usuario.correo)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Administrador" }))
+            {
+                <div class="mt-4">
+                    @Html.ActionLink("Editar", "EditAdmin", new { id = Model.ID }, new { @class = "btn btn-primary me-2" })
+                    @Html.ActionLink("Volver al Listado", "IndexAdmin", null, new { @class = "btn btn-secondary" })
+                </div>
+            }
+
+            @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Residente" }))
+            {
+                <div class="mt-4">
+                    @Html.ActionLink("Editar", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary me-2" })
+                    @Html.ActionLink("Volver al Listado", "Index", null, new { @class = "btn btn-secondary" })
+                </div>
+            }
+
+            
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

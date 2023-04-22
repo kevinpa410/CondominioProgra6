@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CondominioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CondominioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AreaComunal">
           <Key>
             <PropertyRef Name="ID" />
@@ -76,6 +76,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Total" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Reservaciones">
           <Key>
@@ -398,8 +399,7 @@
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CondominioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -488,6 +488,7 @@
           <Property Name="Total" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="EstadoCuenta" Relationship="Self.FKEstadoCuenta_PlanesCobro" FromRole="PlanesCobro" ToRole="EstadoCuenta" />
           <NavigationProperty Name="RubroCobro" Relationship="Self.RubroPlanes" FromRole="PlanesCobro" ToRole="RubroCobro" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Reservaciones">
           <Key>
@@ -873,6 +874,7 @@
           <EntitySetMapping Name="PlanesCobro">
             <EntityTypeMapping TypeName="CondominioModel.PlanesCobro">
               <MappingFragment StoreEntitySet="PlanesCobro">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
               </MappingFragment>
