@@ -4,41 +4,47 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Detalles</h2>
+<br />
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title text-center mb-3">Detalles de la Incidencia</h4>
+                    <hr />
 
-<div>
-    <h4>Usuario</h4>
-    <hr />
-    <dl class="dl-horizontal">
+                    <dl class="row">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.nombre) y @Html.DisplayNameFor(model => model.apellido)
+                        </dt>
 
+                        <dd>
+                            @Html.DisplayFor(model => model.nombre) @Html.DisplayFor(model => model.apellido)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre) y @Html.DisplayNameFor(model => model.apellido)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.correo)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombre) @Html.DisplayFor(model => model.apellido)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.correo)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.correo)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Rol.descripcion)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.correo)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Rol.descripcion)
+                        </dd>
+                    </dl>
+                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Rol.descripcion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Rol.descripcion)
-        </dd>
-
-    </dl>
+                <div class="mt-4">
+                    @Html.ActionLink("Editar", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary me-2" })
+                    @Html.ActionLink("Volver al Listado", "Index", null, new { @class = "btn btn-secondary" })
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

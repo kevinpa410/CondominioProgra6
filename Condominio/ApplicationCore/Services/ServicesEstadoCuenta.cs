@@ -46,5 +46,11 @@ namespace ApplicationCore.Services
             IRepositoryEstadoCuenta repository = new RepositoryEstadoCuenta();
             return repository.Save(estadoCuenta);
         }
+
+        public IEnumerable<EstadoCuenta> GetEstadosCuentaByUsuario(int idusuario)
+        {
+            IRepositoryEstadoCuenta repository = new RepositoryEstadoCuenta();
+            return repository.GetEstadosCuentaByUsuario(idusuario);
+        }
     }
 }

@@ -8,9 +8,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h2>Incidencias</h2>
-            <p>
-                @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
-            </p>
+
+            @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Residente" }))
+            {
+                <p>
+                    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+                </p>
+            }           
 
             <table class="table table-striped table-hover">
                 <thead>
@@ -31,8 +35,11 @@
                             <td>@Html.DisplayFor(modelItem => item.Residencias.ID)</td>
 
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-sm btn-primary" }) 
-                                @Html.ActionLink("Details", "Details", new { id = item.ID },new { @class = "btn btn-sm btn-info" })
+                                @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Administrador" }))
+                                {
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-sm btn-primary" })
+                                }
+                                @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-sm btn-info" })
                             </td>
                         </tr>
                     }
@@ -42,3 +49,8 @@
         </div>
     </div>
 </div>
+
+@if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Administrador" }))
+{
+
+}

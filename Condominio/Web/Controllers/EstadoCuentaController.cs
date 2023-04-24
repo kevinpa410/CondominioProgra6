@@ -18,6 +18,31 @@ namespace Web.Controllers
         // GET: EstadoCuenta
         public ActionResult Index()
         {
+            var usuario = (Infrastructure.Models.Usuario)Session["User"];
+
+            IEnumerable<EstadoCuenta> lista = null;
+            try
+            {
+                IServicesEstadoCuenta _ServicesEstadoCuenta = new ServicesEstadoCuenta();
+                lista = _ServicesEstadoCuenta.GetEstadosCuentaByUsuario(Convert.ToInt32(usuario.ID));
+                
+
+
+                return View(lista);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+        //GET: EstadoCuenta/Details/5
+
+        public ActionResult IndexAdmin()
+        {
             IEnumerable<EstadoCuenta> lista = null;
             try
             {
@@ -37,7 +62,13 @@ namespace Web.Controllers
             }
         }
 
-        //GET: EstadoCuenta/Details/5
+        public ActionResult Create()
+        {
+            ViewBag.IDPlanCobro = listaPlanesCobro();
+            ViewBag.IDUsuario = listaUsuarios();
+
+            return View();
+        }
         public ActionResult Details(int? ID)
         {
             ServicesEstadoCuenta _ServicesEstadoCuenta = new ServicesEstadoCuenta();
@@ -204,36 +235,47 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-
         private SelectList listaPlanesCobro(int idPlanesCobro = 0)
         {
             IServicesPlanesCobro _ServicesPlanesCobro = new ServicesPlanesCobro();
             IEnumerable<PlanesCobro> lista = _ServicesPlanesCobro.GetPlanesCobro();
             return new SelectList(lista, "ID", "Descripcion", idPlanesCobro);
-        }        
+        }
+
+        private SelectList listaUsuarios(int idUsuarios = 0)
+        {
+            IServicesUsuario _ServicesUsuario  = new ServicesUsuario();
+            IEnumerable<Usuario> lista = _ServicesUsuario.GetUsuarios();
+            return new SelectList(lista, "ID", "nombre", idUsuarios);
+        }
 
         public ActionResult Save(EstadoCuenta estadoCuenta)
         {
-            //Gestión de archivos
             MemoryStream target = new MemoryStream();
-            //Servicio Libro
-            IServicesEstadoCuenta _ServicesEstadoCuenta = new ServicesEstadoCuenta();
 
+            IServicesEstadoCuenta _ServicesEstadoCuenta = new ServicesEstadoCuenta();
             try
             {
-
-                if (estadoCuenta.IDEstado == null)
+                if (ModelState.IsValid)
                 {
-                    estadoCuenta.IDEstado = 1;
-                }                
+                    if (estadoCuenta.IDEstado == null)
+                    {
+                        estadoCuenta.IDEstado = 1;
+                    }
+                    else
+                    {
+                        estadoCuenta.IDEstado = 2;
+                    }
+                    EstadoCuenta oEstadoCuenta = _ServicesEstadoCuenta.Save(estadoCuenta);
+                }                                    
                 else
                 {
 
-                    // Valida Errores si Javascript está deshabilitado
-                    Utils.Util.ValidateErrors(this);                    
+                    Utils.Util.ValidateErrors(this);
                     ViewBag.IDEstado = listaPlanesCobro(Convert.ToInt32(estadoCuenta.IDEstado));
-                    //Cargar la vista crear o actualizar
-                    //Lógica para cargar vista correspondiente
+                    ViewBag.IDEstado = listaUsuarios(Convert.ToInt32(estadoCuenta.IDUsuario));
+
+
                     if (estadoCuenta.ID > 0)
                     {
                         return (ActionResult)View("Edit", estadoCuenta);
@@ -244,8 +286,7 @@ namespace Web.Controllers
                         return View("Create", estadoCuenta);
                     }
                 }
-
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexAdmin");
             }
             catch (DbEntityValidationException ex)
             {
@@ -270,66 +311,63 @@ namespace Web.Controllers
             }
         }
 
-        public ActionResult SaveAdmin(EstadoCuenta estadoCuenta)
-        {
-            //Gestión de archivos
-            MemoryStream target = new MemoryStream();
-            //Servicio Libro
-            IServicesEstadoCuenta _ServicesEstadoCuenta = new ServicesEstadoCuenta();
-            try
-            {
+        //public ActionResult SaveAdmin(EstadoCuenta estadoCuenta)
+        //{
+        //    //Gestión de archivos
+        //    MemoryStream target = new MemoryStream();
+        //    //Servicio Libro
+        //    IServicesEstadoCuenta _ServicesEstadoCuenta = new ServicesEstadoCuenta();
+        //    try
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            if (ModelState.IsValid)
+        //            {
+        //                estadoCuenta.IDEstado = 2;
+        //            }
+        //            EstadoCuenta oEstadoCuenta = _ServicesEstadoCuenta.Save(estadoCuenta);
+        //        }
+        //        else
+        //        {
+        //            // Valida Errores si Javascript está deshabilitado
+        //            Utils.Util.ValidateErrors(this);
+        //            ViewBag.IDEstado = listaPlanesCobro(Convert.ToInt32(estadoCuenta.IDEstado));
+        //            //Cargar la vista crear o actualizar
+        //            //Lógica para cargar vista correspondiente
+        //            if (estadoCuenta.ID > 0)
+        //            {
+        //                return (ActionResult)View("Edit", estadoCuenta);
+        //            }
+        //            else
+        //            {
 
-                if (ModelState.IsValid)
-                {
-                    if (ModelState.IsValid)
-                    {
-                        estadoCuenta.IDEstado = 2;
-                    }
-                    EstadoCuenta oEstadoCuenta = _ServicesEstadoCuenta.Save(estadoCuenta);
-                }
-                else
-                {
+        //                return View("Create", estadoCuenta);
+        //            }
+        //        }
 
-                    // Valida Errores si Javascript está deshabilitado
-                    Utils.Util.ValidateErrors(this);
-                    ViewBag.IDEstado = listaPlanesCobro(Convert.ToInt32(estadoCuenta.IDEstado));
-                    //Cargar la vista crear o actualizar
-                    //Lógica para cargar vista correspondiente
-                    if (estadoCuenta.ID > 0)
-                    {
-                        return (ActionResult)View("Edit", estadoCuenta);
-                    }
-                    else
-                    {
+        //        return RedirectToAction("IndexAdmin","Ususario");
+        //    }
+        //    catch (DbEntityValidationException ex)
+        //    {
 
-                        return View("Create", estadoCuenta);
-                    }
-                }
+        //        ////Loop through the validation errors and log them
+        //        //foreach (var error in ex.EntityValidationErrors)
+        //        //{
+        //        //    foreach (var validationError in error.ValidationErrors)
+        //        //    {
+        //        //        string errorMessage = $"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}";
+        //        //        // log the error message or handle it as appropriate
+        //        //    }
+        //        //}
 
-                return RedirectToAction("IndexAdmin","Ususario");
-            }
-            catch (DbEntityValidationException ex)
-            {
-
-                ////Loop through the validation errors and log them
-                //foreach (var error in ex.EntityValidationErrors)
-                //{
-                //    foreach (var validationError in error.ValidationErrors)
-                //    {
-                //        string errorMessage = $"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}";
-                //        // log the error message or handle it as appropriate
-                //    }
-                //}
-
-                // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "EstadoCuenta";
-                TempData["Redirect-Action"] = "IndexAdmin";
-                // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
-            }
-        }
-
+        //        // Salvar el error en un archivo 
+        //        Log.Error(ex, MethodBase.GetCurrentMethod());
+        //        TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+        //        TempData["Redirect"] = "EstadoCuenta";
+        //        TempData["Redirect-Action"] = "IndexAdmin";
+        //        // Redireccion a la captura del Error
+        //        return RedirectToAction("Default", "Error");
+        //    }
+        //}
     }
 }

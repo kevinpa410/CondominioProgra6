@@ -4,77 +4,130 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<br />
 
-<div>
-    <h4>EstadoCuenta</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Usuario.nombre) y @Html.DisplayNameFor(model => model.Usuario.apellido)
-        </dt>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card ">
+                <div class="card-body">
+                    <hr />
 
-        <dd>
-            @Html.DisplayFor(model => model.Usuario.nombre) @Html.DisplayFor(model => model.Usuario.apellido)
-        </dd>
+                    <div class="container">
+                        <h2>Detalles de Cuenta</h2>
+                        <hr />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Residencias.ID)
-        </dt>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>EstadoCuenta</h4>
+                                <dl class="dl-horizontal">
+                                    <dt>@Html.DisplayNameFor(model => model.Usuario.nombre) y @Html.DisplayNameFor(model => model.Usuario.apellido)</dt>
+                                    <dd>@Html.DisplayFor(model => model.Usuario.nombre) @Html.DisplayFor(model => model.Usuario.apellido)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Residencias.ID)
-        </dd>
+                                    <dt>@Html.DisplayNameFor(model => model.Residencias.ID)</dt>
+                                    <dd>@Html.DisplayFor(model => model.Residencias.ID)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IDPlanCobro)
-        </dt>
+                                    <dt>@Html.DisplayNameFor(model => model.IDPlanCobro)</dt>
+                                    <dd>@Html.DisplayFor(model => model.IDPlanCobro)</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.IDPlanCobro)
-        </dd>
-    </dl>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="card ">
+                        <div class="card-body">
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h2> Pagos Pendientes</h2>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>@Html.DisplayNameFor(model => model.ID)</th>
+                                                <th>@Html.DisplayNameFor(model => model.IDPlanCobro)</th>
+                                                <th>@Html.DisplayNameFor(model => model.IDResidencia)</th>
+                                                <th>@Html.DisplayNameFor(model => model.Mes)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in (IEnumerable<Infrastructure.Models.EstadoCuenta>)ViewBag.PagosPendientes)
+                                            {
+                                                <tr>
+                                                    <td>@item.ID</td>
+                                                    <td>@item.IDPlanCobro</td>
+                                                    <td>@item.IDResidencia</td>
+                                                    <td>@item.Mes</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <h2> Pagos Pendientes</h2>
-    <table class="table">
-        <tr>
-            <th>ID</th>
-            <th>IDPlanCobro</th>
-            <th>IDResidencia</th>
-            <th>Mes</th>
-        </tr>
-        @foreach (var item in (IEnumerable<Infrastructure.Models.EstadoCuenta>)ViewBag.PagosPendientes)
-        {
-            <tr>
-                <td>@item.ID</td>
-                <td>@item.IDPlanCobro</td>
-                <td>@item.IDResidencia</td>
-                <td>@item.Mes</td>
-            </tr>
-        }
-    </table>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="card ">
+                        <div class="card-body">
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h2> Historial de pagos</h2>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>@Html.DisplayNameFor(model => model.ID)</th>
+                                                <th>@Html.DisplayNameFor(model => model.IDPlanCobro)</th>
+                                                <th>@Html.DisplayNameFor(model => model.IDResidencia)</th>
+                                                <th>@Html.DisplayNameFor(model => model.Mes)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in (IEnumerable<Infrastructure.Models.EstadoCuenta>)ViewBag.HistorialPagos)
+                                            {
+                                                <tr>
+                                                    <td>@item.ID</td>
+                                                    <td>@item.IDPlanCobro</td>
+                                                    <td>@item.IDResidencia</td>
+                                                    <td>@item.Mes</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <br />
+                @Html.ActionLink("Volver al Listado", "Index", null, new { @class = "btn btn-secondary" })
+                <br />
+            </div>
 
-    <h2> Historial de pagos</h2>
-    <table class="table">
-        <tr>
-            <th>ID</th>
-            <th>IDPlanCobro</th>
-            <th>IDResidencia</th>
-            <th>Mes</th>
-        </tr>
-        @foreach (var item in (IEnumerable<Infrastructure.Models.EstadoCuenta>)ViewBag.HistorialPagos)
-        {
-            <tr>
-                <td>@item.ID</td>
-                <td>@item.IDPlanCobro</td>
-                <td>@item.IDResidencia</td>
-                <td>@item.Mes</td>
-            </tr>
-        }
-    </table>
-
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+
+
+
+
+

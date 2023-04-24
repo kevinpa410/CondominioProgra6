@@ -16,5 +16,8 @@ namespace ApplicationCore.Services
         EstadoCuenta GetEstadoCuentaByID(int id);
         EstadoCuenta Save(EstadoCuenta estadoCuenta);
         EstadoCuenta GetEstadoCuentaByUsuario(int idusuario);
+        IEnumerable<EstadoCuenta> GetEstadosCuentaByUsuario(int idusuario);
+
+
     }
 }

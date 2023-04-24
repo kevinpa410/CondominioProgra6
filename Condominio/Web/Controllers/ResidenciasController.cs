@@ -103,6 +103,45 @@ namespace Web.Controllers
             return new SelectList(lista, "ID", "nombre",idUsuario);
         }
 
+        public ActionResult Edit(int? id)
+        {
+            ServicesResidencias _ServicesResidencias = new ServicesResidencias();
+            Residencias residencias = null;
+
+            try
+            {
+                // Si va null
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                residencias = _ServicesResidencias.GetResidenciasByID(Convert.ToInt32(id));
+                if (residencias == null)
+                {
+                    TempData["Message"] = "No existe la Residencia solicitado";
+                    TempData["Redirect"] = "Residencia";
+                    TempData["Redirect-Action"] = "IndexAdmin";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                //Listados
+                ViewBag.IDEstado = listaEstadoResidencias(residencias.ID);
+                ViewBag.IDUsuario = listaUsuario(residencias.IDUsuario);
+                return View(residencias);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Residencia";
+                TempData["Redirect-Action"] = "IndexAdmin";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
         // POST: Residencias/Create
         [HttpPost]
         public ActionResult Save(Residencias residencias)

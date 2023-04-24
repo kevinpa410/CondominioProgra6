@@ -28,15 +28,16 @@ namespace Infrastructure.Models
 
         internal partial class EstadoCuentaMetadata
         {
-            [Display(Name = "ID ")]
+            [Display(Name = "ID del Estado de Cuenta")]
             public int ID { get; set; }
             [Display(Name = "ID Plan de Cobro")]
             public Nullable<int> IDPlanCobro { get; set; }
-            [Display(Name = "ID Usuario")]
+            [Display(Name = "ID de Usuario")]
             public Nullable<int> IDUsuario { get; set; }
-            [Display(Name = "ID Residencia")]
+            [Display(Name = "ID de Residencia")]
             public Nullable<int> IDResidencia { get; set; }
-            public Nullable<decimal> Total { get; set; }
+            [Display(Name = "ID de Estado")]
+            public Nullable<int> IDEstado { get; set; }
             public Nullable<System.DateTime> Mes { get; set; }
 
         }

@@ -8,52 +8,37 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-auto">
-            <h2>Planes de Cobro</h2>
+        <div class="col-md-8">
             <p>
-                @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Crear Usuario Nuevo", "Create", null, new { @class = "btn btn-primary" })
             </p>
 
             <table class="table">
                 <tr>
-
                     <th>
-                        @Html.DisplayNameFor(model => model.nombre)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.apellido)
+                        @Html.DisplayNameFor(model => model.nombre) y @Html.DisplayNameFor(model => model.apellido)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.correo)
                     </th>
-                    <th></th>
                 </tr>
 
                 @foreach (var item in Model)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.apellido)
+                            @Html.DisplayFor(modelItem => item.nombre) @Html.DisplayFor(modelItem => item.apellido)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.correo)
                         </td>
                         <td>
-                            @Html.ActionLink("Detalles del Usuario", "Details", "Ususario", new { id = item.ID },new { @class = "btn btn-sm btn-success" })|
-                            @Html.ActionLink("Editar Usuario", "Edit", "Ususario", new { id = item.ID }, new { @class = "btn btn-sm btn-warning" })|
-                            @Html.ActionLink("Asignar Plan de Cobro", "EditAdmin", "EstadoCuenta", new { id = item.ID },new { @class = "btn btn-sm btn-primary" }) |
-                            @Html.ActionLink("Detalles del Plan de Cobro", "Details", "EstadoCuenta", new { id = item.ID }, new { @class = "btn btn-sm btn-primary" })
-
-
+                            @Html.ActionLink("Detalles del Usuario", "Details", "Ususario", new { id = item.ID }, new { @class = "btn btn-sm btn-success" })|
+                            @Html.ActionLink("Editar Usuario", "Edit", "Ususario", new { id = item.ID }, new { @class = "btn btn-sm btn-warning" })
                         </td>
                     </tr>
                 }
-
             </table>
-
         </div>
     </div>
 </div>

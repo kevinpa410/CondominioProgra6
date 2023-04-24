@@ -35,7 +35,7 @@
                     }
                 }
 
-                @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Administrador", "Residente" }))
+                @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Administrador" }))
                 {
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mantenimientos</a>
@@ -50,17 +50,31 @@
                                 @Html.ActionLink("Rubro de Cobro", "Index", "RubroCobro", null, new { @class = "dropdown-item" })
                                 <div class="dropdown-divider"></div>
                                 @Html.ActionLink("Informacion", "Index", "Informacion", null, new { @class = "dropdown-item" })
+                                <div class="dropdown-divider"></div>
+                                @Html.ActionLink("Usuarios", "IndexAdmin", "Ususario", null, new { @class = "dropdown-item" })
 
                             }
-                            <div class="dropdown-divider"></div>
-                            @Html.ActionLink("Estados de Cuenta", "Index", "EstadoCuenta", null, new { @class = "dropdown-item" })
-
-                            <div class="dropdown-divider"></div>
-                            @Html.ActionLink("Incidencias", "Index", "Incidencias", null, new { @class = "dropdown-item" })
 
                         </div>
                     </li>
                 }
+
+                @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Residente" }))
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Estado de Cuenta</a>
+                        <div class="dropdown-menu">
+
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink("Pagos Pendientes", "Index", "Reservacion", null, new { @class = "dropdown-item" }) @*  Deudas *@
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink("Historial", "Index", "Reservacion", null, new { @class = "dropdown-item" }) @* Historial  *@
+
+
+                        </div>
+                    </li>
+                }
+
 
                 @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Administrador", "Residente" }))
                 {
@@ -72,34 +86,23 @@
                             {
                                 <div class="dropdown-divider"></div>
                                 @Html.ActionLink("Reservaciones", "IndexAdmin", "Reservacion", null, new { @class = "dropdown-item" })
+                                <div class="dropdown-divider"></div>
+                                @Html.ActionLink("Planes de Cobro", "IndexAdmin", "EstadoCuenta", null, new { @class = "dropdown-item" })
+
                             }
 
                             @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Residente" }))
                             {
                                 <div class="dropdown-divider"></div>
                                 @Html.ActionLink("Reservaciones", "Index", "Reservacion", null, new { @class = "dropdown-item" })
+                                <div class="dropdown-divider"></div>
+                                @Html.ActionLink("Incidencias", "Index", "Incidencias", null, new { @class = "dropdown-item" })
                             }
 
-                            @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Administrador" }))
-                            {
-                                <div class="dropdown-divider"></div>
-                                @Html.ActionLink("Asignar Plan Cobro", "IndexAdmin", "Ususario", null, new { @class = "dropdown-item" })
-                            }
-
-                            @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Administrador" }))
-                            {
-                                <div class="dropdown-divider"></div>
-                                @Html.ActionLink("Usuarios", "IndexAdmin", "Ususario", null, new { @class = "dropdown-item" })
-                            }
-
-                            @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Residente" }))
-                            {
-                                <div class="dropdown-divider"></div>
-                                @Html.ActionLink("Usuario", "Index", "Ususario", null, new { @class = "dropdown-item" })
-                            }
                         </div>
                     </li>
                 }
+
                 <li class="nav-item dropdown">
                     @* Información usuario *@
 
