@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<br />  
+<br />
 
 @using (Html.BeginForm("Save", "Residencias", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
 {
@@ -14,17 +14,19 @@
         <div class="card-body text-center">
             <h2 class="">Crear Residencia</h2>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Usuario, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="w-50 mx-auto">
-                    @Html.DropDownListFor(model => model.IDUsuario, (SelectList)ViewBag.IDUsuario, "Seleccione un Usuario", htmlAttributes: new { @class = "form-control" })
+            <<div class="form-group">
+                @Html.LabelFor(model => model.IDUsuario, "IDUsuario", htmlAttributes: new { @class = "control-label col-md-2 mx-auto" })
+                <div class="col-md-10 mx-auto">
+                    @Html.DropDownList("IDUsuario", null, htmlAttributes: new { @class = "form-control mx-auto" })
+                    @Html.ValidationMessageFor(model => model.IDEstado, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.EstadoResidencias, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="w-50 mx-auto">
-                    @Html.DropDownListFor(model => model.IDEstado, (SelectList)ViewBag.IDEstado, "Seleccione el Estado", htmlAttributes: new { @class = "form-control" })
+            <<div class="form-group">
+                @Html.LabelFor(model => model.IDEstado, "IDEstado", htmlAttributes: new { @class = "control-label col-md-2 mx-auto" })
+                <div class="col-md-10 mx-auto">
+                    @Html.DropDownList("IDEstado", null, htmlAttributes: new { @class = "form-control mx-auto" })
+                    @Html.ValidationMessageFor(model => model.IDEstado, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -52,7 +54,7 @@
                 </div>
             </div>
 
-            <br/>
+            <br />
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">

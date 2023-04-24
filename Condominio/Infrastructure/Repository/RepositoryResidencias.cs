@@ -87,7 +87,7 @@ namespace Infrastructure.Repository
                     //Obtener libros por Autor
                     oResidencias = ctx.Residencias.
                         Where(l => l.IDUsuario == idusuario)
-                         .Include("EstadoResidencias")
+                        .Include("EstadoResidencias")
                         .Include("Usuario").FirstOrDefault();
 
                 }
@@ -105,6 +105,26 @@ namespace Infrastructure.Repository
                 string mensaje = "";
                 Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
                 throw;
+            }
+        }
+
+        public IEnumerable<Residencias> GetResidenciasByUsuarioID(int id)
+        {
+            IEnumerable<Residencias> lista = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    //Obtener todos los libros incluyendo el autor
+                    lista = ctx.Residencias.
+                        Where(l => l.IDUsuario == id).
+                       Include("Usuario").
+                        Include("EstadoResidencias").
+                        ToList();
+
+                }
+                return lista;
             }
         }
 

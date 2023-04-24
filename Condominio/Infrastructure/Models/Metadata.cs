@@ -12,7 +12,7 @@ namespace Infrastructure.Models
     {
         internal partial class RecidenciaMetadata
         {
-            [Display(Name = "ID ")]
+            [Display(Name = "ID de Residencia")]
             public int ID { get; set; }
             [Display(Name = "ID Usuario")]
             public int IDUsuario { get; set; }
@@ -53,6 +53,7 @@ namespace Infrastructure.Models
 
         internal partial class UsuarioMetadata
         {
+            [Display(Name = "ID de Usuario")]
             public int ID { get; set; }
             [Display(Name = "Correo")]
             public string correo { get; set; }
@@ -70,7 +71,7 @@ namespace Infrastructure.Models
 
         internal partial class InformacionMetadata
         {
-            [Display(Name = "ID ")]
+            [Display(Name = "ID de Informacion")]
             public int ID { get; set; }
             [Display(Name = "Descripcion")]
             public string Descripcion { get; set; }
@@ -79,7 +80,7 @@ namespace Infrastructure.Models
 
         internal partial class IncidenciasMetadata
         {
-            [Display(Name = "ID")]
+            [Display(Name = "ID de Incidencia")]
             public int ID { get; set; }
             [Display(Name = "ID Estado")]
             public Nullable<int> IDEstado { get; set; }

@@ -37,14 +37,13 @@
                                 @Html.DisplayFor(modelItem => item.Mes)
                             </td>
                             <td>
-                                @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-primary" })
-                                @Html.ActionLink("Pagar Plan de Cobro", "Details", new { id = item.ID }, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Details", "Details", new { id = item.IDUsuario }, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Pagar Plan de Cobro", "Edit", new { id = item.IDUsuario }, new { @class = "btn btn-primary" })
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
-
         </div>
     </div>
 </div>

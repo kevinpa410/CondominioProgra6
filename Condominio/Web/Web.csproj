@@ -249,6 +249,8 @@
     <Content Include="Views\Reservacion\EditAdmin.cshtml" />
     <Content Include="Views\EstadoCuenta\Create.cshtml" />
     <Content Include="Views\Residencias\Edit.cshtml" />
+    <Content Include="Views\EstadoCuenta\Deudas.cshtml" />
+    <Content Include="Views\EstadoCuenta\Historial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

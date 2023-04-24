@@ -28,6 +28,12 @@ namespace ApplicationCore.Services
             return repository.GetResidenciasByUsuario(idusuario);
         }
 
+        public IEnumerable<Residencias> GetResidenciasByUsuarioID(int id)
+        {
+            IRepositoryResidencias repository = new RepositoryResidencias();
+            return repository.GetResidenciasByUsuarioID(id);
+        }
+
         public Residencias Save(Residencias residencias)
         {
             IRepositoryResidencias repository = new RepositoryResidencias();

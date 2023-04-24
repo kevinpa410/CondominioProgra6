@@ -12,6 +12,7 @@
                 @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
             </p>
 
+
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -23,6 +24,9 @@
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Mes)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Estado_EstadoCuenta.Descripcion) 
                         </th>
                     </tr>
                 </thead>
@@ -38,6 +42,9 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Mes)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Estado_EstadoCuenta.Descripcion) @Html.HiddenFor(modelItem => item.IDEstado)
                             </td>
                             <td>
                                 @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-primary" })
