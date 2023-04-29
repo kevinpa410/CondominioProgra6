@@ -15,7 +15,8 @@
         <div class="col-md-5">
             <div class="card text-center">
                 <div class="card-body ">
-                    <h4 class="card-title">Create</h4>
+                    <h4 class="card-title">Crear Incidencia </h4>
+                    @Html.HiddenFor(model => model.IDEstado)
 
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
@@ -38,8 +39,8 @@
                     <br />
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Create" class="btn btn-primary" />
-                            <a href="@Url.Action("Index")" class="btn btn-default">Back to List</a>
+                            <input type="submit" value="Crear" class="btn btn-primary" />
+                            <a href="@Url.Action("Index")" class="btn btn-default">Volver a la lista</a>
                         </div>
                     </div>
 

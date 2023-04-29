@@ -26,7 +26,7 @@
                             @Html.DisplayNameFor(model => model.Mes)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Estado_EstadoCuenta.Descripcion) 
+                            @Html.DisplayNameFor(model => model.Estado_EstadoCuenta.Descripcion)
                         </th>
                     </tr>
                 </thead>
@@ -44,7 +44,7 @@
                                 @Html.DisplayFor(modelItem => item.Mes)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Estado_EstadoCuenta.Descripcion) @Html.HiddenFor(modelItem => item.IDEstado)
+                                @Html.DisplayFor(modelItem => item.Estado_EstadoCuenta.Descripcion)
                             </td>
                             <td>
                                 @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-primary" })

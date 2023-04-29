@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 using Web.Utils;
 
 namespace Web.Controllers
@@ -85,6 +86,8 @@ namespace Web.Controllers
         }
 
         // GET: Incidencias/Edit/5
+        [HttpGet]
+        [CustomAuthorize((int)Rols.Administrador)]
         public ActionResult Edit(int? id)
         {
             ServicesIncidencias _ServicesIncidencias = new ServicesIncidencias();

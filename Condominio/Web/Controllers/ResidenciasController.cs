@@ -16,6 +16,7 @@ namespace Web.Controllers
 {
     public class ResidenciasController : Controller
     {
+
         // GET: Residencias
         public ActionResult Index()
         {

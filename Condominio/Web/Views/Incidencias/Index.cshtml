@@ -37,9 +37,9 @@
                             <td>
                                 @if (Web.Security.AutorizeView.IsUserInRole(new string[] { "Administrador" }))
                                 {
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-sm btn-primary" })
+                                    @Html.ActionLink("Editar", "Edit", new { id = item.ID }, new { @class = "btn btn-sm btn-primary" })
                                 }
-                                @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-sm btn-info" })
+                                @Html.ActionLink("Detalles", "Details", new { id = item.ID }, new { @class = "btn btn-sm btn-info" })
                             </td>
                         </tr>
                     }

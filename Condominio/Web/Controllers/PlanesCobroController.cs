@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using Web.Security;
 using Web.Utils;
 using Log = Web.Utils.Log;
 
@@ -16,6 +17,8 @@ namespace Web.Controllers
 {
     public class PlanesCobroController : Controller
     {
+        [HttpGet]
+        [CustomAuthorize((int)Rols.Administrador)]
         // GET: PlanesCobro
         public ActionResult Index()
         {
@@ -37,7 +40,8 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-
+        [HttpGet]
+        [CustomAuthorize((int)Rols.Administrador)]
         // GET: PlanesCobro/Details/5
         public ActionResult Details(int? id)
         {
@@ -74,14 +78,14 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-
+        [HttpGet]
+        [CustomAuthorize((int)Rols.Administrador)]
         // GET: PlanesCobro/Create
         public ActionResult Create()
         {
             ViewBag.IDRubroCobro = listaRubroCobro();
             return View();
         }
-
         private MultiSelectList listaRubroCobro(ICollection<RubroCobro> rubroCobro = null)
         {
             IServicesRubroCobro _ServicesRubroCobro = new ServicesRubroCobro();
@@ -95,7 +99,8 @@ namespace Web.Controllers
 
             return new MultiSelectList(lista, "ID", "Descripcion", listaRubroCobroSelect);
         }
-
+        [HttpGet]
+        [CustomAuthorize((int)Rols.Administrador)]
         // GET: PlanesCobro/Edit/5
         public ActionResult Edit(int? id)
         {

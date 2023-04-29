@@ -61,8 +61,12 @@ namespace Web.Controllers
         }
         public ActionResult Create()
         {
+            var usuario = (Infrastructure.Models.Usuario)Session["User"];
+            ViewBag.IDResidencia = listaResidencia();
             ViewBag.IDPlanCobro = listaPlanesCobro();
             ViewBag.IDUsuario = listaUsuarios();
+            //ViewBag.IDEstado = listaEstados();
+
 
             return View();
         }
@@ -215,6 +219,13 @@ namespace Web.Controllers
             IEnumerable<Usuario> lista = _ServicesUsuario.GetUsuarios();
             return new SelectList(lista, "ID", "nombre", idUsuarios);
         }
+        private SelectList listaResidencia(int idResidencias = 0)
+        {
+            IServicesResidencias _ServicesResidencias = new ServicesResidencias();
+            IEnumerable<Residencias> lista = _ServicesResidencias.GetResidencias();
+            return new SelectList(lista, "ID", "ID", idResidencias);
+        }
+
         public ActionResult Save(EstadoCuenta estadoCuenta)
         {
             var usuario = (Infrastructure.Models.Usuario)Session["User"];

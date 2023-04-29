@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 using Web.Utils;
 
 namespace Web.Controllers
@@ -14,6 +15,8 @@ namespace Web.Controllers
     public class InformacionController : Controller
     {
         // GET: Informacion
+        [HttpGet]
+        [CustomAuthorize((int)Rols.Administrador)]
         public ActionResult Index()
         {
             IEnumerable<Informacion> lista = null;
@@ -21,7 +24,7 @@ namespace Web.Controllers
             {
                 IServicesInformacion _ServiceInformacion = new ServicesInformacion();
                 lista = _ServiceInformacion.GetInformacion();
-                ViewBag.title = "Lista Libros";
+                ViewBag.title = "Index";
                 return View(lista);
             }
             catch (Exception ex)
@@ -33,6 +36,8 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+        [HttpGet]
+        [CustomAuthorize((int)Rols.Administrador)]
 
         // GET: Informacion/Details/5
         public ActionResult Details(int? id)
@@ -70,14 +75,16 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-
+        [HttpGet]
+        [CustomAuthorize((int)Rols.Administrador)]
         // GET: Informacion/Create
         public ActionResult Create()
         {
             ViewBag.IDTipoInformacion = listTipoInformacion();
             return View();
         }
-
+        [HttpGet]
+        [CustomAuthorize((int)Rols.Administrador)]
         // GET: Informacion/Edit/5
         public ActionResult Edit(int? id)
         {

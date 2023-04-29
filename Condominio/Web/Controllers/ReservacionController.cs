@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using Web.Security;
 using Web.Utils;
 
 namespace Web.Controllers
@@ -37,7 +38,8 @@ namespace Web.Controllers
             }
             return View(lista);
         }
-
+        [HttpGet]
+        [CustomAuthorize((int)Rols.Administrador)]
         public ActionResult IndexAdmin()
         {
             IEnumerable<Reservaciones> lista = null;
@@ -57,7 +59,6 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-
         // GET: Reservacion/Details/5
         public ActionResult Details(int? id)
         {
@@ -94,7 +95,6 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-
         // GET: Reservacion/Create
         public ActionResult Create()
         {
@@ -103,8 +103,9 @@ namespace Web.Controllers
             ViewBag.IDEstadoReservaciones = listaEstadoReservaciones();
             return View();
         }
-
-        // GET: Reservaciones/Edit/5
+        //[HttpGet]
+        //[CustomAuthorize((int)Rols.Administrador)]
+        //// GET: Reservaciones/Edit/5
         public ActionResult Edit(int? id)
         {
             ServicesReservacion _ServicesReservacion = new ServicesReservacion();
@@ -152,7 +153,8 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-
+        [HttpGet]
+        [CustomAuthorize((int)Rols.Administrador)]
         public ActionResult EditAdmin(int? id)
         {
             ServicesReservacion _ServicesReservacion = new ServicesReservacion();

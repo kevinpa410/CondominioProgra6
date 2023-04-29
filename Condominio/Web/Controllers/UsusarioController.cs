@@ -21,8 +21,8 @@ namespace Web.Controllers
         {
             return View();
         }
-        //[HttpGet]
-        //[CustomAuthorize((int)Rols.Administrador)]
+        [HttpGet]
+        [CustomAuthorize((int)Rols.Administrador)]
         public ActionResult IndexUsuario()
         {
             IEnumerable<Usuario> lista = null;
@@ -42,6 +42,8 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+        [HttpGet]
+        [CustomAuthorize((int)Rols.Administrador)]
         public ActionResult Indexadmin()
         {
             IEnumerable<Usuario> lista = null;
@@ -139,8 +141,8 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-        //[HttpGet]
-        //[CustomAuthorize((int)Rols.Administrador)]
+        [HttpGet]
+        [CustomAuthorize((int)Rols.Administrador)]
         public ActionResult Create()
         {
             ViewBag.IDRol = listRol();
